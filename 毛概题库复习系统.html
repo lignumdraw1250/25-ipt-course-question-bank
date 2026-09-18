@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>毛概题库复习系统</title>
+<style>
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #f0f2f5; --card-bg: #ffffff; --primary: #4f46e5; --primary-light: #eef2ff;
+  --success: #16a34a; --success-light: #f0fdf4; --error: #dc2626; --error-light: #fef2f2;
+  --text: #1e293b; --text-secondary: #64748b; --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --radius: 12px; --radius-sm: 8px; --transition: 0.2s ease;
+  --nav-h: 58px; --bottom-nav-h: 64px;
+  --answer-item-bg: #f8fafc; --answer-unanswered-bg: #f8fafc; --answer-viewed-bg: #e0e7ff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+
+/* ===== HEADER ===== */
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%); color: white; padding: 14px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 200; }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.header h1 { font-size: 1.15rem; font-weight: 700; white-space: nowrap; }
+.header-stats { display: flex; gap: 14px; font-size: 0.85rem; opacity: 0.9; flex-shrink: 0; }
+
+/* ===== PC NAV (top tabs) ===== */
+.pc-nav { background: var(--card-bg); border-bottom: 1px solid var(--border); position: sticky; top: var(--nav-h); z-index: 99; box-shadow: var(--shadow); }
+.pc-nav-inner { max-width: 960px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+.pc-nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab { flex: 1 1 0; padding: 12px 6px; font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; transition: var(--transition); white-space: nowrap; text-align: center; }
+.nav-tab:hover { color: var(--primary); background: var(--primary-light); }
+.nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+.nav-tab .badge { display: inline-block; background: var(--primary); color: white; font-size: 0.7rem; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 300; background: var(--card-bg); border-top: 1px solid var(--border); box-shadow: 0 -2px 12px rgba(0,0,0,0.10); height: var(--bottom-nav-h); }
+.mobile-bottom-nav-inner { display: flex; height: 100%; width: 100%; }
+.mobile-nav-tab { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 2px; gap: 3px; cursor: pointer; border: none; background: none; color: var(--text-secondary); font-size: 0.65rem; font-weight: 500; border-top: 3px solid transparent; transition: var(--transition); min-width: 0; }
+.mobile-nav-tab .tab-icon { font-size: 1.1rem; line-height: 1; }
+.mobile-nav-tab .tab-label { white-space: nowrap; }
+.mobile-nav-tab .tab-badge { display: inline-block; background: #e2e8f0; color: var(--text-secondary); font-size: 0.58rem; padding: 1px 5px; border-radius: 8px; }
+.mobile-nav-tab.active { color: var(--primary); border-top-color: var(--primary); }
+.mobile-nav-tab.active .tab-badge { background: var(--primary); color: white; }
+
+/* ===== MAIN LAYOUT ===== */
+.main { max-width: 960px; margin: 0 auto; padding: 20px 16px 40px; }
+
+/* ===== PROGRESS ===== */
+.progress-section { background: var(--card-bg); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.progress-title { font-weight: 600; font-size: 0.92rem; }
+.progress-numbers { font-size: 0.82rem; color: var(--text-secondary); display: flex; gap: 10px; flex-wrap: wrap; }
+.progress-numbers .c { color: var(--success); font-weight: 600; } .progress-numbers .w { color: var(--error); font-weight: 600; }
+.progress-bar-outer { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.progress-bar-inner { height: 100%; background: linear-gradient(90deg, var(--primary), #818cf8); border-radius: 4px; transition: width 0.4s ease; }
+
+/* ===== ORDER TOGGLE ===== */
+.order-toggle-bar { display: flex; gap: 8px; margin-bottom: 12px; background: var(--card-bg); border-radius: var(--radius); padding: 8px 12px; box-shadow: var(--shadow); align-items: center; }
+.order-toggle-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+.order-toggle-btn { padding: 7px 16px; border: 2px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 500; transition: var(--transition); background: var(--card-bg); color: var(--text-secondary); }
+.order-toggle-btn:hover { border-color: var(--primary); color: var(--primary); }
+.order-toggle-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.order-toggle-btn .reshuffle { font-size: 0.75rem; margin-left: 4px; }
+
+/* ===== CARD ===== */
+.card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; }
+.card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.card-header .q-number { font-weight: 700; font-size: 0.98rem; color: var(--primary); }
+.card-header .q-type { font-size: 0.78rem; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+.q-type.single { background: #dbeafe; color: #1e40af; } .q-type.multi { background: #fef3c7; color: #92400e; } .q-type.judge { background: #ede9fe; color: #6b21a8; } .q-type.essay { background: #fce7f3; color: #9d174d; }
+.card-body { padding: 18px; }
+.question-text { font-size: 1.05rem; font-weight: 500; line-height: 1.85; margin-bottom: 18px; }
+.options-list { display: flex; flex-direction: column; gap: 10px; }
+.option-btn { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 14px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--card-bg); cursor: pointer; transition: var(--transition); font-size: 0.98rem; color: var(--text); line-height: 1.5; }
+.option-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+.option-btn.selected { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 3px rgba(79,70,229,0.15); }
+.option-btn.correct { border-color: var(--success); background: var(--success-light); }
+.option-btn.incorrect { border-color: var(--error); background: var(--error-light); }
+.option-btn.missed { border-color: var(--success); background: var(--success-light); opacity: 0.8; }
+.option-btn:disabled { cursor: default; }
+.opt-icon { flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.88rem; background: #f1f5f9; color: var(--text-secondary); transition: var(--transition); }
+.option-btn.selected .opt-icon { background: var(--primary); color: white; }
+.option-btn.correct .opt-icon { background: var(--success); color: white; }
+.option-btn.incorrect .opt-icon { background: var(--error); color: white; }
+.option-btn.missed .opt-icon { background: var(--success); color: white; }
+
+/* ===== ACTIONS ===== */
+.actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.btn { padding: 10px 20px; border: none; border-radius: var(--radius-sm); font-size: 0.93rem; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 6px; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--primary); color: white; } .btn-primary:hover { background: #4338ca; } .btn-primary:disabled { background: #a5b4fc; cursor: not-allowed; }
+.btn-outline { background: white; color: var(--primary); border: 2px solid var(--primary); } .btn-outline:hover { background: var(--primary-light); }
+.btn-ghost { background: transparent; color: var(--text-secondary); } .btn-ghost:hover { background: #f1f5f9; color: var(--text); }
+
+/* ===== FEEDBACK ===== */
+.feedback { margin-top: 14px; padding: 13px 16px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.93rem; display: none; animation: slideIn 0.25s ease; }
+.feedback.show { display: flex; align-items: center; gap: 8px; }
+.feedback.ok { background: var(--success-light); color: #166534; border: 1px solid #bbf7d0; }
+.feedback.no { background: var(--error-light); color: #991b1b; border: 1px solid #fecaca; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.answer-reveal { margin-top: 10px; font-size: 0.92rem; color: var(--text-secondary); display: none; }
+.answer-reveal.show { display: block; } .answer-reveal strong { color: var(--primary); }
+
+/* ===== ESSAY ===== */
+.essay-card { text-align: center; padding: 32px 16px; }
+.essay-question { font-size: 1.2rem; font-weight: 600; line-height: 1.8; margin: 20px 0; padding: 20px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius); border: 2px dashed #f59e0b; }
+.essay-meta { color: var(--text-secondary); font-size: 0.88rem; margin-top: 10px; }
+.essay-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.essay-item { padding: 11px 14px; background: #f8fafc; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 0.88rem; display: flex; align-items: flex-start; gap: 10px; }
+.essay-item .num { font-weight: 700; color: var(--primary); flex-shrink: 0; }
+
+/* ===== MISC ===== */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+.kbd-hints { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; font-size: 0.8rem; color: var(--text-secondary); }
+.kbd { display: inline-block; background: #f1f5f9; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-family: monospace; font-size: 0.78rem; font-weight: 600; }
+.footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.82rem; }
+.reset-area { display: flex; justify-content: flex-end; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.btn-reset { font-size: 0.78rem; padding: 6px 12px; background: transparent; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: var(--transition); }
+.btn-reset:hover { background: var(--error-light); color: var(--error); border-color: var(--error); }
+
+/* ===== MOBILE FIXED BOTTOM ACTION BAR ===== */
+.mobile-action-bar { display: none; position: fixed; bottom: var(--bottom-nav-h); left: 0; right: 0; z-index: 200; background: var(--card-bg); border-top: 1px solid var(--border); padding: 10px 16px; gap: 10px; box-shadow: 0 -1px 6px rgba(0,0,0,0.06); }
+
+/* ===== MOBILE STYLES ===== */
+body.is-mobile .pc-nav { display: none; }
+body.is-mobile .mobile-bottom-nav { display: block; }
+body.is-mobile .mobile-action-bar { display: flex; }
+body.is-mobile .kbd-hints { display: none; }
+body.is-mobile .footer { display: none; }
+body.is-mobile .main { padding: 14px 12px calc(var(--bottom-nav-h) + var(--bottom-nav-h) + 16px); }
+body.is-mobile .header h1 { font-size: 1rem; }
+body.is-mobile .header-stats { font-size: 0.75rem; gap: 10px; }
+body.is-mobile .card-body { padding: 14px; }
+body.is-mobile .question-text { font-size: 1.02rem; line-height: 1.75; }
+body.is-mobile .option-btn { padding: 13px 14px; font-size: 0.95rem; min-height: 52px; }
+body.is-mobile .opt-icon { width: 34px; height: 34px; font-size: 0.92rem; border-radius: 10px; }
+body.is-mobile .actions { display: none; }
+body.is-mobile .essay-card { padding: 20px 12px; }
+body.is-mobile .essay-question { font-size: 1.05rem; padding: 16px; }
+body.is-mobile .essay-item { font-size: 0.85rem; padding: 10px 12px; }
+body.is-mobile .progress-section { padding: 12px 14px; }
+body.is-mobile .reset-area { margin-bottom: 10px; }
+body.is-mobile .btn { padding: 11px 18px; font-size: 0.92rem; }
+body.is-mobile .btn-primary { flex: 1; justify-content: center; }
+body.is-mobile .btn-outline { flex: 0 0 auto; }
+body.is-mobile .btn-ghost { flex: 0 0 auto; }
+body.is-mobile .order-toggle-bar { padding: 6px 10px; }
+body.is-mobile .order-toggle-btn { padding: 6px 14px; font-size: 0.78rem; }
+body.is-mobile .essay-btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+body.is-mobile .mistake-item { padding: 12px 14px; }
+body.is-mobile .explanation-box { font-size: 0.82rem !important; padding: 12px 14px !important; }
+.nav-tab.mistake-tab { color: #dc2626; }
+.nav-tab.mistake-tab.active { color: #dc2626; border-bottom-color: #dc2626; }
+.nav-tab.mistake-tab .badge { background: #dc2626; }
+.mobile-nav-tab.mistake-tab { color: #dc2626; }
+.mobile-nav-tab.mistake-tab.active { color: #dc2626; border-top-color: #dc2626; }
+.mistake-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.mistake-stat-card { background: var(--card-bg); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); text-align: center; }
+.mistake-stat-card .stat-icon { font-size: 2rem; margin-bottom: 8px; }
+.mistake-stat-card .stat-value { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.mistake-stat-card .stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+.mistake-stat-card.wrong .stat-value { color: var(--error); }
+.mistake-stat-card.rate .stat-value { color: #f59e0b; }
+.mistake-filter { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; background: var(--card-bg); border-radius: var(--radius); padding: 10px 14px; box-shadow: var(--shadow); align-items: center; }
+.mistake-filter-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+.mistake-filter-btn { padding: 6px 14px; border: 2px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 500; background: var(--card-bg); color: var(--text-secondary); transition: var(--transition); }
+.mistake-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.mistake-filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.mistake-list { display: flex; flex-direction: column; gap: 10px; }
+.mistake-item { background: var(--card-bg); border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow); border-left: 4px solid var(--border); transition: var(--transition); cursor: pointer; position: relative; }
+.mistake-item:hover { border-left-color: var(--primary); box-shadow: var(--shadow-md); }
+.mistake-item.wrong { border-left-color: var(--error); }
+.mistake-item.good { border-left-color: var(--success); }
+.mistake-item .mi-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.mistake-item .mi-type { font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+.mistake-item .mi-question { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.mistake-item .mi-stats { display: flex; gap: 16px; font-size: 0.78rem; color: var(--text-secondary); margin-top: 8px; flex-wrap: wrap; }
+.mistake-item .mi-stats .rate-low { color: var(--error); font-weight: 700; }
+.mistake-item .mi-stats .rate-mid { color: #f59e0b; font-weight: 700; }
+.mistake-item .mi-stats .rate-high { color: var(--success); font-weight: 700; }
+.mistake-item .mi-answer { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; }
+	.mistake-item .mi-delete { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border: none; background: transparent; color: var(--text-secondary); font-size: 1.1rem; cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: var(--transition); opacity: 0.5; }
+	.mistake-item .mi-delete:hover { background: var(--error-light); color: var(--error); opacity: 1; }
+body.is-mobile .mistake-summary { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+body.is-mobile .mistake-stat-card { padding: 12px 8px; }
+body.is-mobile .mistake-stat-card .stat-value { font-size: 1.5rem; }
+
+/* ===== PC STYLES ===== */
+body.is-pc .mobile-bottom-nav { display: none !important; }
+body.is-pc .mobile-action-bar { display: none !important; }
+
+/* ===== TEACHER EMPHASIS ===== */
+.teacher-emphasis { display: inline-block; margin-top: 10px; padding: 10px 14px; background: #fef2f2; border-radius: 6px; border: 1px dashed #f87171; font-size: 0.82rem; color: #991b1b; }
+
+/* ===== DARK MODE ===== */
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f172a; --card-bg: #1e293b; --primary: #818cf8; --primary-light: #1e1b4b; --success: #4ade80; --success-light: #052e16; --error: #f87171; --error-light: #450a0a; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --shadow: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 6px rgba(0,0,0,0.4); --answer-item-bg: #1e293b; --answer-unanswered-bg: #334155; --answer-viewed-bg: #1e1b4b; }
+  .option-btn { background: #1e293b; } .option-btn:hover { background: #1e1b4b; }
+  .opt-icon { background: #334155; color: #94a3b8; }
+  .essay-question { background: linear-gradient(135deg, #422006 0%, #713f12 100%); border-color: #a16207; }
+  .essay-item { background: #1e293b; } .kbd { background: #334155; border-color: #475569; }
+  .progress-bar-outer { background: #334155; }
+  .feedback.ok { background: #052e16; color: #86efac; border-color: #166534; }
+  .feedback.no { background: #450a0a; color: #fca5a5; border-color: #991b1b; }
+  .mobile-bottom-nav { background: #1e293b; border-top-color: #334155; }
+  .mobile-action-bar { background: #1e293b; border-top-color: #334155; }
+  .btn-outline { background: #1e293b; }
+  .order-toggle-bar { background: #1e293b; }
+  .order-toggle-btn { background: #1e293b; }
+  .answer-item { color: #f1f5f9; border-color: #475569; }
+  .answer-item:hover { border-color: var(--primary); }
+  .answer-item.correct { background: var(--success-light); color: var(--success); border-color: var(--success); }
+  .answer-item.wrong { background: var(--error-light); color: var(--error); border-color: var(--error); }
+  .answer-item.revealed { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+  .answer-item.unanswered { color: #94a3b8; }
+  .answer-item.current { outline-color: var(--primary); }
+  .answer-item.viewed { border-color: var(--primary); color: #a5b4fc; }
+  .mistake-item { background: #1e293b; }
+  .mistake-item:hover { background: #1e1b4b; }
+  .mistake-item .mi-delete { color: #94a3b8; }
+  .mistake-item .mi-delete:hover { background: #450a0a; color: #f87171; }
+  .explanation-box { background: linear-gradient(135deg,#0c1929,#0f2847) !important; border-left-color: #38bdf8 !important; color: #e2e8f0 !important; }
+  .teacher-emphasis { background: #450a0a !important; border-color: #991b1b !important; color: #fca5a5 !important; }
+}
+
+/* ===== ANSWER CARD ===== */
+.answer-card-wrap { margin-top: 16px; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; border: 1px solid var(--border); }
+.answer-card-head { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.answer-card-title { font-weight: 700; font-size: 0.9rem; }
+.answer-card-body { padding: 14px 16px 18px; }
+.answer-section { margin-top: 12px; }
+.answer-section:first-child { margin-top: 0; }
+.answer-section-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: var(--text); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.answer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 7px; }
+.answer-item { height: 38px; border-radius: 8px; border: 1px solid var(--border); background: var(--answer-item-bg); color: var(--text); font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: var(--transition); position: relative; }
+.answer-item:hover { border-color: var(--primary); transform: translateY(-1px); }
+.answer-item.current { outline: 2px solid var(--primary); outline-offset: 1px; }
+.answer-item.unanswered { background: var(--answer-unanswered-bg); }
+.answer-item.correct { background: var(--success-light); border-color: var(--success); color: var(--success); }
+.answer-item.wrong { background: var(--error-light); border-color: var(--error); color: var(--error); }
+.answer-item.revealed { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+.answer-item.viewed { background: var(--answer-viewed-bg); border-color: var(--primary); color: var(--primary); }
+.answer-item .mini { display: block; font-size: 0.62rem; font-weight: 600; opacity: 0.8; line-height: 1; margin-top: 1px; }
+.answer-summary { display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-secondary); }
+.answer-summary span { display: inline-flex; align-items: center; gap: 3px; }
+.answer-summary .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.answer-summary .u .dot { background: #94a3b8; }
+.answer-summary .c .dot { background: var(--success); }
+.answer-summary .w .dot { background: var(--error); }
+.answer-summary .r .dot { background: var(--primary); }
+.answer-summary .v .dot { background: #818cf8; }
+
+body.is-mobile .answer-card-head { padding: 10px 14px; }
+body.is-mobile .answer-card-body { padding: 12px 12px 14px; }
+body.is-mobile .answer-grid { grid-template-columns: repeat(auto-fill, minmax(35px, 1fr)); gap: 6px; }
+body.is-mobile .answer-item { height: 35px; border-radius: 7px; font-size: 0.78rem; }
+body.is-mobile .answer-section-title { font-size: 0.8rem; }
+
+/* Exam essay card */
+.exam-essay-q { padding: 16px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-sm); border: 2px dashed #f59e0b; margin-top: 16px; text-align: center; font-size: 1rem; font-weight: 600; line-height: 1.7; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <h1>📚 毛概题库复习系统</h1>
+    <div class="header-stats">
+      <span>✅ <strong id="totalCorrect">0</strong></span>
+      <span>❌ <strong id="totalWrong">0</strong></span>
+      <span>📝 <strong id="totalDone">0</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- PC TOP NAV -->
+<nav class="pc-nav">
+  <div class="pc-nav-inner" id="navTabs">
+    <button class="nav-tab active" data-mode="single">📋 单选题<span class="badge">90</span></button>
+    <button class="nav-tab" data-mode="multi">✅ 多选题<span class="badge">60</span></button>
+    <button class="nav-tab" data-mode="judge">⚖️ 判断题<span class="badge">50</span></button>
+    <button class="nav-tab" data-mode="jianDa">📝 简答题<span class="badge">13</span></button>
+    <button class="nav-tab" data-mode="lunShu">📄 论述题<span class="badge">8</span></button>
+    <button class="nav-tab" data-mode="exam">🧪 考试模式<span class="badge">44</span></button>
+    <button class="nav-tab mistake-tab" data-mode="mistake">📒 错题本<span class="badge" id="mistakeBadge">0</span></button>
+  </div>
+</nav>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-bottom-nav">
+  <div class="mobile-bottom-nav-inner" id="mobileNavTabs">
+    <button class="mobile-nav-tab active" data-mode="single">
+      <span class="tab-icon">📋</span><span class="tab-label">单选题</span><span class="tab-badge">90</span>
+    </button>
+    <button class="mobile-nav-tab" data-mode="multi">
+      <span class="tab-icon">✅</span><span class="tab-label">多选题</span><span class="tab-badge">60</span>
+    </button>
+    <button class="mobile-nav-tab" data-mode="judge">
+      <span class="tab-icon">⚖️</span><span class="tab-label">判断题</span><span class="tab-badge">50</span>
+    </button>
+    <button class="mobile-nav-tab" data-mode="jianDa">
+      <span class="tab-icon">📝</span><span class="tab-label">简答题</span><span class="tab-badge">13</span>
+    </button>
+    <button class="mobile-nav-tab" data-mode="lunShu">
+      <span class="tab-icon">📄</span><span class="tab-label">论述题</span><span class="tab-badge">8</span>
+    </button>
+    <button class="mobile-nav-tab" data-mode="exam">
+      <span class="tab-icon">🧪</span><span class="tab-label">考试</span><span class="tab-badge">44</span>
+    </button>
+    <button class="mobile-nav-tab mistake-tab" data-mode="mistake">
+      <span class="tab-icon">📒</span><span class="tab-label">错题本</span><span class="tab-badge" id="mistakeBadgeM">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE FIXED ACTION BAR -->
+<div class="mobile-action-bar" id="mobileActionBar"></div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent"></div>
+
+<!-- PC FOOTER -->
+<div class="footer">
+  <p>💡 快捷键：<kbd class="kbd">1-5</kbd> 选择选项 · <kbd class="kbd">Enter</kbd> 提交 · <kbd class="kbd">← →</kbd> 上下题 · <kbd class="kbd">R</kbd> 显示答案</p>
+</div>
+
+<script>
+(() => {
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+    || (navigator.maxTouchPoints > 1 && /Mac/.test(ua) && window.innerWidth <= 1024);
+  document.body.classList.add(isMobile ? 'is-mobile' : 'is-pc');
+  window.IS_MOBILE = isMobile;
+})();
+
+const STORAGE_KEY = 'maogai_review_state_v4';
+const DATA = {"singleChoice":[{"id":1,"originalNum":1,"type":"single","question":"1938年，(    )在党的六届六中全会上作了《论新阶段》的报告，正式提出“马克思主义的中国化”这一命题。","options":[{"letter":"A","text":"毛泽东"},{"letter":"B","text":"任弼时"},{"letter":"C","text":"刘少奇"},{"letter":"D","text":"周恩来"}],"answer":"A"},{"id":2,"originalNum":2,"type":"single","question":"党的十八大以来，以习近平同志为核心的党中央明确提出要不断推进（  ）。","options":[{"letter":"A","text":"社会主义现代化"},{"letter":"B","text":"马克思主义中国化时代化"},{"letter":"C","text":"“两个结合”"},{"letter":"D","text":"社会主义现代化强国"}],"answer":"B"},{"id":3,"originalNum":3,"type":"single","question":"(    )明确把“不断谱写马克思主义中国化时代化新篇章”作为当代中国共产党人的庄严历史责任，并提出了继续推进马克思主义中国化时代化的新要求。","options":[{"letter":"A","text":"党的十七大"},{"letter":"B","text":"党的十八大"},{"letter":"C","text":"党的十九大"},{"letter":"D","text":"党的二十大"}],"answer":"D"},{"id":4,"originalNum":4,"type":"single","question":"(    )是马克思主义中国化时代化的第一次历史性飞跃。","options":[{"letter":"A","text":"毛泽东思想"},{"letter":"B","text":"邓小平理论"},{"letter":"C","text":"“三个代表”重要思想"},{"letter":"D","text":"科学发展观"}],"answer":"A"},{"id":5,"originalNum":5,"type":"single","question":"1978年召开的党的（   ），实现了新中国成立以来党的历史上具有深远意义的伟大转折，开启了改革开放和社会主义现代化建设历史新时期。","options":[{"letter":"A","text":"十一届三中全会"},{"letter":"B","text":"十二大"},{"letter":"C","text":"十三大"},{"letter":"D","text":"十一届六中全会"}],"answer":"A"},{"id":6,"originalNum":6,"type":"single","question":"马克思主义中国化时代化的理论成果是一脉相承又(    )的关系。","options":[{"letter":"A","text":"实事求是"},{"letter":"B","text":"与时俱进"},{"letter":"C","text":"独立自主"},{"letter":"D","text":"精益求精"}],"answer":"B"},{"id":7,"originalNum":7,"type":"single","question":"马克思主义中国化时代化的最新理论成果是(    )。","options":[{"letter":"A","text":"毛泽东思想"},{"letter":"B","text":"科学发展观"},{"letter":"C","text":"习近平新时代中国特色社会主义思想"},{"letter":"D","text":"邓小平理论"}],"answer":"C"},{"id":8,"originalNum":8,"type":"single","question":"1917年（  ）的胜利开辟了世界无产阶级社会主义革命的新时代，也给中国送来了马克思列宁主义，中国革命从此有了科学的指导思想。","options":[{"letter":"A","text":"俄国十月革命"},{"letter":"B","text":"五四运动"},{"letter":"C","text":"中国共产党成立"},{"letter":"D","text":"中华人民共和国建立"}],"answer":"A"},{"id":9,"originalNum":9,"type":"single","question":"(    )是毛泽东思想形成和发展的实践基础。","options":[{"letter":"A","text":"中国共产党领导人民进行革命和建设的成功实践"},{"letter":"B","text":"中国共产党领导的工人运动"},{"letter":"C","text":"中国共产党领导的农民运动"},{"letter":"D","text":"中国共产党领导的学生运动"}],"answer":"A"},{"id":10,"originalNum":10,"type":"single","question":"毛泽东思想是在中国革命和建设的实践过程中，在总结我国革命和建设正反两方面历史经验的基础上，逐步形成和发展起来的，其初步形成的标志是(    )。","options":[{"letter":"A","text":"提出了新民主主义革命的基本思想"},{"letter":"B","text":"提出并深入阐述的农村包围城市、武装夺取政权的思想"},{"letter":"C","text":"提出了系统的新民主主义革命理论"},{"letter":"D","text":"提出了人民民主专政、社会主义改造和建设理论"}],"answer":"B"},{"id":11,"originalNum":11,"type":"single","question":"(    )开始形成以毛泽东同志为核心的党的第一代中央领导集体。","options":[{"letter":"A","text":"党的一大"},{"letter":"B","text":"党的二大"},{"letter":"C","text":"八七会议"},{"letter":"D","text":"遵义会议"}],"answer":"D"},{"id":12,"originalNum":12,"type":"single","question":"(    )把毛泽东思想确立为党必须长期坚持的指导思想并写入党章。","options":[{"letter":"A","text":"遵义会议"},{"letter":"B","text":"党的六届六中全会"},{"letter":"C","text":"党的七大"},{"letter":"D","text":"党的八大"}],"answer":"C"},{"id":13,"originalNum":13,"type":"single","question":"(    )创造性地将支部建在连上，成立各级士兵委员会，实行民主制度，在政治上官兵平等。","options":[{"letter":"A","text":"南昌起义"},{"letter":"B","text":"秋收起义"},{"letter":"C","text":"三湾改编"},{"letter":"D","text":"古田会议"}],"answer":"C"},{"id":14,"originalNum":14,"type":"single","question":"(    )是毛泽东思想的基本点，毛泽东思想的精髓。","options":[{"letter":"A","text":"实事求是"},{"letter":"B","text":"群众路线"},{"letter":"C","text":"独立自主"},{"letter":"D","text":"艰苦奋斗"}],"answer":"A"},{"id":15,"originalNum":15,"type":"single","question":"(    )是中国共产党的生命线和根本工作路线，是我们党永葆青春活力和战斗力的重要传家宝。","options":[{"letter":"A","text":"实事求是"},{"letter":"B","text":"群众路线"},{"letter":"C","text":"独立自主"},{"letter":"D","text":"自力更生"}],"answer":"B"},{"id":16,"originalNum":16,"type":"single","question":"毛泽东在《反对本本主义》一文中就指出：“中国革命斗争的胜利要靠中国同志了解中国情况。”这句话的意思是(    )。","options":[{"letter":"A","text":"加强学习马克思主义理论"},{"letter":"B","text":"保持与共产国际的联系"},{"letter":"C","text":"坚持独立自主原则"},{"letter":"D","text":"必须走群众路线"}],"answer":"C"},{"id":17,"originalNum":17,"type":"single","question":"马克思主义中国化时代化的第一个重大理论成果是(    )。","options":[{"letter":"A","text":"邓小平理论"},{"letter":"B","text":"毛泽东思想"},{"letter":"C","text":"“三个代表”重要思想"},{"letter":"D","text":"科学发展观"}],"answer":"B"},{"id":18,"originalNum":18,"type":"single","question":"(    )是解决中国革命问题的基本前提。","options":[{"letter":"A","text":"认清中国国情"},{"letter":"B","text":"分清敌友"},{"letter":"C","text":"成立无产阶级政党"},{"letter":"D","text":"以马克思列宁主义为指导"}],"answer":"A"},{"id":19,"originalNum":19,"type":"single","question":"近代中国最基本的国情是中国逐步成为(    )。","options":[{"letter":"A","text":"殖民地"},{"letter":"B","text":"封建社会"},{"letter":"C","text":"半殖民地半封建社会"},{"letter":"D","text":"资本主义社会"}],"answer":"C"},{"id":20,"originalNum":20,"type":"single","question":"中国革命的首要对象是(    )。","options":[{"letter":"A","text":"资产阶级"},{"letter":"B","text":"官僚资本主义"},{"letter":"C","text":"帝国主义"},{"letter":"D","text":"封建主义"}],"answer":"C"},{"id":21,"originalNum":21,"type":"single","question":"中国革命最基本的动力是(    )。","options":[{"letter":"A","text":"城市小资产阶级"},{"letter":"B","text":"无产阶级"},{"letter":"C","text":"农民阶级"},{"letter":"D","text":"民族资产阶级"}],"answer":"B"},{"id":22,"originalNum":22,"type":"single","question":"(    )是中国革命的中心问题，也是新民主主义革命理论的核心问题。","options":[{"letter":"A","text":"无产阶级的领导权"},{"letter":"B","text":"农民阶级的主力军地位"},{"letter":"C","text":"民族资产阶级的领导权"},{"letter":"D","text":"无产阶级同资产阶级的联盟"}],"answer":"A"},{"id":23,"originalNum":23,"type":"single","question":"新民主主义革命的性质是(    )。","options":[{"letter":"A","text":"无产阶级革命"},{"letter":"B","text":"农民阶级革命"},{"letter":"C","text":"资产阶级民主主义革命"},{"letter":"D","text":"地主阶级革命"}],"answer":"C"},{"id":24,"originalNum":24,"type":"single","question":"新民主主义革命的前途是(    )。","options":[{"letter":"A","text":"新民主主义"},{"letter":"B","text":"社会主义"},{"letter":"C","text":"资本主义"},{"letter":"D","text":"民主主义"}],"answer":"B"},{"id":25,"originalNum":25,"type":"single","question":"新民主主义国家的国体是(    )。","options":[{"letter":"A","text":"无产阶级专政"},{"letter":"B","text":"各革命阶级联合专政"},{"letter":"C","text":"民主集中制的人民代表大会制度"},{"letter":"D","text":"人民民主专政"}],"answer":"B"},{"id":26,"originalNum":26,"type":"single","question":"新民主主义的经济纲领中极具特色的一项内容是(    )。","options":[{"letter":"A","text":"没收封建地主阶级的土地"},{"letter":"B","text":"没收民族资本"},{"letter":"C","text":"没收官僚资本"},{"letter":"D","text":"保护民族工商业"}],"answer":"D"},{"id":27,"originalNum":27,"type":"single","question":"新民主主义文化的特征是无产阶级领导的(    )文化。","options":[{"letter":"A","text":"民族的科学的大众的"},{"letter":"B","text":"新民主主义"},{"letter":"C","text":"社会主义"},{"letter":"D","text":"共产主义"}],"answer":"A"},{"id":28,"originalNum":28,"type":"single","question":"新民主主义革命的道路是(    )。","options":[{"letter":"A","text":"城市暴动和起义"},{"letter":"B","text":"农村包围城市、武装夺取政权"},{"letter":"C","text":"经过长期的合法斗争以进入起义和战争"},{"letter":"D","text":"先占城市后取乡村"}],"answer":"B"},{"id":29,"originalNum":29,"type":"single","question":"毛泽东系统阐述中国革命三大法宝的文章是(    )。","options":[{"letter":"A","text":"《井冈山的斗争》"},{"letter":"B","text":"《&lt;共产党人&gt;发刊词》"},{"letter":"C","text":"《星星之火，可以燎原》"},{"letter":"D","text":"《战争和战略问题》"}],"answer":"B"},{"id":30,"originalNum":30,"type":"single","question":"在新民主主义革命的三大法宝中，(    )是无产阶级政党策略思想的重要内容。","options":[{"letter":"A","text":"统一战线"},{"letter":"B","text":"武装斗争"},{"letter":"C","text":"党的建设"},{"letter":"D","text":"军队建设"}],"answer":"A"},{"id":31,"originalNum":31,"type":"single","question":"从中华人民共和国成立到社会主义改造基本完成，是我国从新民主主义到社会主义的(    )。","options":[{"letter":"A","text":"转变时期"},{"letter":"B","text":"过渡时期"},{"letter":"C","text":"继承时期"},{"letter":"D","text":"发展时期"}],"answer":"B"},{"id":32,"originalNum":32,"type":"single","question":"1952年底，随着土地改革的基本完成，(    )逐步成为我国社会的主要矛盾。","options":[{"letter":"A","text":"人民大众同帝国主义、封建主义及国民党反动派残余的矛盾"},{"letter":"B","text":"帝国主义和中华民族的矛盾、封建主义和人民大众的矛盾"},{"letter":"C","text":"工人阶级同资产阶级的矛盾"},{"letter":"D","text":"人民日益增长的物质文化需要同落后的社会生产之间的矛盾"}],"answer":"C"},{"id":33,"originalNum":33,"type":"single","question":"在新民主主义社会中，(    )是私人资本主义经济向社会主义国营经济过渡的形式。","options":[{"letter":"A","text":"国营经济"},{"letter":"B","text":"国家资本主义经济"},{"letter":"C","text":"个体经济"},{"letter":"D","text":"合作社经济"}],"answer":"B"},{"id":34,"originalNum":34,"type":"single","question":"党在过渡时期总路线的主要内容被概括为(    )。","options":[{"letter":"A","text":"“一化两改”"},{"letter":"B","text":"“两化一改”"},{"letter":"C","text":"“一化三改”"},{"letter":"D","text":"“两化三改”"}],"answer":"C"},{"id":35,"originalNum":35,"type":"single","question":"党在过渡时期总路线的主体是实现(    )。","options":[{"letter":"A","text":"国家的社会主义工业化"},{"letter":"B","text":"私营经济的国有化"},{"letter":"C","text":"个体农业的集体化"},{"letter":"D","text":"对个体农业、手工业和资本主义工商业的改造"}],"answer":"A"},{"id":36,"originalNum":36,"type":"single","question":"对(    )的社会主义改造，是三大改造中首先进行的。","options":[{"letter":"A","text":"工业"},{"letter":"B","text":"手工业"},{"letter":"C","text":"资本主义工商业"},{"letter":"D","text":"农业"}],"answer":"D"},{"id":37,"originalNum":37,"type":"single","question":"对手工业的社会主义改造是通过(    )道路，把个体手工业经济改造成为社会主义经济的过程。","options":[{"letter":"A","text":"互助组"},{"letter":"B","text":"高级社"},{"letter":"C","text":"公私合营"},{"letter":"D","text":"合作化"}],"answer":"D"},{"id":38,"originalNum":38,"type":"single","question":"中国共产党对资本主义工商业进行社会主义改造的方法是(    )。","options":[{"letter":"A","text":"和平赎买"},{"letter":"B","text":"统购统销"},{"letter":"C","text":"公私合营"},{"letter":"D","text":"合作化"}],"answer":"A"},{"id":39,"originalNum":39,"type":"single","question":"我国对农业、手工业和资本主义工商业的社会主义改造基本完成是在(    )。","options":[{"letter":"A","text":"1955年底"},{"letter":"B","text":"1956年底"},{"letter":"C","text":"1957年底"},{"letter":"D","text":"1958年底"}],"answer":"B"},{"id":40,"originalNum":40,"type":"single","question":"(    )为当代中国一切发展进步奠定了制度基础。","options":[{"letter":"A","text":"新中国成立"},{"letter":"B","text":"社会主义制度的确立"},{"letter":"C","text":"国民经济恢复任务的完成"},{"letter":"D","text":"一五计划的完成"}],"answer":"B"},{"id":41,"originalNum":41,"type":"single","question":"(    )的发表，标志着党探索中国社会主义建设道路的良好开端。","options":[{"letter":"A","text":"整风运动"},{"letter":"B","text":"《论十大关系》"},{"letter":"C","text":"党的八大"},{"letter":"D","text":"《关于正确处理人民内部矛盾的问题》"}],"answer":"B"},{"id":42,"originalNum":42,"type":"single","question":"《论十大关系》的报告围绕的基本方针是(    )。","options":[{"letter":"A","text":"独立自主"},{"letter":"B","text":"自力更生为主，争取外援为辅"},{"letter":"C","text":"调动一切积极因素为社会主义建设服务"},{"letter":"D","text":"走中国特色社会主义道路"}],"answer":"C"},{"id":43,"originalNum":43,"type":"single","question":"不属于《论十大关系》讨论范畴的是(    )。","options":[{"letter":"A","text":"重工业和轻工业、农业的关系"},{"letter":"B","text":"社会主义市场经济和计划经济的关系"},{"letter":"C","text":"国家、生产单位和生产者个人的关系"},{"letter":"D","text":"革命和反革命的关系"}],"answer":"B"},{"id":44,"originalNum":44,"type":"single","question":"毛泽东系统论述社会主义社会矛盾理论的著作是(    )。","options":[{"letter":"A","text":"《关于正确处理人民内部矛盾的问题》"},{"letter":"B","text":"《新民主主义论》"},{"letter":"C","text":"《论十大关系》"},{"letter":"D","text":"《中国社会各阶级的分析》"}],"answer":"A"},{"id":45,"originalNum":45,"type":"single","question":"毛泽东在《关于正确处理人民内部矛盾的问题》的报告中指出，社会主义社会的基本矛盾仍然是(    )。","options":[{"letter":"A","text":"人民内部的非对抗性的矛盾"},{"letter":"B","text":"无产阶级和资产阶级之间、社会主义和资本主义之间的矛盾"},{"letter":"C","text":"生产关系和生产力之间、上层建筑和经济基础之间的矛盾"},{"letter":"D","text":"人民日益增长的物质文化需要同落后的社会生产之间的矛盾"}],"answer":"C"},{"id":46,"originalNum":46,"type":"single","question":"毛泽东指出：在人民民主专政下面，解决敌我之间的和人民内部的这两类不同性质的矛盾，采用(    )这样两种不同的方法。","options":[{"letter":"A","text":"依法严惩和说服教育"},{"letter":"B","text":"暴力镇压和说服教育"},{"letter":"C","text":"批评和团结"},{"letter":"D","text":"专政和民主"}],"answer":"D"},{"id":47,"originalNum":47,"type":"single","question":"走中国工业化道路的关键问题是(    )。","options":[{"letter":"A","text":"正确处理重工业和轻工业、农业的关系"},{"letter":"B","text":"正确处理人民内部的矛盾"},{"letter":"C","text":"正确处理两类不同性质的矛盾"},{"letter":"D","text":"调动一切积极因素为社会主义事业服务"}],"answer":"A"},{"id":48,"originalNum":48,"type":"single","question":"党的八大提出的经济建设的正确方针是(    )。","options":[{"letter":"A","text":"统筹兼顾，全面安排"},{"letter":"B","text":"既反保守又反冒进、在综合平衡中稳步前进"},{"letter":"C","text":"团结互助，统筹兼顾"},{"letter":"D","text":"具体问题具体分析"}],"answer":"B"},{"id":49,"originalNum":49,"type":"single","question":"在社会主义建设道路初步探索过程中，关于生产资料所有制结构调整方面，提出了“三个主体，三个补充”设想的是(    )。","options":[{"letter":"A","text":"毛泽东"},{"letter":"B","text":"刘少奇"},{"letter":"C","text":"陈云"},{"letter":"D","text":"邓小平"}],"answer":"C"},{"id":50,"originalNum":50,"type":"single","question":"下列关于中国社会主义建设道路初步探索的意义，错误的是（   ）。","options":[{"letter":"A","text":"巩固和发展了我国的社会主义制度"},{"letter":"B","text":"确立了中国特色社会主义道路"},{"letter":"C","text":"丰富了科学社会主义的理论和实践"},{"letter":"D","text":"为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础"}],"answer":"B"},{"id":51,"originalNum":51,"type":"single","question":"20世纪70年代，整个世界发生着大变动大调整，最显著的变化就是(    )成为时代主题。","options":[{"letter":"A","text":"和平与发展"},{"letter":"B","text":"革命与战争"},{"letter":"C","text":"合作与共赢"},{"letter":"D","text":"开放与融通"}],"answer":"A"},{"id":52,"originalNum":52,"type":"single","question":"党的十一届三中全会以后，以（  ）同志为主要代表的中国共产党人，领导全党和全国人民果断地纠正了社会主义建设时期的错误，深刻地分析了错误出现的原因，同时又坚决地维护和继承了过去在理论上和实践上所取得的一切积极成果。","options":[{"letter":"A","text":"邓小平"},{"letter":"B","text":"陈云"},{"letter":"C","text":"叶剑英"},{"letter":"D","text":"胡耀邦"}],"answer":"A"},{"id":53,"originalNum":53,"type":"single","question":"“三个代表”重要思想创造性地回答了(    )。","options":[{"letter":"A","text":"什么是社会主义、怎样建设社会主义"},{"letter":"B","text":"建设什么样的党、怎样建设党"},{"letter":"C","text":"实现什么样的发展、怎样发展"},{"letter":"D","text":"新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义"}],"answer":"B"},{"id":54,"originalNum":54,"type":"single","question":"党的十八大以来，中国特色社会主义进入（    ），这是我国发展新的历史方位。","options":[{"letter":"A","text":"新时代"},{"letter":"B","text":"新时期"},{"letter":"C","text":"新阶段"},{"letter":"D","text":"新跨越"}],"answer":"A"},{"id":55,"originalNum":55,"type":"single","question":"1982年，邓小平在党的十二大开幕词中明确提出：走自己的道路，(    )。","options":[{"letter":"A","text":"建设有中国特色的社会主义"},{"letter":"B","text":"建设社会主义初级阶段"},{"letter":"C","text":"实现马克思主义中国化时代化"},{"letter":"D","text":"建设社会主义市场经济"}],"answer":"A"},{"id":56,"originalNum":56,"type":"single","question":"(    )是中国特色社会主义理论体系在新世纪新阶段的新发展。","options":[{"letter":"A","text":"邓小平理论"},{"letter":"B","text":"“三个代表”重要思想"},{"letter":"C","text":"科学发展观"},{"letter":"D","text":"习近平新时代中国特色社会主义思想"}],"answer":"C"},{"id":57,"originalNum":57,"type":"single","question":"（    ）是中国特色社会主义理论体系在新时代的新篇章。","options":[{"letter":"A","text":"邓小平理论"},{"letter":"B","text":"“三个代表”重要思想"},{"letter":"C","text":"科学发展观"},{"letter":"D","text":"习近平新时代中国特色社会主义思想"}],"answer":"D"},{"id":58,"originalNum":58,"type":"single","question":"邓小平理论首要的基本的理论问题是(    )。","options":[{"letter":"A","text":"什么是社会主义、怎样建设社会主义"},{"letter":"B","text":"建设什么样的党、怎样建设党"},{"letter":"C","text":"实现什么样的发展、怎样发展"},{"letter":"D","text":"新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义"}],"answer":"A"},{"id":59,"originalNum":59,"type":"single","question":"1992年初，邓小平在南方谈话中指出：社会主义的本质，是解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到(    )。","options":[{"letter":"A","text":"小康社会"},{"letter":"B","text":"共同富裕"},{"letter":"C","text":"现代化国家"},{"letter":"D","text":"现代化强国"}],"answer":"B"},{"id":60,"originalNum":60,"type":"single","question":"邓小平理论的精髓是(    )。","options":[{"letter":"A","text":"解放思想、实事求是"},{"letter":"B","text":"实事求是、与时俱进"},{"letter":"C","text":"解放思想、实事求是、与时俱进"},{"letter":"D","text":"解放思想、实事求是、与时俱进、求真务实"}],"answer":"A"},{"id":61,"originalNum":61,"type":"single","question":"邓小平和我们党对当代中国基本国情的科学判断是(    )。","options":[{"letter":"A","text":"我国是不发达的社会主义"},{"letter":"B","text":"我国已经是发达社会主义"},{"letter":"C","text":"我国正处于并将长期处于社会主义初级阶段"},{"letter":"D","text":"中国特色社会主义进入新时代"}],"answer":"C"},{"id":62,"originalNum":62,"type":"single","question":"党的(    )系统地阐述了社会主义初级阶段的科学内涵。","options":[{"letter":"A","text":"十一届三中全会"},{"letter":"B","text":"十二大"},{"letter":"C","text":"十三大"},{"letter":"D","text":"十四大"}],"answer":"C"},{"id":63,"originalNum":63,"type":"single","question":"(    )是建设中国特色社会主义的总依据。","options":[{"letter":"A","text":"社会主义本质理论"},{"letter":"B","text":"社会主义初级阶段理论"},{"letter":"C","text":"社会主义改革开放理论"},{"letter":"D","text":"社会主义根本任务理论"}],"answer":"B"},{"id":64,"originalNum":64,"type":"single","question":"党在社会主义初级阶段基本路线的简明概括是(    )。","options":[{"letter":"A","text":"“一个中心、两个基本点”"},{"letter":"B","text":"“一个中心、三个基本点”"},{"letter":"C","text":"“两个中心、一个基本点”"},{"letter":"D","text":"“两个中心、两个基本点”"}],"answer":"A"},{"id":65,"originalNum":65,"type":"single","question":"社会主义的根本任务是(    )。","options":[{"letter":"A","text":"解放生产力"},{"letter":"B","text":"发展生产力"},{"letter":"C","text":"消灭剥削"},{"letter":"D","text":"实现共同富裕"}],"answer":"B"},{"id":66,"originalNum":66,"type":"single","question":"党的十三大把邓小平提出的“三步走”发展战略构想确定下来，其中第三步战略目标是(    )。","options":[{"letter":"A","text":"到21世纪中叶，人均国民生产总值达到中等发达国家水平，人民生活比较富裕，基本实现现代化。然后，在这个基础上继续前进"},{"letter":"B","text":"把我国建设成为富强、民主、文明的社会主义现代化国家"},{"letter":"C","text":"把我国建设成为富强、民主、文明、和谐的社会主义现代化国家"},{"letter":"D","text":"把我国建设成为富强、民主、文明、和谐、美丽的社会主义现代化强国"}],"answer":"A"},{"id":67,"originalNum":67,"type":"single","question":"社会主义社会发展的直接动力是（   ）。","options":[{"letter":"A","text":"改革"},{"letter":"B","text":"革命"},{"letter":"C","text":"和谐"},{"letter":"D","text":"开放"}],"answer":"A"},{"id":68,"originalNum":68,"type":"single","question":"在推进经济体制改革的进程中，邓小平提出社会主义也可以搞市场经济的思想，创立了(    )。","options":[{"letter":"A","text":"社会主义本质理论"},{"letter":"B","text":"社会主义初级阶段理论"},{"letter":"C","text":"社会主义改革开放理论"},{"letter":"D","text":"社会主义市场经济理论"}],"answer":"D"},{"id":69,"originalNum":69,"type":"single","question":"(    )是邓小平在坚持四项基本原则的基础上，从中国实际出发提出的实现祖国和平统一的伟大构想。","options":[{"letter":"A","text":"“一国两制”"},{"letter":"B","text":"“两制一国”"},{"letter":"C","text":"“一国三制”"},{"letter":"D","text":"“三制一国”"}],"answer":"A"},{"id":70,"originalNum":70,"type":"single","question":"建设中国特色社会主义，关键在于坚持、加强和改善(    )。","options":[{"letter":"A","text":"改革开放"},{"letter":"B","text":"人民当家做主"},{"letter":"C","text":"党的领导"},{"letter":"D","text":"国家发展战略"}],"answer":"C"},{"id":71,"originalNum":71,"type":"single","question":"（  ）是我们党站在时代前列、保持先进性的根本体现和根本要求。","options":[{"letter":"A","text":"始终代表中国先进文化的前进方向"},{"letter":"B","text":"始终代表中国最广大人民的根本利益"},{"letter":"C","text":"满足人民群众日益增长的物质文化需要"},{"letter":"D","text":"始终代表中国先进生产力的发展要求，大力促进先进生产力的发展"}],"answer":"D"},{"id":72,"originalNum":72,"type":"single","question":"江泽民指出：（  ）是第一生产力，是先进生产力的集中体现和主要标志。","options":[{"letter":"A","text":"科学技术"},{"letter":"B","text":"教育"},{"letter":"C","text":"文化"},{"letter":"D","text":"人才"}],"answer":"A"},{"id":73,"originalNum":73,"type":"single","question":"发展先进文化的重要内容和中心环节是加强(    )。","options":[{"letter":"A","text":"社会主义经济建设"},{"letter":"B","text":"社会主义思想道德建设"},{"letter":"C","text":"社会主义政治建设"},{"letter":"D","text":"社会主义精神文明建设"}],"answer":"B"},{"id":74,"originalNum":74,"type":"single","question":"江泽民同志强调，我们全部工作的出发点和落脚点，就是(    )。","options":[{"letter":"A","text":"构建人类命运共同体"},{"letter":"B","text":"建立和谐世界"},{"letter":"C","text":"建设社会主义精神文明"},{"letter":"D","text":"不断实现好维护好发展好最广大人民的根本利益"}],"answer":"D"},{"id":75,"originalNum":75,"type":"single","question":"贯彻“三个代表”重要思想 ，关键在坚持(    )。","options":[{"letter":"A","text":"与时俱进"},{"letter":"B","text":"党的先进性"},{"letter":"C","text":"执政为民"},{"letter":"D","text":"以人为本"}],"answer":"A"},{"id":76,"originalNum":76,"type":"single","question":"贯彻“三个代表”重要思想 ，核心在坚持(    )。","options":[{"letter":"A","text":"与时俱进"},{"letter":"B","text":"党的先进性"},{"letter":"C","text":"执政为民"},{"letter":"D","text":"以人为本"}],"answer":"B"},{"id":77,"originalNum":77,"type":"single","question":"贯彻“三个代表”重要思想，本质在坚持（    ）。","options":[{"letter":"A","text":"与时俱进"},{"letter":"B","text":"党的先进性"},{"letter":"C","text":"执政为民"},{"letter":"D","text":"以人为本"}],"answer":"C"},{"id":78,"originalNum":78,"type":"single","question":"党要承担起推动中国社会进步的历史责任，必须始终紧紧抓住(    )。","options":[{"letter":"A","text":"战略机遇期"},{"letter":"B","text":"科教兴国战略"},{"letter":"C","text":"发展这个执政兴国的第一要务"},{"letter":"D","text":"社会主义政治文明建设"}],"answer":"C"},{"id":79,"originalNum":79,"type":"single","question":"在建立什么样的经济体制问题上，江泽民明确提出使用(    )这个提法。","options":[{"letter":"A","text":"社会主义市场经济体制"},{"letter":"B","text":"社会主义政治体制"},{"letter":"C","text":"社会主义文化体制"},{"letter":"D","text":"社会主义生态文明体制"}],"answer":"A"},{"id":80,"originalNum":80,"type":"single","question":"江泽民强调推进党的建设新的伟大工程，重点是加强党的(    )。","options":[{"letter":"A","text":"群众基础"},{"letter":"B","text":"执政能力建设"},{"letter":"C","text":"作风建设"},{"letter":"D","text":"组织建设"}],"answer":"B"},{"id":81,"originalNum":81,"type":"single","question":"科学发展观的第一要义是(    )。","options":[{"letter":"A","text":"发展"},{"letter":"B","text":"以人为本"},{"letter":"C","text":"全面协调可持续"},{"letter":"D","text":"统筹兼顾"}],"answer":"A"},{"id":82,"originalNum":82,"type":"single","question":"科学发展观的核心立场是(    )。","options":[{"letter":"A","text":"发展"},{"letter":"B","text":"以人为本"},{"letter":"C","text":"全面协调可持续"},{"letter":"D","text":"统筹兼顾"}],"answer":"B"},{"id":83,"originalNum":83,"type":"single","question":"科学发展观的基本要求是(    )。","options":[{"letter":"A","text":"发展"},{"letter":"B","text":"以人为本"},{"letter":"C","text":"全面协调可持续"},{"letter":"D","text":"统筹兼顾"}],"answer":"C"},{"id":84,"originalNum":84,"type":"single","question":"科学发展观的根本方法是(    )。","options":[{"letter":"A","text":"发展"},{"letter":"B","text":"以人为本"},{"letter":"C","text":"全面协调可持续"},{"letter":"D","text":"统筹兼顾"}],"answer":"D"},{"id":85,"originalNum":85,"type":"single","question":"坚持以人为本，最终是为了实现(    )。","options":[{"letter":"A","text":"社会主义现代化"},{"letter":"B","text":"人的全面发展"},{"letter":"C","text":"民族复兴"},{"letter":"D","text":"共同富裕"}],"answer":"B"},{"id":86,"originalNum":86,"type":"single","question":"科学发展观强调，社会主义民主政治的本质和核心是(    )。","options":[{"letter":"A","text":"人民当家作主"},{"letter":"B","text":"发展先进生产力"},{"letter":"C","text":"发展先进文化"},{"letter":"D","text":"维护人民利益"}],"answer":"A"},{"id":87,"originalNum":87,"type":"single","question":"(    )是马克思主义政党的本质属性，是马克思主义政党的生命所系、力量所在。","options":[{"letter":"A","text":"先进性"},{"letter":"B","text":"阶级性"},{"letter":"C","text":"全民性"},{"letter":"D","text":"群众性"}],"answer":"A"},{"id":88,"originalNum":88,"type":"single","question":"胡锦涛明确指出（    ）是中国特色社会主义的本质属性。","options":[{"letter":"A","text":"社会发展"},{"letter":"B","text":"社会和谐"},{"letter":"C","text":"社会进步"},{"letter":"D","text":"社会繁荣"}],"answer":"B"},{"id":89,"originalNum":89,"type":"single","question":"科学发展观在邓小平理论和“三个代表”重要思想的基础上，创造性地回答了(    )等重大问题。","options":[{"letter":"A","text":"什么是社会主义、怎样建设社会主义"},{"letter":"B","text":"建设什么样的党、怎样建设党"},{"letter":"C","text":"新形势下实现什么样的发展、怎样发展"},{"letter":"D","text":"新时代进行什么样的伟大革命、怎样进行伟大革命"}],"answer":"C"},{"id":90,"originalNum":90,"type":"single","question":"科学发展观最鲜明的精神实质是（    ）。","options":[{"letter":"A","text":"解放思想、实事求是"},{"letter":"B","text":"立党为公、执政为民"},{"letter":"C","text":"独立自主、自力更生"},{"letter":"D","text":"解放思想、实事求是、与时俱进、求真务实"}],"answer":"D"}],"multiChoice":[{"id":1,"originalNum":1,"type":"multi","question":"推进马克思主义中国化时代化，是(    )。","options":[{"letter":"A","text":"马克思主义唯物史观的要求"},{"letter":"B","text":"马克思主义理论本身发展的内在要求"},{"letter":"C","text":"解决中国实际问题的客观需要"},{"letter":"D","text":"社会主义经济社会发展的需要"}],"answer":"BC"},{"id":2,"originalNum":2,"type":"multi","question":"坚持和发展马克思主义，必须(    )。","options":[{"letter":"A","text":"同中国具体实际相结合"},{"letter":"B","text":"同中华优秀传统文化相结合"},{"letter":"C","text":"同社会主义现代化发展相结合"},{"letter":"D","text":"同中华民族伟大复兴相结合"}],"answer":"AB"},{"id":3,"originalNum":3,"type":"multi","question":"实践证明，中国共产党为什么能，中国特色社会主义为什么好，归根到底是(    )。","options":[{"letter":"A","text":"马克思主义经典作家行"},{"letter":"B","text":"科学社会主义行"},{"letter":"C","text":"马克思主义行"},{"letter":"D","text":"中国化时代化的马克思主义行"}],"answer":"CD"},{"id":4,"originalNum":4,"type":"multi","question":"以下对毛泽东思想科学内涵的理解中，正确的是(    )。","options":[{"letter":"A","text":"马克思列宁主义在中国的运用和发展"},{"letter":"B","text":"被实践证明了的关于中国革命和建设的正确的理论原则和经验总结"},{"letter":"C","text":"中国共产党集体智慧的结晶"},{"letter":"D","text":"毛泽东个人的思想"}],"answer":"ABC"},{"id":5,"originalNum":5,"type":"multi","question":"毛泽东思想在(    )。","options":[{"letter":"A","text":"大革命时期萌芽"},{"letter":"B","text":"土地革命战争时期形成"},{"letter":"C","text":"抗日战争时期走向成熟"},{"letter":"D","text":"解放战争时期和新中国成立后继续发展"}],"answer":"ABCD"},{"id":6,"originalNum":6,"type":"multi","question":"第一次国内革命战争时期，毛泽东提出的新民主主义革命基本思想主要体现在以下著作中(    )。","options":[{"letter":"A","text":"《星星之火，可以燎原》"},{"letter":"B","text":"《中国社会各阶级的分析》"},{"letter":"C","text":"《反对本本主义》"},{"letter":"D","text":"《湖南农民运动考察报告》"}],"answer":"BD"},{"id":7,"originalNum":7,"type":"multi","question":"标志着毛泽东思想初步形成的重要文章主要有(    )。","options":[{"letter":"A","text":"《中国的红色政权为什么能够存在？》"},{"letter":"B","text":"《井冈山的斗争》"},{"letter":"C","text":"《星星之火，可以燎原》"},{"letter":"D","text":"《反对本本主义》"}],"answer":"ABCD"},{"id":8,"originalNum":8,"type":"multi","question":"在党的历史上，1935年1月召开的遵义会议是一次具有伟大转折意义的会议，这次会议(    )。","options":[{"letter":"A","text":"事实上确立了毛泽东同志在党中央和红军的领导地位"},{"letter":"B","text":"开始确立以毛泽东同志为主要代表的马克思主义正确路线在党中央的领导地位"},{"letter":"C","text":"开始形成以毛泽东同志为核心的党的第一代中央领导集体"},{"letter":"D","text":"开启了党独立自主解决中国革命实际问题的新阶段，在最危急关头挽救了党、挽救了红军、挽救了中国革命"}],"answer":"ABCD"},{"id":9,"originalNum":9,"type":"multi","question":"毛泽东思想成熟的突出表现是(    )。","options":[{"letter":"A","text":"科学阐述了新民主主义革命的对象、动力、领导力量、性质和前途等基本问题"},{"letter":"B","text":"提出了新民主主义革命的总路线"},{"letter":"C","text":"制定了相应的经济、政治、文化纲领"},{"letter":"D","text":"指明了新民主主义革命的具体目标"}],"answer":"ABCD"},{"id":10,"originalNum":10,"type":"multi","question":"毛泽东思想有多方面的丰富内容，除了新民主主义革命理论外，还包括(    )。","options":[{"letter":"A","text":"社会主义革命和社会主义建设理论"},{"letter":"B","text":"革命军队建设和军事战略的理论"},{"letter":"C","text":"思想政治工作和文化工作的理论"},{"letter":"D","text":"政策和策略以及党的建设的理论"}],"answer":"ABCD"},{"id":11,"originalNum":11,"type":"multi","question":"毛泽东思想活的灵魂包括(    )。","options":[{"letter":"A","text":"实事求是"},{"letter":"B","text":"群众路线"},{"letter":"C","text":"独立自主"},{"letter":"D","text":"与时俱进"}],"answer":"ABC"},{"id":12,"originalNum":12,"type":"multi","question":"毛泽东思想所确立的马克思主义中国化时代化的(    )，指导着我们党不断推进马克思主义中国化时代化，不断开辟马克思主义中国化时代化新境界。","options":[{"letter":"A","text":"前进方向"},{"letter":"B","text":"基本原则"},{"letter":"C","text":"基本方法"},{"letter":"D","text":"主要内容"}],"answer":"ABC"},{"id":13,"originalNum":13,"type":"multi","question":"毛泽东思想的历史地位主要表现为(    )。","options":[{"letter":"A","text":"是马克思主义中国化时代化的第一个重大理论成果"},{"letter":"B","text":"是中国革命和建设的科学指南"},{"letter":"C","text":"是中国共产党和中国人民宝贵的精神财富"},{"letter":"D","text":"是新时期全党全国各族人民团结奋斗的共同思想基础"}],"answer":"ABC"},{"id":14,"originalNum":14,"type":"multi","question":"近代中国社会诸多矛盾中，占支配地位的主要矛盾是(    )。","options":[{"letter":"A","text":"帝国主义和中华民族的矛盾"},{"letter":"B","text":"地主阶级和农民阶级的矛盾"},{"letter":"C","text":"资产阶级和工人阶级的矛盾"},{"letter":"D","text":"封建主义和人民大众的矛盾"}],"answer":"AD"},{"id":15,"originalNum":15,"type":"multi","question":"新民主主义革命理论的实践基础是(    )。","options":[{"letter":"A","text":"旧民主主义革命的失败呼唤新的革命理论"},{"letter":"B","text":"新民主主义革命的艰辛探索奠定了革命理论形成的实践基础"},{"letter":"C","text":"世界进入帝国主义和无产阶级革命时代"},{"letter":"D","text":"中国共产党领导人民进行革命和建设的成功实践"}],"answer":"AB"},{"id":16,"originalNum":16,"type":"multi","question":"近代中国社会的性质和主要矛盾，决定了中国革命的主要敌人是(    )。","options":[{"letter":"A","text":"资产阶级"},{"letter":"B","text":"帝国主义"},{"letter":"C","text":"封建主义"},{"letter":"D","text":"官僚资本主义"}],"answer":"BCD"},{"id":17,"originalNum":17,"type":"multi","question":"新民主主义革命的动力包括(    )。","options":[{"letter":"A","text":"无产阶级"},{"letter":"B","text":"农民阶级"},{"letter":"C","text":"城市小资产阶级"},{"letter":"D","text":"民族资产阶级"}],"answer":"ABCD"},{"id":18,"originalNum":18,"type":"multi","question":"新民主主义的基本纲领包括(    )。","options":[{"letter":"A","text":"新民主主义的政治纲领"},{"letter":"B","text":"新民主主义的经济纲领"},{"letter":"C","text":"新民主主义的文化纲领"},{"letter":"D","text":"新民主主义的社会纲领"}],"answer":"ABC"},{"id":19,"originalNum":19,"type":"multi","question":"新民主主义经济纲领的主要内容是(    )。","options":[{"letter":"A","text":"没收封建地主阶级的土地归农民所有"},{"letter":"B","text":"没收外国在华资本归新民主主义的国家所有"},{"letter":"C","text":"没收官僚资产阶级的垄断资本归新民主主义的国家所有"},{"letter":"D","text":"保护民族工商业"}],"answer":"ACD"},{"id":20,"originalNum":20,"type":"multi","question":"总结新民主主义革命时期党建立、巩固和发展统一战线的实践经验，主要是(    )。","options":[{"letter":"A","text":"要建立巩固的工农联盟"},{"letter":"B","text":"要正确对待资产阶级，尤其是民族资产阶级"},{"letter":"C","text":"一切经过统一战线,一切服从统一战线"},{"letter":"D","text":"采取区别对待的方针"}],"answer":"ABD"},{"id":21,"originalNum":21,"type":"multi","question":"新民主主义革命时期，中国共产党在加强自身建设中积累了丰富的经验，归纳起来主要有(    )。","options":[{"letter":"A","text":"必须把思想建设始终放在党的建设的首位"},{"letter":"B","text":"必须在任何时候都重视党的组织建设"},{"letter":"C","text":"必须重视党的作风建设"},{"letter":"D","text":"必须联系党的政治路线加强党的建设"}],"answer":"ABCD"},{"id":22,"originalNum":22,"type":"multi","question":"中国革命走农村包围城市、武装夺取政权的道路，根本在于处理好（    ）三者之间的关系。","options":[{"letter":"A","text":"土地革命"},{"letter":"B","text":"党的建设"},{"letter":"C","text":"武装斗争"},{"letter":"D","text":"农村革命根据地建设"}],"answer":"ACD"},{"id":23,"originalNum":23,"type":"multi","question":"毛泽东在《&lt;共产党人&gt;发刊词》一文中，总结了中国革命两次胜利和两次失败的经验教训，揭示了中国革命发展的客观规律，提出了党在中国革命中战胜敌人的三个主要的法宝是(    )。","options":[{"letter":"A","text":"统一战线"},{"letter":"B","text":"武装斗争"},{"letter":"C","text":"党的建设"},{"letter":"D","text":"土地革命"}],"answer":"ABC"},{"id":24,"originalNum":24,"type":"multi","question":"关于中国新民主主义社会，下列说法正确的是(    )。","options":[{"letter":"A","text":"它是指从中华人民共和国的成立到社会主义改造基本完成"},{"letter":"B","text":"它是一个独立的社会形态"},{"letter":"C","text":"它是由新民主主义向社会主义转变的过渡性社会形态"},{"letter":"D","text":"它是属于社会主义体系的"}],"answer":"ACD"},{"id":25,"originalNum":25,"type":"multi","question":"在新民主主义社会中，主要的经济成分有(    )。","options":[{"letter":"A","text":"合作社经济"},{"letter":"B","text":"社会主义经济"},{"letter":"C","text":"个体经济"},{"letter":"D","text":"资本主义经济"}],"answer":"BCD"},{"id":26,"originalNum":26,"type":"multi","question":"新民主主义社会时期，中国社会的阶级构成主要包括(    )。","options":[{"letter":"A","text":"工人阶级"},{"letter":"B","text":"农民阶级"},{"letter":"C","text":"其他小资产阶级"},{"letter":"D","text":"民族资产阶级"}],"answer":"ABCD"},{"id":27,"originalNum":27,"type":"multi","question":"20世纪50年代，中国共产党人开辟了一条适合我国情况的农业社会主义改造道路，其成功经验主要有(    )。","options":[{"letter":"A","text":"积极引导农民组织起来，走互助合作道路"},{"letter":"B","text":"遵循自愿互利、典型示范、国家帮助的原则"},{"letter":"C","text":"正确分析农村的阶级和阶层状况，制定正确的阶级政策"},{"letter":"D","text":"坚持积极领导、稳步前进的方针，采取循序渐进的步骤"}],"answer":"ABCD"},{"id":28,"originalNum":28,"type":"multi","question":"新中国对手工业的社会主义改造经历了由小到大、由低级到高级的步骤，包括（  ）。","options":[{"letter":"A","text":"供销小组"},{"letter":"B","text":"供销合作社"},{"letter":"C","text":"生产合作社"},{"letter":"D","text":"公私合营"}],"answer":"ABC"},{"id":29,"originalNum":29,"type":"multi","question":"新中国对资本主义工商业进行社会主义改造的经验有(    )。","options":[{"letter":"A","text":"用和平赎买的方法"},{"letter":"B","text":"采取从低级到高级的国家资本主义的过渡形式"},{"letter":"C","text":"对私人资本主义的赎买政策始终坚持“四马分肥”"},{"letter":"D","text":"把资本工商业者改造成为自食其力的社会主义劳动者"}],"answer":"ABD"},{"id":30,"originalNum":30,"type":"multi","question":"我国社会主义改造是一场伟大的社会变革，但是在改造过程中也出现了一些偏差，遗留了一些问题，主要表现在（  ）。","options":[{"letter":"A","text":"要求过急"},{"letter":"B","text":"工作过粗"},{"letter":"C","text":"改变过快"},{"letter":"D","text":"改造形式过于简单划一"}],"answer":"ABCD"},{"id":31,"originalNum":31,"type":"multi","question":"1956年，毛泽东提出探索适合中国情况的社会主义建设道路的思想，他强调(    )。","options":[{"letter":"A","text":"独立思考"},{"letter":"B","text":"以苏为鉴"},{"letter":"C","text":"进行“第二次结合”"},{"letter":"D","text":"实行改革开放"}],"answer":"ABC"},{"id":32,"originalNum":32,"type":"multi","question":"以下关于毛泽东作的《论十大关系》报告，正确的说法是(    )。","options":[{"letter":"A","text":"标志着党探索中国社会主义建设道路的良好开端"},{"letter":"B","text":"基本方针是调动一切积极因素为社会主义事业服务"},{"letter":"C","text":"前五条主要讨论经济问题"},{"letter":"D","text":"后五条论述的是政治生活和思想文化生活领域如何调动各种积极因素的问题"}],"answer":"ABCD"},{"id":33,"originalNum":33,"type":"multi","question":"党的八大正确分析了社会主义改造完成后我国社会主要矛盾的变化，指出我们国内的主要矛盾(    )。","options":[{"letter":"A","text":"是无产阶级和资产阶级的矛盾"},{"letter":"B","text":"已经不再是工人阶级和资产阶级的矛盾"},{"letter":"C","text":"是人民对于经济文化迅速发展的需要同当前经济文化不能满足人民需要的状况之间的矛盾"},{"letter":"D","text":"是人民日益增长的物质文化需要同落后的社会生产之间的矛盾"}],"answer":"BC"},{"id":34,"originalNum":34,"type":"multi","question":"毛泽东在《关于正确处理人民内部矛盾的问题》中提出了一系列正确处理人民内部矛盾的方针、原则，主要包括(    )。","options":[{"letter":"A","text":"“团结—批评—团结”"},{"letter":"B","text":"统筹兼顾、适当安排"},{"letter":"C","text":"“百花齐放、百家争鸣”"},{"letter":"D","text":"“长期共存，互相监督”"}],"answer":"ABCD"},{"id":35,"originalNum":35,"type":"multi","question":"毛泽东关于社会主义发展阶段的观点表述正确的是(    )。","options":[{"letter":"A","text":"第一个阶段是不发达的社会主义"},{"letter":"B","text":"第二个阶段是比较发达的社会主义"},{"letter":"C","text":"不发达的社会主义比比较发达的社会主义需要更长的时间"},{"letter":"D","text":"第二个阶段是相对发达的社会主义"}],"answer":"AB"},{"id":36,"originalNum":36,"type":"multi","question":"党在社会主义建设道路初步探索中提出的理论成果包括(    )。","options":[{"letter":"A","text":"社会主义发展阶段的思想"},{"letter":"B","text":"实现“四个现代化”的“两步走”发展战略"},{"letter":"C","text":"从经济建设和国防建设的战略布局考虑的“三线建设”"},{"letter":"D","text":"“一纲四目”的和平解决台湾问题的思想、政策和主张"}],"answer":"ABCD"},{"id":37,"originalNum":37,"type":"multi","question":"党领导人民探索社会主义建设道路，在理论和实践上取得了一系列重要成果，这些成果的重要意义体现在(    )。","options":[{"letter":"A","text":"巩固和发展了我国的社会主义制度"},{"letter":"B","text":"为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础"},{"letter":"C","text":"丰富了科学社会主义的理论和实践"},{"letter":"D","text":"为资本主义国家的社会建设提供了经验和借鉴"}],"answer":"ABC"},{"id":38,"originalNum":38,"type":"multi","question":"中国特色社会主义理论体系包括(    )。","options":[{"letter":"A","text":"邓小平理论"},{"letter":"B","text":"“三个代表”重要思想"},{"letter":"C","text":"科学发展观"},{"letter":"D","text":"习近平新时代中国特色社会主义思想"}],"answer":"ABCD"},{"id":39,"originalNum":39,"type":"multi","question":"20世纪70年代，整个世界发生着大变动大调整，最显著的变化就是(    )。","options":[{"letter":"A","text":"和平与发展成为时代主题"},{"letter":"B","text":"世界多极化和经济全球化深入发展"},{"letter":"C","text":"战争与革命仍然是时代主题"},{"letter":"D","text":"综合国力竞争日趋激烈"}],"answer":"ABD"},{"id":40,"originalNum":40,"type":"multi","question":"20世纪80年代末90年代初，中国特色社会主义理论体系形成发展面临的国际背景包括(    )。","options":[{"letter":"A","text":"东欧剧变、苏联解体，国际共产主义运动遭受了重大挫折"},{"letter":"B","text":"和平与发展仍然是时代的主题，世界多极化仍然在曲折中获得发展"},{"letter":"C","text":"经济全球化浪潮正在蓬勃发展"},{"letter":"D","text":"科技进步日新月异"}],"answer":"ABCD"},{"id":41,"originalNum":41,"type":"multi","question":"我国在社会主义建设初期走了不少弯路、犯了不少错误，造成这些失误的深层次原因在于（  ）。","options":[{"letter":"A","text":"经济上急于求成、盲目求纯和急于过渡"},{"letter":"B","text":"政治上坚持以阶级斗争为纲"},{"letter":"C","text":"偏离了党的实事求是的思想路线"},{"letter":"D","text":"对什么是社会主义和如何建设社会主义的问题没有完全搞清楚"}],"answer":"CD"},{"id":42,"originalNum":42,"type":"multi","question":"新世纪新阶段，我国进入（  ），经济社会发展呈现一系列新的阶段性特征。","options":[{"letter":"A","text":"发展关键期"},{"letter":"B","text":"改革攻坚期"},{"letter":"C","text":"开放活跃期"},{"letter":"D","text":"矛盾凸显期"}],"answer":"ABD"},{"id":43,"originalNum":43,"type":"multi","question":"中国特色社会主义理论体系的形成发展过程，经历了以下(    )几个阶段。","options":[{"letter":"A","text":"中国特色社会主义理论体系的形成"},{"letter":"B","text":"中国特色社会主义理论体系的跨世纪发展"},{"letter":"C","text":"中国特色社会主义理论体系在新世纪新阶段的新发展"},{"letter":"D","text":"中国特色社会主义理论体系在新时代的新篇章"}],"answer":"ABCD"},{"id":44,"originalNum":44,"type":"multi","question":"1978年12月召开的党的十一届三中全会，实现了党的历史上具有深远意义的伟大转折，主要内容包括(    )。","options":[{"letter":"A","text":"重新确立了实事求是的思想路线"},{"letter":"B","text":"彻底否定了“以阶级斗争为纲”的错误理论和实践"},{"letter":"C","text":"确定把全党工作的着重点转移到社会主义现代化建设上来"},{"letter":"D","text":"作出实行改革开放的重大决策"}],"answer":"ABCD"},{"id":45,"originalNum":45,"type":"multi","question":"中国特色社会主义理论体系是中国共产党长期探索的伟大理论创造，同（  ）一脉相承又与时俱进，是马克思主义中国化时代化的重大理论成果。","options":[{"letter":"A","text":"空想社会主义"},{"letter":"B","text":"科学社会主义"},{"letter":"C","text":"马克思列宁主义"},{"letter":"D","text":"毛泽东思想"}],"answer":"CD"},{"id":46,"originalNum":46,"type":"multi","question":"1992年初，邓小平在南方谈话中对社会主义本质作出了总结性的理论概括，他指出：“社会主义本质，是(    )。”","options":[{"letter":"A","text":"解放生产力，发展生产力"},{"letter":"B","text":"消灭剥削，消除两极分化"},{"letter":"C","text":"最终达到共同富裕"},{"letter":"D","text":"最终实现现代化"}],"answer":"ABC"},{"id":47,"originalNum":47,"type":"multi","question":"邓小平强调：在改革中，我们始终坚持两条根本原则，一是(    )，一是(    )。","options":[{"letter":"A","text":"以社会主义公有制经济为主体"},{"letter":"B","text":"公有制"},{"letter":"C","text":"共同富裕"},{"letter":"D","text":"市场经济"}],"answer":"AC"},{"id":48,"originalNum":48,"type":"multi","question":"党在社会主义初级阶段基本路线的主要内容概括为(    )。","options":[{"letter":"A","text":"一个中心"},{"letter":"B","text":"两个中心"},{"letter":"C","text":"两个基本点"},{"letter":"D","text":"三个基本点"}],"answer":"AC"},{"id":49,"originalNum":49,"type":"multi","question":"判断改革和各方面是非得失的“三个有利于”标准是指(    )。","options":[{"letter":"A","text":"是否有利于发展社会主义社会的生产力"},{"letter":"B","text":"是否有利于增强社会主义国家的综合国力"},{"letter":"C","text":"是否有利于实现共同富裕"},{"letter":"D","text":"是否有利于提高人民生活水平"}],"answer":"ABD"},{"id":50,"originalNum":50,"type":"multi","question":"邓小平强调的“两手抓，两手都要硬”思想包括(    )。","options":[{"letter":"A","text":"一手抓物质文明，一手抓精神文明"},{"letter":"B","text":"“一手抓建设，一手抓法制”"},{"letter":"C","text":"“一手抓改革开放，一手抓惩治腐败”"},{"letter":"D","text":"“一手抓改革开放，一手抓打击各种犯罪活动”"}],"answer":"ABCD"},{"id":51,"originalNum":51,"type":"multi","question":"江泽民强调，我们想事情，做工作，想得对不对，做得好不好，根本的衡量尺度，就是(    )。","options":[{"letter":"A","text":"人民拥护不拥护"},{"letter":"B","text":"人民赞成不赞成"},{"letter":"C","text":"人民高兴不高兴"},{"letter":"D","text":"人民答应不答应"}],"answer":"ABCD"},{"id":52,"originalNum":52,"type":"multi","question":"“三个代表”重要思想的核心观点包括(    )。","options":[{"letter":"A","text":"始终代表中国先进生产力的发展要求"},{"letter":"B","text":"始终代表中国先进文化的前进方向"},{"letter":"C","text":"始终代表中国先进教育的发展要求"},{"letter":"D","text":"始终代表中国最广大人民的根本利益"}],"answer":"ABD"},{"id":53,"originalNum":53,"type":"multi","question":"江泽民要求领导干部一定要（  ）。","options":[{"letter":"A","text":"讲公正"},{"letter":"B","text":"讲学习"},{"letter":"C","text":"讲政治"},{"letter":"D","text":"讲正气"}],"answer":"BCD"},{"id":54,"originalNum":54,"type":"multi","question":"在党的十六大报告中，把建设社会主义(    )一起确立为社会主义现代化全面发展的基本目标。","options":[{"letter":"A","text":"物质文明"},{"letter":"B","text":"政治文明"},{"letter":"C","text":"生态文明"},{"letter":"D","text":"精神文明"}],"answer":"ABD"},{"id":55,"originalNum":55,"type":"multi","question":"“三个代表”重要思想是(    )。","options":[{"letter":"A","text":"对马列主义、毛泽东思想和邓小平理论的继承和发展"},{"letter":"B","text":"中国特色社会主义理论体系的重要组成部分"},{"letter":"C","text":"中国特色社会主义理论体系的丰富发展"},{"letter":"D","text":"加强和改进党的建设、推进中国特色社会主义事业的强大理论武器"}],"answer":"ABCD"},{"id":56,"originalNum":56,"type":"multi","question":"科学发展观的科学内涵集中概括为(    )。","options":[{"letter":"A","text":"第一要义是发展"},{"letter":"B","text":"核心立场是以人为本"},{"letter":"C","text":"基本要求是全面协调可持续"},{"letter":"D","text":"根本方法是统筹兼顾"}],"answer":"ABCD"},{"id":57,"originalNum":57,"type":"multi","question":"社会主义协商民主，充分体现了社会主义民主的(    )。","options":[{"letter":"A","text":"真实性"},{"letter":"B","text":"广泛性"},{"letter":"C","text":"包容性"},{"letter":"D","text":"开放性"}],"answer":"ABC"},{"id":58,"originalNum":58,"type":"multi","question":"社会主义核心价值体系是兴国之魂，决定着中国特色社会主义发展方向，其基本内容包括(    )。","options":[{"letter":"A","text":"马克思主义指导思想"},{"letter":"B","text":"中国特色社会主义共同理想"},{"letter":"C","text":"以爱国主义为核心的民族精神和以改革创新为核心的时代精神"},{"letter":"D","text":"社会主义荣辱观"}],"answer":"ABCD"},{"id":59,"originalNum":59,"type":"multi","question":"构建社会主义和谐社会的总要求是(    )。","options":[{"letter":"A","text":"民主法治、公平正义"},{"letter":"B","text":"诚信友爱、充满活力"},{"letter":"C","text":"尊重自然、顺应自然、保护自然"},{"letter":"D","text":"安定有序、人与自然和谐相处"}],"answer":"ABD"},{"id":60,"originalNum":60,"type":"multi","question":"科学发展观同邓小平理论、“三个代表”重要思想，面对着共同的时代课题，面临着共同的历史任务，都(    )。","options":[{"letter":"A","text":"贯穿了中国特色社会主义这个主题"},{"letter":"B","text":"坚持辩证唯物主义和历史唯物主义的世界观方法论"},{"letter":"C","text":"坚持党的最高纲领和最低纲领的统一"},{"letter":"D","text":"坚持代表最广大人民根本利益"}],"answer":"ABCD"}],"judgeQuestions":[{"id":1,"originalNum":1,"type":"judge","question":"中国共产党从成立之日起，就明确把马克思列宁主义确立为指导思想。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":2,"originalNum":2,"type":"judge","question":"马克思主义中国化只有中国特色、没有时代特点。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":3,"originalNum":3,"type":"judge","question":"2021年，党的十九届六中全会通过的《中共中央关于党的百年奋斗重大成就和历史经验的决议》总结了百年来中国共产党推进马克思主义中国化时代化的重大成就，阐释了马克思主义中国化时代化的重大历史意义。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":4,"originalNum":4,"type":"judge","question":"坚持和发展马克思主义，必须同中国具体实际相结合、同中华优秀传统文化相结合。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":5,"originalNum":5,"type":"judge","question":"党的十六大提出了“中国特色社会主义理论体系”的科学概念","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":6,"originalNum":6,"type":"judge","question":"马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":7,"originalNum":7,"type":"judge","question":"毛泽东在《星星之火，可以燎原》《反对本本主义》等著作中指明了中国革命的发展规律，标志着毛泽东思想趋于成熟。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":8,"originalNum":8,"type":"judge","question":"从进攻大城市转为向农村进军，是中国革命具有决定意义的新起点","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":9,"originalNum":9,"type":"judge","question":"独立自主是毛泽东思想的基本点，是毛泽东思想的精髓。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":10,"originalNum":10,"type":"judge","question":"毛泽东指出：“群众观点是共产党员革命的出发点与归宿。”","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":11,"originalNum":11,"type":"judge","question":"毛泽东思想是毛泽东个人的全部思想的总和。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":12,"originalNum":12,"type":"judge","question":"认清中国国情，是解决中国革命问题的基本前提。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":13,"originalNum":13,"type":"judge","question":"封建主义和人民大众的矛盾是近代中国各种矛盾中最主要的矛盾。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":14,"originalNum":14,"type":"judge","question":"新民主主义革命的领导力量是民族资产阶级。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":15,"originalNum":15,"type":"judge","question":"农村包围城市、武装夺取政权是中国共产党探索出来的新民主主义革命的正确道路。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":16,"originalNum":16,"type":"judge","question":"党领导的革命统一战线中工农联盟是非基本的、辅助性的。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":17,"originalNum":17,"type":"judge","question":"人民军队必须以全心全意为人民服务为唯一宗旨。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":18,"originalNum":18,"type":"judge","question":"中国共产党要领导中国革命取得胜利，必须不断加强党的思想建设、组织建设和作风建设。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":19,"originalNum":19,"type":"judge","question":"新民主主义社会不是一个独立的社会形态，而是过渡性社会形态。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":20,"originalNum":20,"type":"judge","question":"党在过渡时期总路线的主要内容被概括为“一化三改”。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":21,"originalNum":21,"type":"judge","question":"对农业的社会主义改造是强迫农民走互助合作道路实现的。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":22,"originalNum":22,"type":"judge","question":"对资本主义工商业改造实行暴力剥夺的方式。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":23,"originalNum":23,"type":"judge","question":"1956年底，我国对农业、手工业和资本主义工商业的社会主义改造基本完成，标志着中国历史上长达数千年的阶级剥削制度的结束和社会主义基本制度的确立","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":24,"originalNum":24,"type":"judge","question":"《论十大关系》标志着党探索社会主义建设道路的良好开端。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":25,"originalNum":25,"type":"judge","question":"社会主义社会不存在矛盾。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":26,"originalNum":26,"type":"judge","question":"解决人民内部矛盾的总方针是用专政方法","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":27,"originalNum":27,"type":"judge","question":"走中国工业化道路要强调发展重工业，忽视农业和轻工业的发展。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":28,"originalNum":28,"type":"judge","question":"党在探索社会主义建设道路过程中取得的重要理论成果，是毛泽东思想的重要组成部分，丰富和发展了科学社会主义理论，成为中国特色社会主义理论体系的重要思想来源。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":29,"originalNum":29,"type":"judge","question":"战争与革命是20世纪70年代以来的时代主题。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":30,"originalNum":30,"type":"judge","question":"邓小平理论是中国特色社会主义理论体系的开篇之作。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":31,"originalNum":31,"type":"judge","question":"始终做到“三个代表”是我们党的立党之本、执政之基、力量之源。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":32,"originalNum":32,"type":"judge","question":"党的十七大把科学发展观写入党章，并确立为党必须长期坚持的指导思想。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":33,"originalNum":33,"type":"judge","question":"科学发展观所要解决的根本问题是“建设一个什么样的党、怎样建设党”。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":34,"originalNum":34,"type":"judge","question":"社会主义的本质最终目的是实现少数人的富裕。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":35,"originalNum":35,"type":"judge","question":"解放思想、实事求是是邓小平理论的精髓。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":36,"originalNum":36,"type":"judge","question":"我国正处于并将长期处于社会主义高级阶段。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":37,"originalNum":37,"type":"judge","question":"社会主义的根本任务是发展生产力。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":38,"originalNum":38,"type":"judge","question":"改革开放是决定当代中国命运的关键一招。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":39,"originalNum":39,"type":"judge","question":"“一国两制”构想最初是为了解决香港问题而提出的。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":40,"originalNum":40,"type":"judge","question":"社会主义现代化可以建立在不发达的生产力基础之上。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":41,"originalNum":41,"type":"judge","question":"教育是发展先进文化、建设物质文明和精神文明的基础工程。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":42,"originalNum":42,"type":"judge","question":"我们全部工作的出发点和落脚点，就是不断实现好维护好发展好最广大人民的根本利益。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":43,"originalNum":43,"type":"judge","question":"发展不包括促进人的全面发展。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":44,"originalNum":44,"type":"judge","question":"党的十五大正式把建立社会主义市场经济体制确立为我国经济体制改革的目标。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":45,"originalNum":45,"type":"judge","question":"“引进来”和“走出去”，是我们对外开放方针的两个紧密联系、相互促进的方面，缺一不可。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":46,"originalNum":46,"type":"judge","question":"在当代中国，坚持发展是硬道理的本质要求就是坚持科学发展。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":47,"originalNum":47,"type":"judge","question":"科学发展观强调的“以人为本”与中国古代的民本思想不存在本质上的区别。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"},{"id":48,"originalNum":48,"type":"judge","question":"坚持可持续发展，就要坚定走生产发展、生活富裕、生态良好的文明发展道路。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":49,"originalNum":49,"type":"judge","question":"社会主义核心价值体系是兴国之魂，决定着中国特色社会主义发展方向。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"√"},{"id":50,"originalNum":50,"type":"judge","question":"我们要构建的社会主义和谐社会就是历史上一些思想家憧憬的“大同社会”和空想社会主义者所描绘的“乌托邦”。","options":[{"letter":"√","text":"正确"},{"letter":"×","text":"错误"}],"answer":"×"}],"essayQuestions":[{"id":1,"question":"简述毛泽东思想的主要内容包含哪几个组成部分？ （参考教材P20-25）"},{"id":2,"question":"简述毛泽东思想的历史地位？ （参考教材P32-35）"},{"id":3,"question":"简述新民主主义革命总路线的内容？ （参考教材P45）"},{"id":4,"question":"新民主主义的政治纲领是什么？（参考教材P52）"},{"id":5,"question":"党在过渡时期总路线的完整表述是什么？（参考教材P70-71）"},{"id":6,"question":"简述社会主义改造的历史经验？（参考教材P83-85）"},{"id":7,"question":"《论十大关系》确定的基本方针是什么？（参考教材P94）"},{"id":8,"question":"简述党对社会主义建设道路初步探索的意义？（参考教材P110-112）"},{"id":9,"question":"邓小平关于社会主义本质的论断是什么？（参考教材P153）"},{"id":10,"question":"简述党的十三大提出的党在社会主义初级阶段的基本路线的内容？（参考教材P160）"},{"id":11,"question":"简述邓小平理论的历史地位？（参考教材P188-189）"},{"id":12,"question":"简述“三个代表”重要思想的核心观点？（参考教材P193-200）"},{"id":13,"question":"简述科学发展观的科学内涵？（参考教材P264：本章小结的第一段话）"},{"id":14,"question":"如何理解并灵活运用毛泽东思想活的灵魂？（参考教材P26-32）"},{"id":15,"question":"试述新民主主义革命道路形成的必要性及其核心内容？（参考教材P57-59）"},{"id":16,"question":"结合本学期概论课开展的主题实践教学活动,如何理解河南革命精神？"},{"id":17,"question":"试述中国确立社会主义基本制度的重大意义？（参考教材P89-91）"},{"id":18,"question":"党对社会主义建设道路的初步探索有哪些经验教训？（参考教材P112-116）"},{"id":19,"question":"根据所学知识，如何认识改革的性质？（参考教材P168-169）"},{"id":20,"question":"如何理解“三个代表”重要思想的核心观点？（参考教材P193-200）"},{"id":21,"question":"如何理解构建社会主义和谐社会的总体要求？（参考教材P251-253）"}]};
+
+function decorate(list, type) {
+  return list.map(q => ({ ...q, key: `${type}-${q.id}`, type }));
+}
+
+DATA.singleChoice = decorate(DATA.singleChoice, 'single');
+DATA.multiChoice = decorate(DATA.multiChoice, 'multi');
+DATA.judgeQuestions = decorate(DATA.judgeQuestions, 'judge');
+
+// ===== EXPLANATIONS DATA (NEW) =====
+const EXPLANATIONS = {"single":{"1":"【答案】A\n【解析】1938年，毛泽东在党的六届六中全会上作了《论新阶段》的政治报告，第一次正式提出\"马克思主义的中国化\"这一科学命题。他指出：\"没有抽象的马克思主义，只有具体的马克思主义。所谓具体的马克思主义，就是通过民族形式的马克思主义，就是把马克思主义应用到中国具体环境的具体斗争中去，而不是抽象地应用它。\"1945年党的七大上，刘少奇在修改党章的报告中正式阐述了\"马克思主义中国化\"的概念，并将毛泽东思想确立为党的指导思想。","2":"【答案】B\n【解析】党的十八大以来，以习近平同志为核心的党中央明确提出要不断推进\"马克思主义中国化时代化\"。2023版教材在此前\"马克思主义中国化\"的基础上增加了\"时代化\"二字，体现了理论与时俱进的特征。在党的二十大报告中，更是明确把\"不断谱写马克思主义中国化时代化新篇章\"作为当代中国共产党人的庄严历史责任。","3":"【答案】D\n【解析】党的二十大（2022年）明确把\"不断谱写马克思主义中国化时代化新篇章\"作为当代中国共产党人的庄严历史责任，并提出了继续推进马克思主义中国化时代化的新要求。党的二十大报告专篇论述了这一重大命题。","4":"【答案】A\n【解析】毛泽东思想是马克思主义中国化时代化的第一次历史性飞跃。这一论断是在党的十一届六中全会通过的《关于建国以来党的若干历史问题的决议》（1981年）中明确提出的。毛泽东思想系统回答了在一个半殖民地半封建的东方大国如何进行新民主主义革命和社会主义革命的问题。","5":"【答案】A\n【解析】1978年12月召开的党的十一届三中全会，是新中国成立以来党的历史上具有深远意义的伟大转折。全会果断停止使用\"以阶级斗争为纲\"的口号，作出把党和国家工作中心转移到经济建设上来、实行改革开放的历史性决策，开启了改革开放和社会主义现代化建设历史新时期。","6":"【答案】B\n【解析】马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系。毛泽东思想、邓小平理论、\"三个代表\"重要思想、科学发展观、习近平新时代中国特色社会主义思想，虽然形成于不同的历史时期、面对不同的时代课题，但都坚持马克思主义的基本立场、观点和方法，都围绕着实现中华民族伟大复兴这一主题，是一脉相承的；同时每个理论成果都根据新的实践和时代特征进行了创新发展，体现了与时俱进的理论品格。","7":"【答案】C\n【解析】习近平新时代中国特色社会主义思想是马克思主义中国化时代化的最新理论成果。党的十九大将其确立为党必须长期坚持的指导思想并写入党章。它系统回答了\"新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义\"等重大时代课题，是当代中国马克思主义、二十一世纪马克思主义。","8":"【答案】A\n【解析】1917年俄国十月革命的胜利，开辟了世界无产阶级社会主义革命的新时代。毛泽东指出：\"十月革命一声炮响，给我们送来了马克思列宁主义。\"十月革命的胜利使社会主义从理论变为现实，中国先进分子从十月革命的胜利中看到了中国的前途和希望，开始用无产阶级世界观作为观察国家命运的工具。","9":"【答案】A\n【解析】中国共产党领导人民进行革命和建设的成功实践，是毛泽东思想形成和发展的实践基础。理论源于实践，毛泽东思想是在中国共产党领导中国人民进行新民主主义革命、社会主义革命和社会主义建设的丰富实践中逐步形成和发展起来的。B、C、D选项都只是这一整体实践中的一部分。","10":"【答案】B\n【解析】毛泽东思想初步形成的标志是提出并深入阐述了农村包围城市、武装夺取政权的思想。这一思想在井冈山斗争时期形成并逐步完善。在《中国的红色政权为什么能够存在？》《井冈山的斗争》《星星之火，可以燎原》等著作中，毛泽东系统论证了中国革命走农村包围城市道路的必要性和可能性。A选项是萌芽时期特征，C选项是成熟时期特征，D选项是继续发展时期特征。","11":"【答案】D\n【解析】遵义会议（1935年1月）开始形成以毛泽东同志为核心的党的第一代中央领导集体。会议事实上确立了毛泽东在党中央和红军的领导地位，开始确立了以毛泽东为主要代表的马克思主义正确路线在党中央的领导地位。这是中国共产党第一次独立自主地运用马克思列宁主义基本原理解决自己的路线、方针和政策问题，是中国共产党从幼年走向成熟的标志。","12":"【答案】C\n【解析】1945年党的七大把毛泽东思想确立为党必须长期坚持的指导思想并写入党章。七大在延安召开，刘少奇在《关于修改党章的报告》中正式阐述了毛泽东思想的概念，指出\"毛泽东思想，就是马克思列宁主义的理论与中国革命的实践之统一的思想\"。","13":"【答案】C\n【解析】三湾改编（1927年9月-10月）创造性地将支部建在连上，成立各级士兵委员会，实行民主制度，在政治上官兵平等。毛泽东率领秋收起义余部向井冈山进军途中，在江西永新县三湾村进行了著名的三湾改编，从组织上确立了党对军队的绝对领导，是建设无产阶级领导的新型人民军队的重要开端。南昌起义打响了武装反抗国民党反动派的第一枪，秋收起义后部队上了井冈山，古田会议确立了\"思想建党、政治建军\"的原则。","14":"【答案】A\n【解析】实事求是是毛泽东思想的基本点，是毛泽东思想的精髓。毛泽东在《改造我们的学习》（1941年）中对实事求是作了科学阐释：\"'实事'就是客观存在着的一切事物，'是'就是客观事物的内部联系即规律性，'求'就是我们去研究。\"群众路线和独立自主是毛泽东思想活的灵魂的另外两个基本方面。艰苦奋斗是中国共产党的优良传统，但不是毛泽东思想的精髓。","15":"【答案】B\n【解析】群众路线是中国共产党的生命线和根本工作路线，是我们党永葆青春活力和战斗力的重要传家宝。群众路线的基本内容是：一切为了群众，一切依靠群众，从群众中来，到群众中去，把党的正确主张变为群众的自觉行动。实事求是是党的思想路线，独立自主是党的根本政治原则。","16":"【答案】C\n【解析】毛泽东在《反对本本主义》（1930年）中指出：\"中国革命斗争的胜利要靠中国同志了解中国情况。\"这句话强调的是坚持独立自主原则。《反对本本主义》是毛泽东为反对当时红军中教条主义思想而写的。这句话的含义是：中国的事情必须由中国人民自己作主张、自己来处理，不能盲目依赖共产国际的指示或照搬外国经验。","17":"【答案】B\n【解析】毛泽东思想是马克思主义中国化时代化的第一个重大理论成果。它是马克思列宁主义在中国的运用和发展，是被实践证明了的关于中国革命和建设的正确的理论原则和经验总结，是中国共产党集体智慧的结晶。邓小平理论是马克思主义中国化时代化第二次飞跃的开篇之作。","18":"【答案】A\n【解析】认清中国国情，是解决中国革命问题的基本前提。毛泽东在《中国革命和中国共产党》中指出：\"认清中国的国情，乃是认清一切革命问题的基本的根据。\"近代中国最基本的国情是中国逐步成为半殖民地半封建社会。只有正确认识中国社会的性质，才能正确认识中国革命的对象、任务、动力、性质和前途。","19":"【答案】C\n【解析】近代中国最基本的国情是中国逐步成为半殖民地半封建社会。1840年鸦片战争后，中国开始从完全独立的封建社会向半殖民地半封建社会转变。半殖民地是从政治主权角度而言的，半封建是从经济结构角度而言的。不能将\"半殖民地\"与\"半封建\"颠倒表述。","20":"【答案】C\n【解析】中国革命的首要对象是帝国主义。帝国主义是阻碍中国社会进步的首要因素，是近代中国一切灾祸的总根源。新民主主义革命的对象是\"三座大山\"——帝国主义、封建主义和官僚资本主义。在这三大敌人中，帝国主义是中国人民最凶恶的敌人。","21":"【答案】B\n【解析】中国革命最基本的动力是无产阶级（工人阶级）。无产阶级是中国最先进的阶级，富于组织性和纪律性，没有私人占有的生产资料，具有彻底的革命性。虽然中国无产阶级人数较少，但由于他们身受三重压迫，革命性最强，成为新民主主义革命的领导阶级。农民阶级是主力军，城市小资产阶级是可靠的同盟者，民族资产阶级具有两面性。","22":"【答案】A\n【解析】无产阶级的领导权是中国革命的中心问题，也是新民主主义革命理论的核心问题。新旧民主主义革命的根本区别就在于领导阶级不同：旧民主主义革命由资产阶级领导，新民主主义革命由无产阶级（通过中国共产党）领导。无产阶级及其政党能否牢牢掌握革命的领导权，是关系到革命成败的关键。","23":"【答案】C\n【解析】新民主主义革命的性质是资产阶级民主主义革命。这是因为新民主主义革命的任务仍然是反帝反封建，而不是消灭资产阶级和资本主义。但是，新民主主义革命与旧民主主义革命有着本质区别：革命领导权不同、革命前途不同、所属的革命范畴不同。毛泽东在《新民主主义论》中系统阐明了这一革命性质的特殊性。","24":"【答案】B\n【解析】新民主主义革命的前途是社会主义。中国革命必须分两步走：第一步是新民主主义革命，建立新民主主义社会；第二步是社会主义革命，实现从新民主主义到社会主义的过渡。毛泽东形象地说：\"民主主义革命是社会主义革命的必要准备，社会主义革命是民主主义革命的必然趋势。\"","25":"【答案】B\n【解析】新民主主义国家的国体是各革命阶级联合专政。新民主主义共和国是无产阶级领导的、以工农联盟为基础的、各革命阶级（包括工人、农民、城市小资产阶级和民族资产阶级）联合专政的民主共和国。1956年社会主义改造完成后，国体转变为人民民主专政，其实质是无产阶级专政。","26":"【答案】D\n【解析】保护民族工商业是新民主主义经济纲领中极具特色的一项内容。新民主主义经济纲领概括为\"两没收一保护\"：没收封建地主阶级的土地归农民所有，没收官僚资本归新民主主义国家所有，保护民族工商业。保护民族工商业是因为民族资本主义经济在落后的中国仍然有利于国计民生，这充分体现了新民主主义经济纲领的中国特色。","27":"【答案】A\n【解析】新民主主义文化的特征是无产阶级领导的民族的科学的大众的文化。毛泽东在《新民主主义论》中提出：民族的文化反对帝国主义奴化思想；科学的文化反对一切封建迷信和唯心主义；大众的文化为全民族百分之九十以上的工农劳苦大众服务。","28":"【答案】B\n【解析】新民主主义革命的道路是农村包围城市、武装夺取政权。1927年大革命失败后，毛泽东率领秋收起义部队上井冈山，建立了第一个农村革命根据地，从实践上开辟了这条道路。城市暴动和起义是俄国十月革命的模式，在中国均遭失败，证明俄国道路在中国行不通。","29":"【答案】B\n【解析】毛泽东系统阐述中国革命三大法宝的文章是《〈共产党人〉发刊词》（1939年10月）。毛泽东指出：\"统一战线，武装斗争，党的建设，是中国共产党在中国革命中战胜敌人的三个法宝，三个主要的法宝。\"《井冈山的斗争》总结了井冈山斗争经验，《星星之火，可以燎原》批评了悲观思想，《战争和战略问题》侧重论述武装斗争。","30":"【答案】A\n【解析】在三大法宝中，统一战线是无产阶级政党策略思想的重要内容。统一战线解决的是\"团结谁、打击谁\"的问题，本质上是一个政治策略问题。毛泽东强调\"政策和策略是党的生命\"，统一战线的核心就是在不同历史阶段正确区分敌友、团结大多数、打击主要敌人。","31":"【答案】B\n【解析】从中华人民共和国成立到社会主义改造基本完成（1949-1956年），是我国从新民主主义到社会主义的过渡时期。这一时期的社会主要矛盾逐步由人民大众与\"三座大山\"的矛盾转变为工人阶级与资产阶级、社会主义道路与资本主义道路之间的矛盾。1953年提出过渡时期总路线，1956年底三大改造基本完成。","32":"【答案】C\n【解析】1952年底，随着土地改革的基本完成，工人阶级同资产阶级的矛盾逐步成为我国社会的主要矛盾。土改完成后，封建主义的经济基础被彻底摧毁，无产阶级与资产阶级两个阶级、社会主义与资本主义两条道路的矛盾就凸显出来。D选项是1981年十一届六中全会对1956年社会主义改造完成后社会主要矛盾的概括。","33":"【答案】B\n【解析】在新民主主义社会中，国家资本主义经济是私人资本主义经济向社会主义国营经济过渡的形式。国家资本主义分为初级形式（委托加工、计划订货、统购包销、经销代销）和高级形式（个别企业公私合营、全行业公私合营）。国营经济本身就是社会主义性质的，合作社经济是半社会主义性质的过渡形式，个体经济是可以走向资本主义也可以走向社会主义的十字路口经济。","34":"【答案】C\n【解析】党在过渡时期总路线的主要内容被概括为\"一化三改\"。\"一化\"即社会主义工业化，是总路线的主体；\"三改\"即对个体农业、手工业和资本主义工商业的社会主义改造，是总路线的两翼。毛泽东比喻为鸟的主体和翅膀的关系。\"一化两改\"\"两化一改\"\"两化三改\"均为错误表述。","35":"【答案】A\n【解析】党在过渡时期总路线的主体是实现国家的社会主义工业化。工业化是关系到国家富强和民族独立的根本大计。毛泽东曾说：\"现在我们能造什么？……一辆汽车、一架飞机、一辆坦克、一辆拖拉机都不能造。\"B、C、D选项均属于\"三改\"的范畴，是总路线的\"两翼\"。","36":"【答案】D\n【解析】对农业的社会主义改造是三大改造中首先进行的。原因在于：农业人口占绝大多数；土改后农村出现贫富分化趋势；分散的小农经济无法满足工业化对粮食和原料的需求。农业改造遵循自愿互利、典型示范、国家帮助的原则，经历了互助组、初级社、高级社三个发展阶段。","37":"【答案】D\n【解析】对手工业的社会主义改造是通过合作化道路，把个体手工业经济改造成为社会主义集体经济的过程。手工业合作化经历了供销小组、供销合作社、生产合作社三个阶段。互助组和高级社主要是农业改造的形式，公私合营是资本主义工商业改造的形式。","38":"【答案】A\n【解析】中国共产党对资本主义工商业进行社会主义改造的方法是和平赎买。和平赎买是指国家有偿地将私营企业变为国营企业，让资本家在一定年限内从企业经营所得中获取利润。马克思、恩格斯和列宁都曾设想过和平赎买，但只有在中国的历史条件下才得以成功实现。统购统销是过渡时期的购销政策，公私合营是国家资本主义的高级形式，合作化是对农业和手工业的改造方式。","39":"【答案】B\n【解析】我国对农业、手工业和资本主义工商业的社会主义改造基本完成是在1956年底。到1956年底，入社农户超过96%、手工业合作化达91.7%、资本主义工商业实现了全行业公私合营。原来设想需要十几年甚至二十几年，实际仅用了约3年时间。改造后期也出现了\"要求过急、工作过粗\"等偏差。","40":"【答案】B\n【解析】社会主义制度的确立为当代中国一切发展进步奠定了制度基础。1956年底，随着三大改造基本完成，社会主义基本经济制度在中国确立。新中国成立（A）使中国人民站起来了，但当时建立的还是新民主主义社会；社会主义制度的确立则使中国真正走上了社会主义道路。","41":"【答案】B\n【解析】《论十大关系》的发表，标志着党探索中国社会主义建设道路的良好开端。1956年4月，毛泽东在中央政治局扩大会议上作了《论十大关系》的报告，以苏联经验为鉴戒，总结中国自己的经验，探索适合中国国情的社会主义建设道路。报告围绕的基本方针是调动一切积极因素为社会主义建设服务。","42":"【答案】C\n【解析】《论十大关系》的报告围绕的基本方针是调动一切积极因素为社会主义建设服务。毛泽东明确提出：\"提出这十个问题，都是围绕着一个基本方针，就是要把国内外一切积极因素调动起来，为社会主义事业服务。\"独立自主是中国外交的基本原则，自力更生为主、争取外援为辅是经济建设的方针，走中国特色社会主义道路是邓小平在十二大首次提出的。","43":"【答案】B\n【解析】\"社会主义市场经济和计划经济的关系\"不属于《论十大关系》讨论的范畴。《论十大关系》讨论的十大关系包括：重工业和轻工业农业的关系、沿海工业和内地工业的关系、经济建设和国防建设的关系、国家生产单位和生产者个人的关系、中央和地方的关系、汉族和少数民族的关系、党和非党的关系、革命和反革命的关系、是非关系、中国和外国的关系。社会主义市场经济概念是在1992年党的十四大上才正式确立的。","44":"【答案】A\n【解析】毛泽东系统论述社会主义社会矛盾理论的著作是《关于正确处理人民内部矛盾的问题》（1957年2月）。在这篇著作中，毛泽东第一次系统地阐述了社会主义社会矛盾的学说：社会主义社会仍然存在矛盾，基本矛盾仍然是生产关系与生产力、上层建筑与经济基础之间的矛盾；社会主义社会的矛盾分为敌我矛盾和人民内部矛盾两类不同性质的矛盾；解决敌我矛盾用专政的方法，解决人民内部矛盾用民主的方法。","45":"【答案】C\n【解析】毛泽东指出社会主义社会的基本矛盾仍然是生产关系和生产力之间、上层建筑和经济基础之间的矛盾。这一论断创造性地发展了马克思主义关于社会基本矛盾的理论，指出社会主义社会的基本矛盾具有\"又相适应又相矛盾\"的特点，可以通过社会主义制度本身不断得到解决。","46":"【答案】D\n【解析】毛泽东指出，解决敌我矛盾和人民内部矛盾这两类不同性质的矛盾，采用专政和民主这样两种不同的方法。敌我矛盾是对抗性的，只能用专政的方法去解决；人民内部矛盾是非对抗性的，只能用民主的方法、说服教育的方法去解决。毛泽东把解决人民内部矛盾的民主方法具体化为\"团结-批评-团结\"的公式。","47":"【答案】A\n【解析】走中国工业化道路的关键问题是正确处理重工业和轻工业、农业的关系。毛泽东在《论十大关系》中把这个问题列为十大关系之首。苏联工业化的教训是片面注重重工业，忽视农业和轻工业。毛泽东提出要以农业为基础、以工业为主导，以农轻重为序发展国民经济，实行\"两条腿走路\"的方针。","48":"【答案】B\n【解析】党的八大提出的经济建设的正确方针是既反保守又反冒进、在综合平衡中稳步前进。八大正确分析了社会主义改造完成后国内主要矛盾的变化，提出全国人民的主要任务是集中力量发展社会生产力。\"统筹兼顾，全面安排\"是处理各种关系的方针，\"具体问题具体分析\"是马克思主义活的灵魂。","49":"【答案】C\n【解析】提出\"三个主体，三个补充\"设想的是陈云。中共八大上，陈云提出：在工商业经营方面，国家经营和集体经营是主体，一定数量的个体经营为补充；在生产计划方面，计划生产是主体，一定范围的自由生产为补充；在市场方面，国家市场是主体，一定范围的自由市场为补充。陈云是党的第一代中央领导集体的重要成员，长期主持经济工作。","50":"【答案】B\n【解析】\"确立了中国特色社会主义道路\"这一表述不正确。\"建设有中国特色的社会主义\"是1982年邓小平在十二大开幕词中首次提出的，不能说在社会主义建设道路初步探索时期（1956-1978年）就已经确立。初步探索的积极意义是为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础。A、C、D都是正确的意义表述。","51":"【答案】A\n【解析】20世纪70年代，整个世界发生着大变动大调整，最显著的变化就是和平与发展成为时代主题。进入70年代后，美苏争霸力量对比趋于均衡，世界多极化趋势发展，和平力量的增长超过了战争力量的增长。邓小平敏锐地察觉到这一变化，提出和平与发展是当代世界的两大问题，为改革开放和以经济建设为中心提供了重要时代依据。","52":"【答案】A\n【解析】党的十一届三中全会以后，以邓小平同志为主要代表的中国共产党人，领导全党和全国人民果断纠正了社会主义建设时期的错误，同时又坚决维护和继承了过去在理论和实践上所取得的一切积极成果。十一届三中全会实际上形成了以邓小平为核心的党的第二代中央领导集体。","53":"【答案】B\n【解析】\"三个代表\"重要思想创造性地回答了\"建设什么样的党、怎样建设党\"的问题。邓小平理论首要的基本理论问题是\"什么是社会主义、怎样建设社会主义\"（A），科学发展观创造性地回答了\"新形势下实现什么样的发展、怎样发展\"（C），习近平新时代中国特色社会主义思想系统回答了\"新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义\"（D）。每个理论成果都有其核心回答的时代课题。","54":"【答案】A\n【解析】党的十八大以来，中国特色社会主义进入新时代，这是我国发展新的历史方位。党的十九大报告正式作出这一重大政治论断。\"新时期\"通常用来指称改革开放以来的历史阶段，\"新阶段\"和\"新跨越\"都不是正式的政治论断表述。","55":"【答案】A\n【解析】1982年，邓小平在党的十二大开幕词中明确提出：\"走自己的道路，建设有中国特色的社会主义。\"这是\"中国特色社会主义\"概念在党的历史上首次被提出，标志着中国特色社会主义理论体系的开篇。","56":"【答案】C\n【解析】科学发展观是中国特色社会主义理论体系在新世纪新阶段的新发展。邓小平理论是开篇之作，\"三个代表\"重要思想是跨世纪的新发展，习近平新时代中国特色社会主义思想是新时代的新篇章。","57":"【答案】D\n【解析】习近平新时代中国特色社会主义思想是中国特色社会主义理论体系在新时代的新篇章。党的十八大以来，以习近平同志为核心的党中央创立了这一思想，系统回答了新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义等重大时代课题，实现了马克思主义中国化时代化新的飞跃。","58":"【答案】A\n【解析】邓小平理论首要的基本的理论问题是\"什么是社会主义、怎样建设社会主义\"。邓小平认为过去我们对社会主义的认识不是完全清醒的，不能离开生产力抽象地谈论社会主义。他通过对这一根本问题的长期思考，在1992年南方谈话中提出了社会主义本质论。B是\"三个代表\"回答的问题，C是科学发展观回答的问题，D是习近平新时代中国特色社会主义思想回答的问题。","59":"【答案】B\n【解析】1992年初，邓小平在南方谈话中指出：\"社会主义的本质，是解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到共同富裕。\"这28个字是邓小平社会主义本质论的核心表述。解放和发展生产力是根本途径，消灭剥削和消除两极分化是内在要求，最终达到共同富裕是根本目标。【课堂强调】老师反复提醒：这是简答题考点，28个字一句不能少！","60":"【答案】A\n【解析】邓小平理论的精髓是\"解放思想、实事求是\"（八个字）。1978年12月，邓小平在中央工作会议闭幕会上发表《解放思想，实事求是，团结一致向前看》的重要讲话。对于毛泽东思想来说是\"实事求是\"四个字，但对于邓小平理论来说\"解放思想、实事求是\"必须八个字完整表述——这是老师反复强调的考点。B选项少了\"解放思想\"，C和D选项中的\"与时俱进\"\"求真务实\"分别是后来江泽民和胡锦涛时期增加的。","61":"【答案】C\n【解析】邓小平和我们党对当代中国基本国情的科学判断是\"我国正处于并将长期处于社会主义初级阶段\"。这一论断是党的十三大（1987年）系统阐述的。社会主义初级阶段包含两层含义：第一，我国已经是社会主义社会；第二，我国的社会主义社会还处在初级阶段，必须从这个实际出发而不能超越这个阶段。","62":"【答案】C\n【解析】党的十三大（1987年10月）系统地阐述了社会主义初级阶段的科学内涵。十三大报告明确指出我国正处在社会主义的初级阶段，并提出了党在社会主义初级阶段的基本路线\"一个中心、两个基本点\"。十一届三中全会实现了伟大转折，十二大提出了建设有中国特色社会主义的命题，十四大确立了社会主义市场经济体制的改革目标。","63":"【答案】B\n【解析】社会主义初级阶段理论是建设中国特色社会主义的总依据。只有正确认识我国社会所处的历史阶段，才能制定和执行正确的路线方针政策。社会主义本质理论回答的是\"什么是社会主义\"的问题，社会主义改革开放理论回答的是发展动力问题，社会主义根本任务理论回答的是社会主义要做什么的问题。","64":"【答案】A\n【解析】党在社会主义初级阶段基本路线的简明概括是\"一个中心、两个基本点\"。\"一个中心\"即以经济建设为中心，\"两个基本点\"即坚持四项基本原则和坚持改革开放。以经济建设为中心是兴国之要，四项基本原则是立国之本，改革开放是强国之路。\"一个中心\"和\"两个基本点\"的数量不可混淆。","65":"【答案】B\n【解析】社会主义的根本任务是发展生产力。1984年6月，邓小平在会见日本客人时作出了这一重大论断。马克思主义最注重发展生产力，社会主义的优越性归根到底要体现在它的生产力比资本主义发展得更快一些、更高一些。邓小平强调\"发展才是硬道理\"。解放生产力也是社会主义本质的内容，但\"根本任务\"强调的是发展生产力。","66":"【答案】A\n【解析】党的十三大把邓小平提出的\"三步走\"发展战略确定下来。第三步战略目标是：到21世纪中叶，人均国民生产总值达到中等发达国家水平，人民生活比较富裕，基本实现现代化。\"三步走\"的具体安排：第一步到1990年解决温饱，第二步到20世纪末达到小康，第三步到21世纪中叶基本实现现代化。B、C、D选项是基本路线奋斗目标在不同历史时期的表述变化。","67":"【答案】A\n【解析】社会主义社会发展的直接动力是改革。邓小平指出，改革是要从根本上改变束缚生产力发展的经济体制，建立充满生机和活力的社会主义新经济体制。邓小平将改革称为\"中国的第二次革命\"，强调改革的性质是社会主义制度的自我完善和发展。革命（B）是新民主主义革命时期的直接动力，和谐（C）是社会主义社会的本质属性，开放（D）与改革共同构成基本国策。","68":"【答案】D\n【解析】邓小平提出社会主义也可以搞市场经济的思想，创立了社会主义市场经济理论。长期以来，人们把计划经济等同于社会主义、市场经济等同于资本主义。邓小平早在1979年就提出\"社会主义也可以搞市场经济\"，1992年南方谈话中更是明确指出：\"计划多一点还是市场多一点，不是社会主义与资本主义的本质区别。\"这一理论为党的十四大确立社会主义市场经济体制的改革目标奠定了思想基础。","69":"【答案】A\n【解析】\"一国两制\"是邓小平在坚持四项基本原则的基础上，从中国实际出发提出的实现祖国和平统一的伟大构想。\"一国两制\"即在一个中国的前提下，国家主体坚持社会主义制度，香港、澳门、台湾保持原有的资本主义制度长期不变。这一构想最早针对台湾问题提出，但首先成功运用于解决香港和澳门问题。\"一国\"是根，根深才能叶茂；\"一国\"是本，本固才能枝荣。","70":"【答案】C\n【解析】建设中国特色社会主义，关键在于坚持、加强和改善党的领导。邓小平反复强调，坚持四项基本原则的核心是坚持党的领导。\"没有中国共产党，就没有社会主义的新中国。\"改革开放是强国之路，人民当家作主是社会主义民主政治的本质和核心，但\"关键\"在于党的领导——这是中国特色社会主义最本质的特征。","71":"【答案】D\n【解析】始终代表中国先进生产力的发展要求，大力促进先进生产力的发展，是我们党站在时代前列、保持先进性的根本体现和根本要求。\"三个代表\"重要思想中，代表先进生产力的发展要求居于首要地位，因为生产力是最活跃最革命的因素，是社会发展的最终决定力量。代表先进文化的前进方向和代表最广大人民的根本利益同样重要，但题干指向\"保持先进性的根本体现\"。","72":"【答案】A\n【解析】江泽民指出：科学技术是第一生产力，是先进生产力的集中体现和主要标志。这一论断继承和发展了邓小平\"科学技术是第一生产力\"的思想。进入21世纪，以信息科技、生物科技为核心的高新技术及其产业迅猛发展，科学技术日益成为推动现代生产力发展最活跃的因素。教育是基础，人才是第一资源，但作为\"先进生产力的集中体现和主要标志\"的只能是科学技术。","73":"【答案】B\n【解析】发展先进文化的重要内容和中心环节是加强社会主义思想道德建设。社会主义思想道德建设集中体现着先进文化的性质和方向。2001年9月，中共中央印发了《公民道德建设实施纲要》。社会主义经济建设属于物质文明，社会主义政治建设属于政治文明，社会主义精神文明建设范围较广，思想道德建设是其中的核心。","74":"【答案】D\n【解析】江泽民同志强调，我们全部工作的出发点和落脚点，就是不断实现好维护好发展好最广大人民的根本利益。\"三个代表\"重要思想的本质是坚持执政为民。始终代表最广大人民的根本利益，是\"三个代表\"重要思想的出发点和归宿。构建人类命运共同体是习近平外交思想，建立和谐世界是胡锦涛时期的外交理念。","75":"【答案】A\n【解析】贯彻\"三个代表\"重要思想，关键在坚持与时俱进。江泽民在十六大报告中指出：\"贯彻'三个代表'重要思想，关键在坚持与时俱进，核心在坚持党的先进性，本质在坚持执政为民。\"这三句话是\"三个代表\"重要思想的精髓所在。关键、核心、本质三者各有侧重，必须区分清楚——这是老师反复强调的考点。","76":"【答案】B\n【解析】贯彻\"三个代表\"重要思想，核心在坚持党的先进性。党的先进性是党存在和发展的根本依据，是党得到最广大人民信任和拥护的根本条件。与时俱进（A）是关键——回答精神状态和方法问题；执政为民（C）是本质——回答为谁执政的问题。","77":"【答案】C\n【解析】贯彻\"三个代表\"重要思想，本质在坚持执政为民。江泽民指出，全心全意为人民服务，立党为公，执政为民，是我们党同一切剥削阶级政党的根本区别。坚持执政为民，就是要做到权为民所用、情为民所系、利为民所谋。与时俱进（A）是关键，党的先进性（B）是核心。\"关键在坚持与时俱进、核心在坚持党的先进性、本质在坚持执政为民\"——三句话要完整记住。","78":"【答案】C\n【解析】党要承担起推动中国社会进步的历史责任，必须始终紧紧抓住发展这个执政兴国的第一要务。江泽民在十六大报告中指出：\"贯彻'三个代表'重要思想，必须把发展作为党执政兴国的第一要务。\"以发展的办法解决前进中的问题，是改革开放以来的一条重要经验。战略机遇期是形势判断，科教兴国是国家战略，政治文明建设是重要目标，但都从属于\"发展\"这个第一要务。","79":"【答案】A\n【解析】在建立什么样的经济体制问题上，江泽民明确提出使用\"社会主义市场经济体制\"这个提法。1992年6月，江泽民在中央党校省部级干部进修班上首次使用了这一提法，为随后党的十四大正式确定经济体制改革目标作了思想准备。B、C、D选项均非经济体制改革的命题范畴。","80":"【答案】B\n【解析】江泽民强调推进党的建设新的伟大工程，重点是加强党的执政能力建设。在长期执政的条件下，党面临执政考验、改革开放考验、市场经济考验和外部环境考验。加强党的执政能力建设，不断提高党的领导水平和执政水平，是推进党的建设新的伟大工程的重点。党的十六届四中全会专题研究了这一重大问题。群众基础是力量源泉，作风建设和组织建设是重要组成部分，但\"重点\"是执政能力建设。","81":"【答案】A\n【解析】科学发展观的第一要义是发展。胡锦涛指出：\"科学发展观，第一要义是发展，核心是以人为本，基本要求是全面协调可持续，根本方法是统筹兼顾。\"把\"发展\"作为第一要义，体现了党对发展问题的始终如一的重视——发展是解决中国一切问题的\"总钥匙\"。以人为本是核心，全面协调可持续是基本要求，统筹兼顾是根本方法。","82":"【答案】B\n【解析】科学发展观的核心立场是以人为本。以人为本就是以最广大人民的根本利益为本，坚持发展为了人民、发展依靠人民、发展成果由人民共享。坚持以人为本，最终是为了实现人的全面发展。发展是第一要义，全面协调可持续是基本要求，统筹兼顾是根本方法。","83":"【答案】C\n【解析】科学发展观的基本要求是全面协调可持续。\"全面\"指各领域全面推进；\"协调\"指各方面相互适应、相互促进；\"可持续\"指发展要有持久性、连续性，不能以牺牲后代人的利益为代价来满足当代人的需求。发展是第一要义，以人为本是核心立场，统筹兼顾是根本方法。","84":"【答案】D\n【解析】科学发展观的根本方法是统筹兼顾。统筹兼顾要求正确认识和妥善处理中国特色社会主义事业中的重大关系，统筹城乡发展、区域发展、经济社会发展、人与自然和谐发展、国内发展和对外开放等。发展是第一要义，以人为本是核心立场，全面协调可持续是基本要求。","85":"【答案】B\n【解析】坚持以人为本，最终是为了实现人的全面发展。马克思把人的自由全面发展作为共产主义的根本目标。科学发展观中的以人为本继承了这一思想，强调经济社会发展的最终目的是为了人的发展，而不是单纯追求GDP增长。\"人\"是发展的目的，不是发展的手段。","86":"【答案】A\n【解析】科学发展观强调，社会主义民主政治的本质和核心是人民当家作主。我国是人民民主专政的社会主义国家，国家一切权力属于人民。发展社会主义民主政治，最根本的是要把坚持党的领导、人民当家作主和依法治国有机统一起来。发展先进生产力是根本任务，发展先进文化是重要内容，维护人民利益是宗旨体现。","87":"【答案】A\n【解析】先进性是马克思主义政党的本质属性，是马克思主义政党的生命所系、力量所在。胡锦涛在庆祝中国共产党成立85周年大会上的讲话中强调这一论断。马克思主义政党以工人阶级为阶级基础，以马克思主义为理论指导，以全心全意为人民服务为根本宗旨，这些决定了党的先进性。保持和发展党的先进性是马克思主义政党自身建设的根本任务和永恒课题。","88":"【答案】B\n【解析】胡锦涛明确指出社会和谐是中国特色社会主义的本质属性。党的十六届六中全会通过《关于构建社会主义和谐社会若干重大问题的决定》，首次提出这一重大论断，深化了对社会主义本质的认识，丰富和发展了中国特色社会主义理论。社会发展、社会进步、社会繁荣都不是正式的理论表述。","89":"【答案】C\n【解析】科学发展观在邓小平理论和\"三个代表\"重要思想的基础上，创造性地回答了\"新形势下实现什么样的发展、怎样发展\"等重大问题。A是邓小平理论回答的问题，B是\"三个代表\"重要思想回答的问题，D是习近平新时代中国特色社会主义思想回答的问题。每一个理论成果都有其核心回答的时代课题。","90":"【答案】D\n【解析】科学发展观最鲜明的精神实质是\"解放思想、实事求是、与时俱进、求真务实\"。这一表述体现了党的思想路线不断丰富和发展的历程：毛泽东确立实事求是，邓小平加上\"解放思想\"，江泽民加上\"与时俱进\"，胡锦涛加上\"求真务实\"。A是邓小平理论的精髓（少了与时俱进和求真务实），B是\"三个代表\"重要思想的本质，C是毛泽东思想活的灵魂的组成部分。"},"multi":{"1":"【答案】BC\n【解析】推进马克思主义中国化时代化，既是马克思主义理论本身发展的内在要求（B），也是解决中国实际问题的客观需要（C）。马克思主义是不断发展的开放的理论，只有不断与各国具体实际和时代特征相结合才能保持生机活力。中国特殊的国情在马克思主义原著中找不到现成答案，必须实现马克思主义中国化时代化才能解决中国的实际问题。A和D不是完全准确的表述。","2":"【答案】AB\n【解析】坚持和发展马克思主义，必须同中国具体实际相结合（A）、同中华优秀传统文化相结合（B）。这就是党的二十大报告所强调的\"两个结合\"。\"第一个结合\"是党在长期实践中总结出的基本经验；\"第二个结合\"是习近平提出的重大理论创新。C和D虽然方向正确，但不是核心路径表述。","3":"【答案】CD\n【解析】实践证明，中国共产党为什么能，中国特色社会主义为什么好，归根到底是马克思主义行（C），是中国化时代化的马克思主义行（D）。这是党的二十大报告的精辟论断。A选项（马克思主义经典作家行）表述不正确。B选项（科学社会主义行）不够完整——科学社会主义必须与各国实际相结合。\"归根到底是两个'行'\"是党的二十大金句，是重要考点。","4":"【答案】ABC\n【解析】毛泽东思想科学内涵的三部分完整表述：①马克思列宁主义在中国的运用和发展（A）；②被实践证明了的关于中国革命和建设的正确的理论原则和经验总结（B）；③中国共产党集体智慧的结晶（C）。D选项不正确——毛泽东思想不是毛泽东个人的思想，不等于毛泽东所有言论的总和，只有被实践证明是正确的理论才属于毛泽东思想的范畴。","5":"【答案】ABCD\n【解析】毛泽东思想的形成和发展经历了四个阶段：大革命时期萌芽（A）——提出了新民主主义革命的基本思想；土地革命战争时期形成（B）——提出农村包围城市、武装夺取政权的思想；抗日战争时期走向成熟（C）——系统阐述了新民主主义革命理论；解放战争时期和新中国成立后继续发展（D）——提出了人民民主专政、社会主义改造和建设理论。四个阶段全选。","6":"【答案】BD\n【解析】第一次国内革命战争时期（大革命时期），毛泽东提出的新民主主义革命基本思想主要体现在《中国社会各阶级的分析》（B）和《湖南农民运动考察报告》（D）两篇著作中。《中国社会各阶级的分析》提出了\"谁是我们的敌人？谁是我们的朋友？\"的著名论断。《湖南农民运动考察报告》充分肯定了农民在中国革命中的地位和作用。《星星之火，可以燎原》（A）和《反对本本主义》（C）是土地革命战争时期的著作。","7":"【答案】ABCD\n【解析】标志着毛泽东思想初步形成的重要文章主要有四篇：《中国的红色政权为什么能够存在？》（A）、《井冈山的斗争》（B）、《星星之火，可以燎原》（C）和《反对本本主义》（D）。这四篇文章从理论和实践上论证了农村包围城市、武装夺取政权道路的必要性和可能性，提出了\"工农武装割据\"的思想。四篇全选。","8":"【答案】ABCD\n【解析】1935年1月召开的遵义会议是一次具有伟大转折意义的会议：事实上确立了毛泽东同志在党中央和红军的领导地位（A）；开始确立以毛泽东同志为主要代表的马克思主义正确路线在党中央的领导地位（B）；开始形成以毛泽东同志为核心的党的第一代中央领导集体（C）；开启了党独立自主解决中国革命实际问题的新阶段，在最危急关头挽救了党、挽救了红军、挽救了中国革命（D）。四个选项全选。","9":"【答案】ABCD\n【解析】毛泽东思想成熟于抗日战争时期，其突出表现是系统阐述了新民主主义革命理论：科学阐述了新民主主义革命的对象、动力、领导力量、性质和前途等基本问题（A）；提出了新民主主义革命的总路线（B）；制定了相应的经济、政治、文化纲领（C）；指明了新民主主义革命的具体目标（D）。这些内容集中体现在《〈共产党人〉发刊词》《中国革命和中国共产党》《新民主主义论》等著作中。四个选项全选。","10":"【答案】ABCD\n【解析】毛泽东思想有多方面的丰富内容，除了新民主主义革命理论外，还包括：社会主义革命和社会主义建设理论（A）、革命军队建设和军事战略的理论（B）、思想政治工作和文化工作的理论（C）、政策和策略以及党的建设的理论（D）。此外还有国际战略和外交工作的理论等，构成了毛泽东思想的科学体系。四个选项全选。","11":"【答案】ABC\n【解析】毛泽东思想活的灵魂包括三个基本方面：实事求是（A）、群众路线（B）、独立自主（C）。实事求是是精髓和基本点，群众路线是生命线和根本工作路线，独立自主是根本政治原则。\"与时俱进\"（D）是后来江泽民提出的马克思主义的理论品质，不属于毛泽东思想活的灵魂的三个基本方面。","12":"【答案】ABC\n【解析】毛泽东思想所确立的马克思主义中国化时代化的前进方向（A）、基本原则（B）、基本方法（C），指导着我们党不断推进马克思主义中国化时代化，不断开辟马克思主义中国化时代化新境界。毛泽东思想为后来的理论创新提供了方向指引和方法论指导。D选项（主要内容）不够准确。","13":"【答案】ABC\n【解析】毛泽东思想的历史地位主要表现为三个方面：是马克思主义中国化时代化的第一个重大理论成果（A），是中国革命和建设的科学指南（B），是中国共产党和中国人民宝贵的精神财富（C）。D选项（新时期全党全国各族人民团结奋斗的共同思想基础）不正确——这是中国特色社会主义理论体系的历史定位。毛泽东思想为后者奠定了理论基础，但不属于中国特色社会主义理论体系。","14":"【答案】AD\n【解析】近代中国社会诸多矛盾中，占支配地位的主要矛盾是帝国主义和中华民族的矛盾（A）、封建主义和人民大众的矛盾（D）。这两对矛盾贯穿于整个中国半殖民地半封建社会的始终，其中帝国主义和中华民族的矛盾是各种矛盾中最主要的矛盾。地主阶级和农民阶级的矛盾（B）是封建主义与人民大众矛盾的具体体现，资产阶级和工人阶级的矛盾（C）在当时尚未成为主要矛盾。","15":"【答案】AB\n【解析】新民主主义革命理论的实践基础包括两个方面：旧民主主义革命的失败呼唤新的革命理论（A）——太平天国、洋务运动、戊戌变法、辛亥革命相继失败；新民主主义革命的艰辛探索奠定了革命理论形成的实践基础（B）——中国共产党领导的革命实践为新理论提供了丰富经验。C和D是理论基础和时代背景，而非实践基础。","16":"【答案】BCD\n【解析】近代中国社会的性质和主要矛盾，决定了中国革命的主要敌人是\"三座大山\"：帝国主义（B）、封建主义（C）和官僚资本主义（D）。帝国主义是中国人民最凶恶的敌人；封建主义是帝国主义统治中国的社会基础；官僚资本主义是帝国主义和封建主义相结合的产物。注意区分\"资产阶级\"（A，宽泛）和\"官僚资本主义\"——民族资产阶级是革命的动力之一，官僚资产阶级才是革命的对象。","17":"【答案】ABCD\n【解析】新民主主义革命的动力包括四个阶级：无产阶级（A）是领导阶级和最基本的动力；农民阶级（B）是主力军和最可靠的同盟军；城市小资产阶级（C）是可靠的同盟者；民族资产阶级（D）在一定时期和一定程度上是同盟者（具有两面性）。人民大众就是这四个阶级的总和。四个选项全选。","18":"【答案】ABC\n【解析】新民主主义的基本纲领包括三个方面：新民主主义的政治纲领（A）——建立无产阶级领导的、以工农联盟为基础的、各革命阶级联合专政的民主共和国；新民主主义的经济纲领（B）——\"两没收一保护\"；新民主主义的文化纲领（C）——无产阶级领导的民族的科学的大众的文化。D选项（新民主主义的社会纲领）不是标准的三大纲领之一。","19":"【答案】ACD\n【解析】新民主主义经济纲领的主要内容是\"两没收一保护\"：没收封建地主阶级的土地归农民所有（A），没收官僚资产阶级的垄断资本归新民主主义的国家所有（C），保护民族工商业（D）。B选项（没收外国在华资本）不正确——新民主主义经济纲领中不包括这一项。没收官僚资本具有双重革命性质。","20":"【答案】ABD\n【解析】总结新民主主义革命时期党建立、巩固和发展统一战线的实践经验，主要是：要建立巩固的工农联盟（A）——统一战线的基础；要正确对待资产阶级，尤其是民族资产阶级（B）——又联合又斗争；采取区别对待的方针（D）——发展进步势力、争取中间势力、孤立顽固势力。C选项（一切经过统一战线,一切服从统一战线）是王明的右倾投降主义错误主张，不是成功经验。","21":"【答案】ABCD\n【解析】新民主主义革命时期，中国共产党在加强自身建设中积累了丰富的经验：必须把思想建设始终放在党的建设的首位（A），必须在任何时候都重视党的组织建设（B），必须重视党的作风建设（C），必须联系党的政治路线加强党的建设（D）。四个选项全选。","22":"【答案】ACD\n【解析】中国革命走农村包围城市、武装夺取政权的道路，根本在于处理好土地革命（A）、武装斗争（C）和农村革命根据地建设（D）三者之间的关系。土地革命是中心内容，武装斗争是主要形式，根据地建设是战略阵地。党的建设（B）是三大法宝之一，但不是农村包围城市道路的三个核心要素。","23":"【答案】ABC\n【解析】毛泽东在《〈共产党人〉发刊词》一文中提出的党在中国革命中战胜敌人的三个主要的法宝是：统一战线（A）、武装斗争（B）、党的建设（C）。毛泽东指出：\"统一战线和武装斗争，是战胜敌人的两个基本武器。而党的组织，则是掌握这两个武器以实行对敌冲锋陷阵的英勇战士。\"土地革命（D）是新民主主义革命道路的核心要素之一，不属于三大法宝。","24":"【答案】ACD\n【解析】关于中国新民主主义社会，正确的说法是：它是指从中华人民共和国成立到社会主义改造基本完成（1949-1956年）（A）；它是由新民主主义向社会主义转变的过渡性社会形态（C），不是一个独立的社会形态（B错误）；它是属于社会主义体系的（D）——因为新民主主义社会中的社会主义因素占据主导地位，发展方向只能是社会主义。","25":"【答案】BCD\n【解析】在新民主主义社会中，主要的经济成分有三种：社会主义经济（B）——主要是国营经济，是领导力量；个体经济（C）——占国民经济的绝大部分（71.8%）；资本主义经济（D）——包括民族资本主义经济。合作社经济（A）是半社会主义性质的过渡形式，不是三种主要经济成分之一。五种经济成分与三种主要经济成分要区分清楚。","26":"【答案】ABCD\n【解析】新民主主义社会时期，中国社会的阶级构成主要包括：工人阶级（A）——领导阶级；农民阶级（B）——人数最多的阶级；其他小资产阶级（C）——包括知识分子、小商人、手工业者等；民族资产阶级（D）——具有两面性的阶级。这四个阶级构成了\"人民\"的范围。四选项全选。","27":"【答案】ABCD\n【解析】20世纪50年代，中国共产党开辟的农业社会主义改造道路的成功经验主要有：积极引导农民组织起来，走互助合作道路（A）；遵循自愿互利、典型示范、国家帮助的原则（B）；正确分析农村的阶级和阶层状况，制定正确的阶级政策（C）；坚持积极领导、稳步前进的方针，采取循序渐进的步骤（D）。四个选项全选。","28":"【答案】ABC\n【解析】新中国对手工业的社会主义改造经历了由小到大、由低级到高级的步骤，包括：供销小组（A）、供销合作社（B）、生产合作社（C）。手工业改造坚持说服教育、典型示范和国家帮助的方针，采取从手工业生产合作小组→手工业供销合作社→手工业生产合作社的逐步过渡形式。到1956年底，约91.7%的手工业者实现了合作化。公私合营（D）是资本主义工商业社会主义改造的形式，不属于手工业改造的步骤。","29":"【答案】ABD\n【解析】新中国对资本主义工商业进行社会主义改造的经验有：用和平赎买的方法（A）——国家有偿地将私营企业变为国营企业；采取从低级到高级的国家资本主义的过渡形式（B）；把资本工商业者改造成为自食其力的社会主义劳动者（D）——对民族资本家实行团结、教育、改造的方针。C选项错误——\"四马分肥\"只是个别企业公私合营阶段的赎买形式，全行业公私合营后实行的是\"定息制度\"，不能说\"始终坚持四马分肥\"。","30":"【答案】ABCD\n【解析】我国社会主义改造是一场伟大的社会变革，但在改造过程中也出现了一些偏差和遗留问题，主要表现在：要求过急（A）——原计划用三个五年计划完成，实际仅用三年多；工作过粗（B）——部分地区在改造方式上简单粗暴；改变过快（C）——生产关系急剧变动超越了生产力发展水平；改造形式过于简单划一（D）——在所有制结构上片面追求\"一大二公\"，忽视了不同行业、不同地区的差异性。四个选项全选。","31":"【答案】ABC\n【解析】1956年，毛泽东在《论十大关系》等讲话中提出探索适合中国情况的社会主义建设道路的思想。他强调：独立思考（A）——不能盲目照搬苏联经验；以苏为鉴（B）——吸取苏联建设中的教训；进行\"第二次结合\"（C）——将马克思列宁主义基本原理同中国具体实际进行\"第二次结合\"，找出在中国建设社会主义的正确道路。D选项（实行改革开放）是1978年十一届三中全会以后才提出的方针，与1956年毛泽东探索的背景不符。","32":"【答案】ABCD\n【解析】关于毛泽东作的《论十大关系》报告，正确的说法是：标志着党探索中国社会主义建设道路的良好开端（A）；基本方针是调动一切积极因素为社会主义事业服务（B）；前五条主要讨论经济问题（C）——重工业和轻工业农业的关系等；后五条论述政治生活和思想文化生活领域的问题（D）——汉族和少数民族的关系、党和非党的关系等。四个选项全选。","33":"【答案】BC\n【解析】党的八大正确分析了社会主义改造完成后我国社会主要矛盾的变化，指出国内的主要矛盾：已经不再是工人阶级和资产阶级的矛盾（B）——三大改造完成后剥削阶级已被消灭；是人民对于经济文化迅速发展的需要同当前经济文化不能满足人民需要的状况之间的矛盾（C）。A是过渡时期的主要矛盾，D是1981年十一届六中全会的表述。","34":"【答案】ABCD\n【解析】毛泽东在《关于正确处理人民内部矛盾的问题》（1957年）中提出了一系列正确处理人民内部矛盾的方针和原则：在思想政治领域，实行\"团结—批评—团结\"（A）——从团结的愿望出发，经过批评或斗争，在新的基础上达到新的团结；在经济工作中，实行统筹兼顾、适当安排（B）——正确处理国家、集体和个人三者的利益关系；在科学文化领域，实行\"百花齐放、百家争鸣\"（C）；在民主党派关系上，实行\"长期共存，互相监督\"（D）。这四个方面共同构成正确处理人民内部矛盾的完整方针体系。四个选项全选。","35":"【答案】AB\n【解析】毛泽东关于社会主义发展阶段的正确表述是：第一个阶段是不发达的社会主义（A），第二个阶段是比较发达的社会主义（B）。这是毛泽东在1959年底至1960年初读苏联《政治经济学教科书》时提出的\"两阶段论\"。注意毛泽东使用的是\"不发达\"和\"比较发达\"的提法。","36":"【答案】ABCD\n【解析】党在社会主义建设道路初步探索中提出的理论成果包括：社会主义发展阶段的思想（A）；实现\"四个现代化\"的\"两步走\"发展战略（B）；从经济建设和国防建设战略布局考虑的\"三线建设\"（C）；\"一纲四目\"的和平解决台湾问题的思想、政策和主张（D）。四个选项全选。","37":"【答案】ABC\n【解析】党领导人民探索社会主义建设道路取得的重要成果，其意义体现在：巩固和发展了我国的社会主义制度（A）；为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础（B）；丰富了科学社会主义的理论和实践（C）。D选项（为资本主义国家的社会建设提供了经验和借鉴）不正确——中国经验是为社会主义国家和发展中国家提供借鉴。","38":"【答案】ABCD\n【解析】中国特色社会主义理论体系包括四个部分：邓小平理论（A）——开篇之作；\"三个代表\"重要思想（B）——跨世纪的新发展；科学发展观（C）——新世纪新阶段的新发展；习近平新时代中国特色社会主义思想（D）——新时代的新篇章。注意毛泽东思想不属于中国特色社会主义理论体系，它是理论体系的准备阶段。四个选项全选。","39":"【答案】ABD\n【解析】20世纪70年代，整个世界发生着大变动大调整，最显著的变化包括：和平与发展成为时代主题（A）；世界多极化和经济全球化深入发展（B）；综合国力竞争日趋激烈（D）。C选项（战争与革命仍然是时代主题）错误——这是被否定的旧判断。邓小平敏锐地察觉国际形势变化，提出和平与发展是当代世界的两大问题。","40":"【答案】ABCD\n【解析】20世纪80年代末90年代初，中国特色社会主义理论体系形成发展面临的国际背景包括：东欧剧变、苏联解体，国际共产主义运动遭受重大挫折（A）；和平与发展仍然是时代主题，世界多极化仍在曲折中发展（B）；经济全球化浪潮蓬勃发展（C）；科技进步日新月异（D）。四个选项全选。","41":"【答案】CD\n【解析】我国在社会主义建设初期走了不少弯路、犯了不少错误，造成这些失误的深层次原因在于：偏离了党的实事求是的思想路线（C）；对什么是社会主义和如何建设社会主义的问题没有完全搞清楚（D）。A和B——经济上急于求成、政治上以阶级斗争为纲——是失误的具体表现，而非深层次原因。深层次原因在思想认识层面。","42":"【答案】ABD\n【解析】新世纪新阶段，我国进入发展关键期（A）、改革攻坚期（B）和矛盾凸显期（D），经济社会发展呈现一系列新的阶段性特征。\"三个期\"的概括体现了新世纪新阶段我国经济社会发展所处的特定历史方位。C选项（开放活跃期）不是正式的理论表述。","43":"【答案】ABCD\n【解析】中国特色社会主义理论体系的形成发展过程经历了四个阶段：中国特色社会主义理论体系的形成（A）——以邓小平理论为开篇；跨世纪发展（B）——\"三个代表\"重要思想；新世纪新阶段的新发展（C）——科学发展观；新时代的新篇章（D）——习近平新时代中国特色社会主义思想。四个选项全选。","44":"【答案】ABCD\n【解析】1978年12月召开的党的十一届三中全会，主要内容包括：重新确立了实事求是的思想路线（A）；彻底否定了\"以阶级斗争为纲\"的错误理论和实践（B）；确定把全党工作的着重点转移到社会主义现代化建设上来（C）；作出实行改革开放的重大决策（D）。这次会议开启了改革开放和社会主义现代化建设历史新时期。四个选项全选。","45":"【答案】CD\n【解析】中国特色社会主义理论体系是中国共产党长期探索的伟大理论创造，同马克思列宁主义（C）和毛泽东思想（D）一脉相承又与时俱进，是马克思主义中国化时代化的重大理论成果。中国特色社会主义理论体系坚持科学社会主义基本原则，但空想社会主义（A）是科学社会主义的思想来源而非理论本身，科学社会主义（B）是广义的理论范畴而非具体的中国化成果。本题强调的是\"同谁一脉相承\"——即中国特色社会主义理论体系与马克思列宁主义和毛泽东思想存在直接的承继关系。","46":"【答案】ABC\n【解析】1992年初，邓小平在南方谈话中指出：\"社会主义本质，是解放生产力，发展生产力（A），消灭剥削，消除两极分化（B），最终达到共同富裕（C）。\"这28个字（五句话）是社会主义本质论的核心表述。D选项（最终实现现代化）是战略目标但不是社会主义本质的内容——本质的最终目标是共同富裕。","47":"【答案】AC\n【解析】邓小平强调在改革中始终坚持两条根本原则：一是以社会主义公有制经济为主体（A），一是共同富裕（C）。这两条根本原则体现了社会主义改革的方向。\"公有制\"（B）表述过于宽泛，\"市场经济\"（D）是经济体制而非根本原则。","48":"【答案】AC\n【解析】党在社会主义初级阶段基本路线的主要内容概括为\"一个中心\"（A）和\"两个基本点\"（C）。\"一个中心\"即以经济建设为中心，\"两个基本点\"即坚持四项基本原则和坚持改革开放。B（两个中心）和D（三个基本点）均为错误表述。","49":"【答案】ABD\n【解析】判断改革和各方面是非得失的\"三个有利于\"标准是：是否有利于发展社会主义社会的生产力（A），是否有利于增强社会主义国家的综合国力（B），是否有利于提高人民生活水平（D）。这是邓小平1992年南方谈话中提出的衡量一切工作是非得失的根本标准。C（是否有利于实现共同富裕）是社会主义本质的最终目标，不是\"三个有利于\"标准之一。","50":"【答案】ABCD\n【解析】邓小平强调的\"两手抓，两手都要硬\"思想包括多方面的内容：一手抓物质文明，一手抓精神文明（A）；一手抓建设，一手抓法制（B）；一手抓改革开放，一手抓惩治腐败（C）；一手抓改革开放，一手抓打击各种犯罪活动（D）。\"两手抓\"体现了邓小平辩证唯物主义的方法论。四个选项全选。","51":"【答案】ABCD\n【解析】江泽民强调，我们想事情、做工作，想得对不对、做得好不好，根本的衡量尺度就是：人民拥护不拥护（A）、人民赞成不赞成（B）、人民高兴不高兴（C）、人民答应不答应（D）。这\"四条标准\"体现了\"三个代表\"重要思想中始终代表最广大人民根本利益的核心要求。四个选项全选。","52":"【答案】ABD\n【解析】\"三个代表\"重要思想的核心观点包括：始终代表中国先进生产力的发展要求（A），始终代表中国先进文化的前进方向（B），始终代表中国最广大人民的根本利益（D）。这三句话是相互联系、有机统一的整体。C选项（代表中国先进教育的发展要求）错误——教育是基础，但不是\"三个代表\"中独立的一项。","53":"【答案】BCD\n【解析】江泽民要求领导干部一定要讲学习（B）、讲政治（C）、讲正气（D）。这就是著名的\"三讲\"教育（1998-2000年）。A选项（讲公正）不是\"三讲\"的内容。记住\"三讲\"的口诀：学习、政治、正气。","54":"【答案】ABD\n【解析】在党的十六大报告中，江泽民把建设社会主义物质文明（A）、政治文明（B）和精神文明（D）一起确立为社会主义现代化全面发展的三大基本目标。三个文明协调发展体现了\"三位一体\"的总体布局。C选项（经济文明）不是正式的理论表述。","55":"【答案】ABCD\n【解析】\"三个代表\"重要思想是中国特色社会主义理论体系的组成部分（A），是马克思主义中国化时代化的重要理论成果（B），是对马克思列宁主义、毛泽东思想、邓小平理论的继承和发展（C），是全党集体智慧的结晶和必须长期坚持的指导思想（D）。2002年党的十六大将\"三个代表\"重要思想写入党章。四个选项全选。","56":"【答案】ABCD\n【解析】科学发展观的科学内涵集中概括为：第一要义是发展（A），核心立场是以人为本（B），基本要求是全面协调可持续（C），根本方法是统筹兼顾（D）。这四句话完整概括了科学发展观的科学内涵，是一个相互联系、有机统一的整体。四个选项全选。","57":"【答案】ABC\n【解析】社会主义协商民主充分体现了社会主义民主的真实性（A）、广泛性（B）和包容性（C）。协商民主是中国社会主义民主政治的特有形式和独特优势，人民通过选举投票行使权利和人民内部各方面在重大决策之前充分协商，是中国社会主义民主的两种重要形式。D选项（排他性）错误——协商民主的本质恰恰是包容而非排他。","58":"【答案】ABCD\n【解析】社会主义核心价值体系的基本内容包括四个方面：马克思主义指导思想（灵魂）、中国特色社会主义共同理想（主题）、以爱国主义为核心的民族精神和以改革创新为核心的时代精神（精髓）、社会主义荣辱观（基础）。四个选项各对应一个方面，全选。","59":"【答案】ABD\n【解析】构建社会主义和谐社会的总要求包括：民主法治（A）、公平正义、诚信友爱、充满活力（B）、安定有序、人与自然和谐相处（D）。六个方面构成和谐社会的完整蓝图。本题需按教材确认具体选项。","60":"【答案】ABCD\n【解析】科学发展观同邓小平理论、\"三个代表\"重要思想，都贯穿了中国特色社会主义这个主题（A），都坚持辩证唯物主义和历史唯物主义的世界观方法论（B），都坚持党的最高纲领和最低纲领的统一（C），都坚持代表最广大人民根本利益（D）。它们一脉相承又与时俱进。四个选项全选。"},"judge":{"1":"【答案】√（正确）\n【解析】中国共产党从成立之日起就明确把马克思列宁主义确立为指导思想。党的一大提出了社会主义和共产主义的奋斗目标，二大制定了民主革命纲领。习近平在庆祝建党95周年大会上指出\"党从成立之日起就把马克思主义写在自己的旗帜上\"。但需要注意的是，党对马克思主义的认识是在实践中逐步深化的——成立初期对马克思主义的理解还比较肤浅，直到七大才正式确立毛泽东思想为指导思想。题干中\"明确\"一词强调的是党从成立之初就以马克思主义为行动指南这一基本事实，整体表述正确。","2":"【答案】×（错误）\n【解析】马克思主义中国化不仅有中国特色，也有时代特点。\"中国化\"强调的是民族特色和中国特色，\"时代化\"强调的是时代特征——二者缺一不可。党的二十大报告将\"中国化时代化\"并提，正体现了中国特色与时代特点的有机统一。由此可知，\"只有中国特色、没有时代特点\"这一表述是错误的。","3":"【答案】√（正确）\n【解析】2021年，党的十九届六中全会通过的《中共中央关于党的百年奋斗重大成就和历史经验的决议》全面总结了百年来中国共产党推进马克思主义中国化时代化的历史进程、重大成就和宝贵经验。《决议》将马克思主义中国化时代化概括为三次历史性飞跃。这是党的历史上的第三个历史决议，具有重大历史意义。题干表述正确。","4":"【答案】√（正确）\n【解析】坚持和发展马克思主义，必须同中国具体实际相结合、同中华优秀传统文化相结合。这就是党的二十大报告强调的\"两个结合\"。第一个结合是党在长期实践中总结出的基本经验；第二个结合是习近平提出的重大理论创新。\"两个结合\"深刻揭示了马克思主义在中国创新发展的内在机理。本题表述正确。","5":"【答案】×（错误）\n【解析】\"中国特色社会主义理论体系\"这一科学概念是在党的十七大（2007年）首次正式提出的，而非党的十六大。胡锦涛在十七大报告中指出：\"中国特色社会主义理论体系，就是包括邓小平理论、'三个代表'重要思想以及科学发展观等重大战略思想在内的科学理论体系。\"十六大（2002年）主要提出了\"三个代表\"重要思想，尚未将这些理论成果整合为\"中国特色社会主义理论体系\"这一整体概念。因此将\"十六大\"与\"十七大\"混淆是错误的。","6":"【答案】√（正确）\n【解析】马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系。毛泽东思想、邓小平理论、\"三个代表\"重要思想、科学发展观、习近平新时代中国特色社会主义思想，虽然形成于不同历史时期、回答不同时代课题，但都坚持马克思主义的基本立场观点方法，都围绕实现中华民族伟大复兴这一主题，是一脉相承的；同时每个理论成果都根据新的实践和时代特征进行了创新发展，体现了与时俱进的理论品格。本题表述正确。","7":"【答案】×（错误）\n【解析】毛泽东在《星星之火，可以燎原》《反对本本主义》等著作中指明了中国革命的发展规律，但这标志着毛泽东思想的初步形成（而非趋于成熟）。毛泽东思想成熟于抗日战争时期（1937-1945年），成熟标志是系统阐述了新民主主义革命理论，代表著作包括《〈共产党人〉发刊词》《中国革命和中国共产党》《新民主主义论》等。题干将\"初步形成\"与\"趋于成熟\"混淆了。本题表述错误。","8":"【答案】√（正确）\n【解析】从进攻大城市转为向农村进军，是中国革命具有决定意义的新起点。1927年大革命失败后，南昌起义、秋收起义、广州起义等攻打大城市的起义均遭失败。毛泽东率领秋收起义余部向井冈山进军，建立了第一个农村革命根据地，从实践上开启了农村包围城市、武装夺取政权的正确道路。这一转变对中国革命的最终胜利具有决定性意义。本题表述正确。","9":"【答案】×（错误）\n【解析】独立自主不是毛泽东思想的基本点，实事求是才是毛泽东思想的基本点和精髓。实事求是、群众路线、独立自主是毛泽东思想活的灵魂的三个基本方面。其中实事求是居于核心地位，是毛泽东思想的精髓和基本点。独立自主是党的根本政治原则。题干将独立自主与实事求是的定位混淆了。本题表述错误。","10":"【答案】√（正确）\n【解析】毛泽东指出：\"群众观点是共产党员革命的出发点与归宿。\"群众路线是毛泽东思想活的灵魂的三个基本方面之一，是中国共产党的生命线和根本工作路线。毛泽东在《论联合政府》等著作中系统阐述了群众观点和群众路线的思想。本题表述正确。","11":"【答案】×（错误）\n【解析】毛泽东思想是毛泽东个人的全部思想的总和——这一表述是错误的。根据1981年《关于建国以来党的若干历史问题的决议》：毛泽东思想是中国共产党集体智慧的结晶，毛泽东是主要创立者但不是唯一创立者；毛泽东思想不等于毛泽东所有言论的总和——只有被实践证明是正确的理论原则和经验总结才属于毛泽东思想的范畴，毛泽东晚年的错误不属于毛泽东思想。本题表述错误。","12":"【答案】√（正确）\n【解析】认清中国国情，是解决中国革命问题的基本前提。毛泽东在《中国革命和中国共产党》中指出：\"认清中国的国情，乃是认清一切革命问题的基本的根据。\"近代中国最基本的国情是中国逐步成为半殖民地半封建社会。只有正确认识中国社会的性质，才能正确认识中国革命的对象、任务、动力、性质和前途。本题表述正确。","13":"【答案】×（错误）\n【解析】封建主义和人民大众的矛盾不是近代中国各种矛盾中最主要的矛盾。近代中国社会有两对主要矛盾：帝国主义和中华民族的矛盾、封建主义和人民大众的矛盾。其中，帝国主义和中华民族的矛盾是各种矛盾中最主要的矛盾。题干将\"封建主义和人民大众的矛盾\"说成\"最主要的矛盾\"，颠倒了主次。帝国主义是中国人民最凶恶的敌人，是近代中国一切灾祸的总根源。本题表述错误。","14":"【答案】×（错误）\n【解析】新民主主义革命的领导力量不是民族资产阶级，而是无产阶级（通过中国共产党）。民族资产阶级具有两面性——既有革命性又有妥协性、软弱性，不能充当革命的领导阶级。新旧民主主义革命的根本区别就在于领导阶级不同：旧民主主义革命由资产阶级领导，新民主主义革命由无产阶级领导。本题表述错误。","15":"【答案】√（正确）\n【解析】农村包围城市、武装夺取政权是中国共产党在领导中国革命的实践中逐步探索出来的新民主主义革命的正确道路。1927年大革命失败后，毛泽东率领秋收起义部队上井冈山，建立了第一个农村革命根据地，从实践上开辟了这条道路。这是马克思主义基本原理与中国革命具体实践相结合的伟大创造。本题表述正确。","16":"【答案】×（错误）\n【解析】党领导的革命统一战线中工农联盟是基本的、主要的联盟——而非\"非基本的、辅助性的\"。革命统一战线包含两个联盟：第一个联盟是劳动者之间的联盟（主要是工农联盟），是统一战线的基础和主体；第二个联盟是劳动者与非劳动者之间的联盟（主要是工人阶级与民族资产阶级的联盟），才是辅助的、不可缺少的联盟。题干将二者地位颠倒了。本题表述错误。","17":"【答案】√（正确）\n【解析】人民军队必须以全心全意为人民服务为唯一宗旨。这是毛泽东建军思想的核心内容。1945年毛泽东在《论联合政府》中明确提出了这一宗旨。从三湾改编\"支部建在连上\"到古田会议\"思想建党、政治建军\"，党确立了党对军队的绝对领导，建立起一支新型的人民军队。本题表述正确。","18":"【答案】√（正确）\n【解析】中国共产党要领导中国革命取得胜利，必须不断加强党的思想建设、组织建设和作风建设。毛泽东在《〈共产党人〉发刊词》中将党的建设称为\"伟大的工程\"和三大法宝之一。思想建设是首位（用马克思主义武装全党），组织建设是基础，作风建设是重要内容。本题表述正确。","19":"【答案】√（正确）\n【解析】新民主主义社会不是一个独立的社会形态，而是过渡性社会形态。它从中华人民共和国成立（1949年）到社会主义改造基本完成（1956年）。在这一社会中，既有社会主义因素又有资本主义因素，社会主义因素占据主导地位并不断发展，发展方向只能是社会主义。本题表述正确。","20":"【答案】√（正确）\n【解析】党在过渡时期总路线的主要内容被概括为\"一化三改\"。\"一化\"即社会主义工业化（主体），\"三改\"即对个体农业、手工业和资本主义工商业的社会主义改造（两翼）。过渡时期总路线1953年正式提出，1954年写入宪法。本题表述正确。","21":"【答案】×（错误）\n【解析】对农业的社会主义改造不是强迫农民实现的，而是遵循自愿互利、典型示范和国家帮助的原则，坚持积极引导、稳步前进的方针。虽然改造后期出现了要求过急、工作过粗等偏差，但总体上遵循了自愿原则。农业合作化从互助组到初级社再到高级社，始终坚持循序渐进的步骤。本题表述错误。","22":"【答案】×（错误）\n【解析】对资本主义工商业改造不是实行暴力剥夺的方式，而是实行和平赎买的方式。和平赎买是指国家有偿地将私营企业变为国营企业，让资本家在一定年限内从企业经营所得中获取利润。马克思、恩格斯和列宁都曾设想过和平赎买，但只有在中国的历史条件下才得以成功实现。暴力剥夺（没收）是对官僚资本采取的政策，对民族资本采取的是和平赎买。本题表述错误。","23":"【答案】√（正确）\n【解析】1956年底，我国对农业、手工业和资本主义工商业的社会主义改造基本完成，标志着中国历史上长达数千年的阶级剥削制度的结束和社会主义基本制度的确立。到1956年底，入社农户超过96%，手工业合作化达91.7%，资本主义工商业实现了全行业公私合营。这是中国历史上最深刻最伟大的社会变革之一。本题表述正确。","24":"【答案】√（正确）\n【解析】《论十大关系》标志着党探索社会主义建设道路的良好开端。1956年4月，毛泽东在中央政治局扩大会议上作了《论十大关系》的报告，以苏联经验为鉴戒，总结中国自己的经验，提出了调动一切积极因素为社会主义建设服务的基本方针。本题表述正确。","25":"【答案】×（错误）\n【解析】社会主义社会不存在矛盾——这一表述是错误的。毛泽东在《关于正确处理人民内部矛盾的问题》中明确指出，社会主义社会仍然存在矛盾，矛盾是普遍存在的。社会主义社会的基本矛盾仍然是生产关系和生产力之间、上层建筑和经济基础之间的矛盾，具有\"又相适应又相矛盾\"的特点。社会主义社会的矛盾可以通过社会主义制度本身不断得到解决。本题表述错误。","26":"【答案】×（错误）\n【解析】解决人民内部矛盾的总方针不是用专政方法，而是用民主方法。毛泽东明确指出，敌我矛盾用专政的方法解决（对抗性矛盾），人民内部矛盾用民主的方法、说服教育的方法解决（非对抗性矛盾）。解决人民内部矛盾的民主方法具体化为\"团结-批评-团结\"的公式。本题表述错误。","27":"【答案】×（错误）\n【解析】走中国工业化道路不能强调发展重工业而忽视农业和轻工业的发展。毛泽东在《论十大关系》中明确指出，要以农业为基础、以工业为主导，以农轻重为序发展国民经济。中国工业化道路与苏联片面强调重工业、忽视农业和轻工业的模式恰恰相反。如果忽视农业和轻工业，会导致市场匮乏、人民生活水平下降。本题表述错误。","28":"【答案】√（正确）\n【解析】党在探索社会主义建设道路过程中取得的重要理论成果，是毛泽东思想的重要组成部分，丰富和发展了科学社会主义理论，成为中国特色社会主义理论体系的重要思想来源。《论十大关系》《关于正确处理人民内部矛盾的问题》等著作中的理论成果为后来中国特色社会主义的创立提供了理论准备。本题表述正确。","29":"【答案】×（错误）\n【解析】\"战争与革命是20世纪70年代以来的时代主题\"这一说法是错误的。20世纪70年代以后，国际形势发生重大变化，和平与发展取代战争与革命成为新的时代主题。邓小平敏锐地察觉到这一变化，在80年代明确提出\"和平与发展是当代世界的两大问题\"的科学论断。这一判断为中国实行改革开放、以经济建设为中心提供了时代背景依据。将\"战争与革命\"当作70年代以来的时代主题是对国际形势的错误判断。","30":"【答案】√（正确）\n【解析】邓小平理论是中国特色社会主义理论体系的开篇之作。1982年，邓小平在党的十二大开幕词中提出\"建设有中国特色的社会主义\"这一命题，标志着中国特色社会主义理论体系的开端。邓小平理论为后续的\"三个代表\"重要思想、科学发展观和习近平新时代中国特色社会主义思想奠定了重要基础。本题表述正确。","31":"【答案】√（正确）\n【解析】始终做到\"三个代表\"是我们党的立党之本、执政之基、力量之源。这三个\"之\"出自党的十六大报告。立党之本回答了党为什么能建立并不断发展壮大；执政之基回答了党为什么能执政以及如何巩固执政地位；力量之源回答了党为什么能战胜各种困难、始终立于不败之地。本题表述正确。","32":"【答案】×（错误）\n【解析】\"党的十七大把科学发展观写入党章\"——这一表述错误。科学发展观是在党的十七大（2007年）被写入党章并确立为党的指导思想的吗？不对。科学发展观在十七大上被写入党章，但当时是与邓小平理论、\"三个代表\"重要思想并列为党的指导思想。确切地说，党的十七大把科学发展观写入党章。本题题干说\"党的十七大把科学发展观写入党章，并确立为党必须长期坚持的指导思想\"——实际上十七大报告确实将科学发展观确立为\"我国经济社会发展的重要指导方针\"和\"发展中国特色社会主义必须坚持和贯彻的重大战略思想\"，十八大将其正式确立为\"党必须长期坚持的指导思想\"。所以\"确立为党必须长期坚持的指导思想\"这个表述是十八大的定位，十七大的表述是重要指导方针。题干混淆了十七大和十八大的表述，因此答案为×。","33":"【答案】×（错误）\n【解析】科学发展观所要解决的根本问题不是\"建设一个什么样的党、怎样建设党\"，而是\"新形势下实现什么样的发展、怎样发展\"。\"建设什么样的党、怎样建设党\"是\"三个代表\"重要思想创造性地回答的问题。每一个理论成果都有其核心回答的时代课题：邓小平理论回答\"什么是社会主义、怎样建设社会主义\"，\"三个代表\"回答党的建设问题，科学发展观回答发展问题。本题将两个不同的理论课题混淆了。","34":"【答案】×（错误）\n【解析】社会主义的本质最终目的不是实现少数人的富裕，而是实现共同富裕。邓小平在1992年南方谈话中明确概括：\"社会主义的本质，是解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到共同富裕。\"共同富裕是全体人民的富裕，不是少数人的富裕。这是社会主义与资本主义的根本区别之一。本题表述错误。","35":"【答案】√（正确）\n【解析】解放思想、实事求是是邓小平理论的精髓（八个字）。1978年邓小平在中央工作会议闭幕会上发表《解放思想，实事求是，团结一致向前看》的重要讲话，实际上成为十一届三中全会的主题报告。对于毛泽东思想来说是\"实事求是\"四个字，对于邓小平理论来说是\"解放思想、实事求是\"八个字——这是老师反复强调的考点。本题表述正确。","36":"【答案】×（错误）\n【解析】我国正处于并将长期处于社会主义高级阶段——这一表述错误。正确的表述是\"我国正处于并将长期处于社会主义初级阶段\"。社会主义初级阶段是党的十三大系统阐述的重大论断，是特指我国在生产力落后、商品经济不发达条件下建设社会主义必然要经历的特定阶段。\"高级阶段\"是一个根本不存在的错误提法。本题表述错误。","37":"【答案】√（正确）\n【解析】社会主义的根本任务是发展生产力。邓小平1984年首次明确作出这一重大论断。马克思主义最注重发展生产力，社会主义的优越性归根到底要体现在生产力比资本主义发展得更快更高。中国还处在社会主义初级阶段，发展生产力的任务尤为突出和紧迫。邓小平强调\"发展才是硬道理\"。本题表述正确。","38":"【答案】√（正确）\n【解析】改革开放是决定当代中国命运的关键一招。1978年党的十一届三中全会作出了实行改革开放的历史性决策。40多年的实践证明，改革开放是党和人民大踏步赶上时代的重要法宝，是坚持和发展中国特色社会主义的必由之路。本题表述正确。","39":"【答案】×（错误）\n【解析】\"一国两制\"构想最初是为了解决台湾问题而提出的，而不是香港问题。1979年元旦，全国人大常委会发表《告台湾同胞书》，郑重宣示了争取祖国和平统一的大政方针。1981年9月，叶剑英提出关于台湾回归祖国、实现和平统一的九条方针（\"叶九条\"）。1982年1月，邓小平首次提出\"一个国家，两种制度\"的概念。后来这一构想首先成功运用于解决香港问题（1984年中英联合声明）和澳门问题。题干将\"一国两制\"最初的提出目的说成香港问题，属于张冠李戴。","40":"【答案】×（错误）\n【解析】社会主义现代化不能建立在不发达的生产力基础之上。社会主义的根本任务是发展生产力，社会主义现代化必须建立在高度发达的生产力基础之上。虽然社会主义初级阶段生产力不发达是一个客观现实（必须从这个实际出发），但实现社会主义现代化恰恰需要通过发展生产力来改变这一状况，而不是停留在不发达基础之上。本题表述错误。","41":"【答案】√（正确）\n【解析】教育是发展先进文化、建设物质文明和精神文明的基础工程。江泽民在\"三个代表\"重要思想中强调教育在现代化建设中具有先导性、全局性作用，必须摆在优先发展的战略地位。科教兴国战略（1995年）将科技和教育作为振兴国家的基础。本题表述正确。","42":"【答案】√（正确）\n【解析】我们全部工作的出发点和落脚点，就是不断实现好维护好发展好最广大人民的根本利益。江泽民在\"三个代表\"重要思想中强调这一论断，体现了党的全心全意为人民服务的根本宗旨。\"三个代表\"的出发点和归宿就是代表最广大人民的根本利益。本题表述正确。","43":"【答案】×（错误）\n【解析】发展不包括促进人的全面发展——这一表述是错误的。科学发展观强调的发展是全面的发展，包括促进人的全面发展。坚持以人为本，最终是为了实现人的全面发展——这也是马克思主义的根本追求。胡锦涛明确指出，要把促进人的全面发展作为经济社会发展的最终目的。本题表述错误。","44":"【答案】×（错误）\n【解析】\"党的十五大正式把建立社会主义市场经济体制确立为我国经济体制改革的目标\"——这一表述错误。正式确立社会主义市场经济体制为改革目标是在党的十四大（1992年10月），而非十五大。十五大（1997年）是在十四大确立目标基础上进一步推进改革。1992年6月江泽民在中央党校首次使用\"社会主义市场经济体制\"提法，1992年10月十四大正式确立。本题表述错误。","45":"【答案】√（正确）\n【解析】\"引进来\"和\"走出去\"，是我们对外开放方针的两个紧密联系、相互促进的方面，缺一不可。江泽民明确提出实施\"引进来\"和\"走出去\"相结合的对外开放战略。在开放初期以\"引进来\"为主（吸引外资、技术和管理经验），随着中国经济发展水平提高，\"走出去\"越来越重要（中国企业到境外投资）。2001年中国加入WTO为两者提供了更广阔的平台。本题表述正确。","46":"【答案】√（正确）\n【解析】在当代中国，坚持发展是硬道理的本质要求就是坚持科学发展。这是胡锦涛对邓小平\"发展才是硬道理\"重要思想的发展。如果说\"发展才是硬道理\"回答的是\"要不要发展\"的问题，那么\"坚持科学发展\"回答的就是\"怎样发展\"的问题——更加注重以人为本、全面协调可持续、统筹兼顾。本题表述正确。","47":"【答案】×（错误）\n【解析】科学发展观强调的\"以人为本\"与中国古代的民本思想存在本质上的区别——题干说\"不存在本质上的区别\"是错误的。中国古代民本思想（如\"民为贵，社稷次之，君为轻\"）虽然体现了重民取向，但其实质是站在统治阶级立场上利用民众力量维护统治，民是手段而非目的。科学发展观中的\"以人为本\"继承发展了马克思主义\"人民群众是历史创造者\"的思想，坚持发展为了人民、依靠人民、成果由人民共享，人是目的而非手段。两者存在本质区别。本题表述错误。","48":"【答案】√（正确）\n【解析】坚持可持续发展，就要坚定走生产发展、生活富裕、生态良好的文明发展道路。这是科学发展观的重要内容。生产发展是物质基础，生活富裕是根本目的，生态良好是重要保障。三者有机统一、缺一不可，共同构成了文明发展道路的整体蓝图。本题表述正确。","49":"【答案】√（正确）\n【解析】社会主义核心价值体系是兴国之魂，决定着中国特色社会主义发展方向。党的十七届六中全会首次提出这一命题。核心价值体系为全社会提供了共同的思想道德基础，内容包括马克思主义指导思想、中国特色社会主义共同理想、以爱国主义为核心的民族精神和以改革创新为核心的时代精神、社会主义荣辱观。本题表述正确。","50":"【答案】×（错误）\n【解析】我们要构建的社会主义和谐社会不是历史上一些思想家憧憬的\"大同社会\"或空想社会主义者所描绘的\"乌托邦\"。社会主义和谐社会具有坚实的科学理论基础（马克思主义）、现实的社会条件（社会主义制度）、明确的实现路径（以经济建设为中心、\"五位一体\"全面推进）、有力的领导力量（中国共产党）。大同社会和乌托邦缺乏实现的现实途径，是脱离社会实际的空想。本题表述错误。【课堂强调】和谐社会的六个总要求：民主法治、公平正义、诚信友爱、充满活力、安定有序、人与自然和谐相处。"}};
+
+// ===== PER-QUESTION STATS STORAGE (NEW - 错题本数据) =====
+const STATS_KEY = 'maogai_stats_v5';
+function makeDefaultStats() {
+  const stats = { single: {}, multi: {}, judge: {} };
+  for (const q of DATA.singleChoice) stats.single[q.id] = { attempts: 0, correct: 0, wrong: 0, lastResult: null };
+  for (const q of DATA.multiChoice) stats.multi[q.id] = { attempts: 0, correct: 0, wrong: 0, lastResult: null };
+  for (const q of DATA.judgeQuestions) stats.judge[q.id] = { attempts: 0, correct: 0, wrong: 0, lastResult: null };
+  return stats;
+}
+function loadStats() {
+  try { const raw = localStorage.getItem(STATS_KEY); if (!raw) return makeDefaultStats();
+    const parsed = JSON.parse(raw); const def = makeDefaultStats();
+    for (const type of ['single','multi','judge']) { if (!parsed[type]) { parsed[type] = def[type]; continue; }
+      for (const id of Object.keys(def[type])) { if (!parsed[type][id]) parsed[type][id] = def[type][id]; } }
+    return parsed; } catch(e) { return makeDefaultStats(); }
+}
+let questionStats = loadStats();
+function saveStats() { localStorage.setItem(STATS_KEY, JSON.stringify(questionStats)); }
+function recordAnswer(q, isCorrect) {
+  const type = q.type, id = q.id;
+  if (!questionStats[type] || !questionStats[type][id]) return;
+  questionStats[type][id].attempts++;
+  if (isCorrect) questionStats[type][id].correct++; else questionStats[type][id].wrong++;
+  questionStats[type][id].lastResult = isCorrect ? 'correct' : 'wrong';
+  saveStats();
+}
+function getCorrectnessRate(q) {
+  const type = q.type, id = q.id;
+  if (!questionStats[type] || !questionStats[type][id]) return null;
+  const s = questionStats[type][id]; if (s.attempts === 0) return null;
+  return Math.round(s.correct / s.attempts * 100);
+}
+function getExplanation(q) {
+  const expMap = EXPLANATIONS[q.type]; if (!expMap) return null;
+  return expMap[String(q.id)] || null;
+}
+
+const JIANDA_ESSAYS = DATA.essayQuestions.slice(0, 13);
+const LUNSHU_ESSAYS = DATA.essayQuestions.slice(13, 21);
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function makeModeState() {
+  return { currentIndex: 0, answers: {}, revealed: {}, orderMode: 'seq', shuffled: null };
+}
+
+function makeDefaultState() {
+  return {
+    currentMode: 'single',
+    single: makeModeState(),
+    multi: makeModeState(),
+    judge: makeModeState(),
+    jianDa: { currentIndex: 0, visited: {}, orderMode: 'seq', shuffled: null },
+    lunShu: { currentIndex: 0, visited: {}, orderMode: 'seq', shuffled: null },
+    exam: { currentIndex: 0, answers: {}, revealed: {}, cardOpen: true, questions: null },
+    mistake: { filterType: 'all', sortBy: 'rate' }
+  };
+}
+
+function mergeState(base, incoming) {
+  if (!incoming || typeof incoming !== 'object') return base;
+  for (const k of Object.keys(base)) {
+    if (!(k in incoming)) continue;
+    if (base[k] && typeof base[k] === 'object' && !Array.isArray(base[k])) {
+      if (incoming[k] && typeof incoming[k] === 'object' && !Array.isArray(incoming[k])) {
+        base[k] = { ...base[k], ...incoming[k] };
+      } else {
+        base[k] = incoming[k];
+      }
+    } else {
+      base[k] = incoming[k];
+    }
+  }
+  return base;
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return makeDefaultState();
+    const parsed = JSON.parse(raw);
+    const base = makeDefaultState();
+    return mergeState(base, parsed);
+  } catch (e) {
+    return makeDefaultState();
+  }
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function getModeQuestions(mode) {
+  const key = mode;
+  const modeState = state[key];
+  const sourceList = (() => {
+    switch (mode) {
+      case 'single': return DATA.singleChoice;
+      case 'multi': return DATA.multiChoice;
+      case 'judge': return DATA.judgeQuestions;
+      case 'jianDa': return JIANDA_ESSAYS;
+      case 'lunShu': return LUNSHU_ESSAYS;
+      default: return [];
+    }
+  })();
+
+  if (mode === 'jianDa' || mode === 'lunShu') {
+    if (modeState.orderMode === 'rand') {
+      if (!modeState.shuffled) {
+        modeState.shuffled = shuffle(sourceList);
+        saveState();
+      }
+      return modeState.shuffled;
+    }
+    return sourceList;
+  }
+
+  if (mode === 'single' || mode === 'multi' || mode === 'judge') {
+    if (modeState.orderMode === 'rand') {
+      if (!modeState.shuffled) {
+        modeState.shuffled = shuffle(sourceList);
+        saveState();
+      }
+      return modeState.shuffled;
+    }
+    return sourceList;
+  }
+
+  return sourceList;
+}
+
+function clampIndex(i, total) {
+  if (total <= 0) return 0;
+  return Math.max(0, Math.min(i, total - 1));
+}
+
+function getAnswerValue(q, modeState) {
+  const value = modeState.answers[q.key];
+  return value === undefined ? null : value;
+}
+
+function isAnswered(modeState, q) {
+  const v = getAnswerValue(q, modeState);
+  return v !== null && v !== undefined;
+}
+
+function isRevealed(modeState, q) {
+  return !!modeState.revealed?.[q.key];
+}
+
+function normalizeMultiAnswer(ans) {
+  return (ans || '').split('').sort().join('');
+}
+
+function isCorrectAnswer(q, ua) {
+  if (ua === null || ua === undefined) return false;
+  if (q.type === 'multi') return normalizeMultiAnswer(ua) === normalizeMultiAnswer(q.answer);
+  return ua === q.answer;
+}
+
+function getOrderModeLabel(mode) {
+  const modeState = state[mode];
+  return modeState.orderMode === 'rand' ? '随机' : '顺序';
+}
+
+function updateGlobalStats() {
+  let correct = 0, wrong = 0, done = 0;
+  const configs = [
+    { key: 'single', qs: state.single.shuffled || DATA.singleChoice },
+    { key: 'multi', qs: state.multi.shuffled || DATA.multiChoice },
+    { key: 'judge', qs: state.judge.shuffled || DATA.judgeQuestions },
+    { key: 'exam', qs: state.exam.questions || [] },
+  ];
+  for (const cfg of configs) {
+    const answers = state[cfg.key]?.answers || {};
+    for (const q of cfg.qs) {
+      const ua = answers[q.key];
+      if (ua !== undefined && ua !== null) {
+        done++;
+        if (isCorrectAnswer(q, ua)) correct++;
+        else wrong++;
+      }
+    }
+  }
+  document.getElementById('totalCorrect').textContent = correct;
+  document.getElementById('totalWrong').textContent = wrong;
+  document.getElementById('totalDone').textContent = done;
+  // ★ 更新错题本badge
+  let totalMistakes = 0;
+  for (const type of ['single', 'multi', 'judge']) {
+    for (const id in questionStats[type]) {
+      const s = questionStats[type][id];
+      if (s.attempts > 0 && s.wrong > 0) totalMistakes++;
+    }
+  }
+  const mb = document.getElementById('mistakeBadge'); if (mb) mb.textContent = totalMistakes;
+  const mbM = document.getElementById('mistakeBadgeM'); if (mbM) mbM.textContent = totalMistakes;
+}
+
+let _selected = [];
+
+function renderQuestionCard(q, idx, total, modeState, mode, opts = {}) {
+  const ua = getAnswerValue(q, modeState);
+  const answered = ua !== null && ua !== undefined;
+  const revealed = isRevealed(modeState, q);
+  const isMulti = q.type === 'multi';
+  const isJudge = q.type === 'judge';
+  const showReveal = opts.showReveal !== false && mode !== 'exam';
+
+  let optionsHtml = '';
+  for (const opt of q.options) {
+    let cls = 'option-btn';
+    if (answered || revealed) {
+      if (revealed) {
+        if (opt.letter === q.answer || (isMulti && q.answer.includes(opt.letter))) cls += ' missed';
+      } else if (isMulti) {
+        const uaLetters = normalizeMultiAnswer(ua).split('');
+        const ansLetters = normalizeMultiAnswer(q.answer).split('');
+        if (ansLetters.includes(opt.letter)) {
+          cls += uaLetters.includes(opt.letter) ? ' correct' : ' missed';
+        } else if (uaLetters.includes(opt.letter)) {
+          cls += ' incorrect';
+        }
+      } else {
+        if (opt.letter === q.answer) cls += ' correct';
+        else if (opt.letter === ua) cls += ' incorrect';
+      }
+    }
+    optionsHtml += '<button class="' + cls + '" data-letter="' + opt.letter + '"' + (answered || revealed ? ' disabled' : '') + '>' +
+      '<span class="opt-icon">' + opt.letter + '</span>' +
+      '<span>' + opt.text + '</span>' +
+    '</button>';
+  }
+
+  let feedbackHtml = '';
+  if (answered && !revealed) {
+    const correct = isCorrectAnswer(q, ua);
+    feedbackHtml = '<div class="feedback ' + (correct ? 'ok' : 'no') + ' show">' +
+      (correct ? '✅ 回答正确！' : '❌ 回答错误') + '</div>' +
+      (!correct ? '<div class="answer-reveal show">正确答案：<strong>' + q.answer + '</strong></div>' : '');
+  } else if (revealed) {
+    feedbackHtml = '<div class="feedback no show">👀 已显示答案</div>' +
+      '<div class="answer-reveal show">正确答案：<strong>' + q.answer + '</strong></div>';
+  }
+
+  // ★ NEW: 构建解析HTML（答题后/显示答案后展示）
+  let explanationHtml = '';
+  if (answered || revealed) {
+    const exp = getExplanation(q);
+    if (exp) {
+      const rate = getCorrectnessRate(q);
+      let rateHtml = '';
+      if (rate !== null) {
+        const rc = rate >= 80 ? 'var(--success)' : (rate >= 50 ? '#f59e0b' : 'var(--error)');
+        rateHtml = '<span style="font-size:0.78rem;font-weight:600;color:' + rc + ';margin-left:8px;">\u{1F4CA} 本题正确率：' + rate + '%（' + questionStats[q.type][q.id].attempts + '次作答）</span>';
+      }
+      let formattedExp = exp
+        .replace(/【答案】/g, '<strong style="color:var(--primary);">【答案】</strong>')
+        .replace(/【解析】/g, '<strong style="color:#0ea5e9;">【解析】</strong>');
+      if (formattedExp.indexOf('【教师强调】') !== -1) {
+        formattedExp = formattedExp.replace(/🔴【教师强调】([\s\S]*?)$/gm, '<span class="teacher-emphasis">\u{1F534}<strong>【教师强调】</strong>$1</span>');
+      }
+      explanationHtml = '<div class="explanation-box show" style="margin-top:14px;padding:16px 18px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:8px;border-left:4px solid #0ea5e9;font-size:0.88rem;line-height:1.8;white-space:pre-line;color:#1e3a5f;animation:slideIn 0.35s ease;">' +
+        '<span style="display:inline-block;background:#0ea5e9;color:white;font-size:0.72rem;font-weight:700;padding:2px 10px;border-radius:12px;margin-bottom:10px;">\u{1F4D6} 解析</span>' + rateHtml + formattedExp + '</div>';
+    }
+  }
+
+  const typeLabel = isMulti ? '多选题' : (isJudge ? '判断题' : '单选题');
+  const typeClass = isMulti ? 'multi' : (isJudge ? 'judge' : 'single');
+  const multiTip = (isMulti && !answered && !revealed) ? '<p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:10px;">💡 多选题，可选多项</p>' : '';
+
+  const actionHtml = opts.showActions === false ? '' : (
+    // ★ 包含解析
+    (explanationHtml || '') +
+    '<div class="actions">' +
+      '<button class="btn btn-primary" id="btnSubmit"' + (answered || revealed ? ' disabled' : '') + '>✔ 提交</button>' +
+      (idx > 0 ? '<button class="btn btn-outline" id="btnPrev">← 上题</button>' : '') +
+      (idx < total - 1 ? '<button class="btn btn-outline" id="btnNext">' + ((answered || revealed) ? '下题 →' : '跳过 →') + '</button>' : '') +
+      (showReveal && !answered && !revealed ? '<button class="btn btn-ghost" id="btnReveal">👁 答案</button>' : '') +
+    '</div>'
+  );
+
+  return '<div class="card">' +
+    '<div class="card-header">' +
+      '<span class="q-number">第 ' + (idx + 1) + ' / ' + total + ' 题</span>' +
+      '<span class="q-type ' + typeClass + '">' + typeLabel + '</span>' +
+    '</div>' +
+    '<div class="card-body">' +
+      '<div class="question-text">' + q.question + '</div>' +
+      multiTip +
+      '<div class="options-list">' + optionsHtml + '</div>' +
+      feedbackHtml +
+      actionHtml +
+    '</div>' +
+  '</div>';
+}
+
+function renderProgressSection(answered, correct, wrong, total) {
+  const pct = total > 0 ? Math.round(answered / total * 100) : 0;
+  return '<div class="progress-section">' +
+    '<div class="progress-header">' +
+      '<span class="progress-title">📊 学习进度</span>' +
+      '<span class="progress-numbers">' +
+        '<span>✅ <span class="c">' + correct + '</span></span>' +
+        '<span>❌ <span class="w">' + wrong + '</span></span>' +
+        '<span>⬜ ' + (total - answered) + ' 剩余</span>' +
+        '<span>📝 ' + answered + '/' + total + ' (' + pct + '%)</span>' +
+      '</span>' +
+    '</div>' +
+    '<div class="progress-bar-outer"><div class="progress-bar-inner" style="width:' + pct + '%"></div></div>' +
+  '</div>';
+}
+
+function renderOrderToggle(mode) {
+  const modeState = state[mode];
+  const isRand = modeState.orderMode === 'rand';
+  return '<div class="order-toggle-bar">' +
+    '<span class="order-toggle-label">答题方式：</span>' +
+    '<button class="order-toggle-btn' + (!isRand ? ' active' : '') + '" id="orderSeq">📋 顺序作答</button>' +
+    '<button class="order-toggle-btn' + (isRand ? ' active' : '') + '" id="orderRand">🎲 随机抽题<span class="reshuffle">↻</span></button>' +
+  '</div>';
+}
+
+function renderAnswerCard(mode, questions, modeState, currentIdx) {
+  const total = questions.length;
+  const isEssayMode = (mode === 'jianDa' || mode === 'lunShu');
+
+  if (isEssayMode) {
+    const items = questions.map((q, i) => {
+      const visited = modeState.visited?.[q.id] ? ' viewed' : '';
+      const current = i === currentIdx ? ' current' : '';
+      return '<button class="answer-item' + visited + current + '" data-jump="' + i + '">' +
+        '<span>' + q.id + '</span>' +
+      '</button>';
+    }).join('');
+    return '<div class="answer-card-wrap">' +
+      '<div class="answer-card-head">' +
+        '<span class="answer-card-title">📋 答题卡</span>' +
+        '<span class="answer-summary"><span>共 ' + total + ' 题</span></span>' +
+      '</div>' +
+      '<div class="answer-card-body">' +
+        '<div class="answer-grid">' + items + '</div>' +
+      '</div></div>';
+  }
+
+  const items = questions.map((q, i) => {
+    const ua = getAnswerValue(q, modeState);
+    let cls = 'answer-item';
+    if (i === currentIdx) cls += ' current';
+    if (isRevealed(modeState, q)) cls += ' revealed';
+    else if (ua === null || ua === undefined) cls += ' unanswered';
+    else cls += isCorrectAnswer(q, ua) ? ' correct' : ' wrong';
+    return '<button class="' + cls + '" data-jump="' + i + '" title="跳转到第' + (i + 1) + '题">' +
+      '<span>' + (i + 1) + '</span>' +
+    '</button>';
+  }).join('');
+
+  const answered = questions.filter(q => isAnswered(modeState, q)).length;
+  const correct = questions.filter(q => isAnswered(modeState, q) && isCorrectAnswer(q, modeState.answers[q.key])).length;
+  const wrong = answered - correct;
+
+  const typeLabel = mode === 'single' ? '单选题' : (mode === 'multi' ? '多选题' : '判断题');
+
+  return '<div class="answer-card-wrap">' +
+    '<div class="answer-card-head">' +
+      '<span class="answer-card-title">📋 答题卡</span>' +
+      '<span class="answer-summary">' +
+        '<span class="u"><i class="dot"></i>未答 ' + (total - answered) + '</span>' +
+        '<span class="c"><i class="dot"></i>对 ' + correct + '</span>' +
+        '<span class="w"><i class="dot"></i>错 ' + wrong + '</span>' +
+        '<span>' + typeLabel + ' ' + total + '题</span>' +
+      '</span>' +
+    '</div>' +
+    '<div class="answer-card-body">' +
+      '<div class="answer-grid">' + items + '</div>' +
+    '</div></div>';
+}
+
+function renderExamAnswerCard() {
+  const questions = state.exam.questions || [];
+  if (!questions.length) return '';
+
+  const choiceQs = questions.filter(q => q.type === 'single' || q.type === 'multi' || q.type === 'judge');
+  const essayQs = questions.filter(q => q._isEssay);
+  const totalChoice = choiceQs.length;
+
+  const sections = [
+    { title: '选择题', items: questions.filter(q => q.type === 'single' || q.type === 'multi' || q.type === 'judge') },
+  ];
+  if (essayQs.length > 0) {
+    sections.push({ title: '大题', items: essayQs });
+  }
+
+  let offset = 0;
+  const body = sections.map(sec => {
+    const items = sec.items.map((q, idx) => ({ ...q, _absIndex: offset + idx }));
+    const total = items.length;
+    const current = clampIndex(state.exam.currentIndex || 0, questions.length);
+    const grid = items.map((q, idx) => {
+      const absIdx = offset + idx;
+      let cls = 'answer-item';
+      if (absIdx === current) cls += ' current';
+      if (q._isEssay) {
+        const visited = state.exam.visited?.[q.key];
+        if (visited) cls += ' viewed';
+        return '<button class="' + cls + '" data-jump="' + absIdx + '" title="跳转到第' + (absIdx + 1) + '题">' +
+          '<span>' + (idx + 1) + '</span>' +
+        '</button>';
+      }
+      const ua = getAnswerValue(q, state.exam);
+      if (isRevealed(state.exam, q)) cls += ' revealed';
+      else if (ua === null || ua === undefined) cls += ' unanswered';
+      else cls += isCorrectAnswer(q, ua) ? ' correct' : ' wrong';
+      return '<button class="' + cls + '" data-jump="' + absIdx + '" title="跳转到第' + (absIdx + 1) + '题">' +
+        '<span>' + (idx + 1) + '</span>' +
+        '<span class="mini">' + (q.type === 'single' ? '单' : (q.type === 'multi' ? '多' : '判')) + '</span>' +
+      '</button>';
+    }).join('');
+    offset += total;
+    return '<div class="answer-section">' +
+      '<div class="answer-section-title"><span>' + sec.title + '（' + total + '题）</span></div>' +
+      '<div class="answer-grid">' + grid + '</div>' +
+    '</div>';
+  }).join('');
+
+  return '<div class="answer-card-wrap" id="examAnswerCard">' +
+    '<div class="answer-card-head">' +
+      '<div><div class="answer-card-title">答题卡</div></div>' +
+      '<div class="answer-summary"><span>点击题号可直接跳转</span></div>' +
+    '</div>' +
+    '<div class="answer-card-body">' + body + '</div>' +
+  '</div>';
+}
+
+// ===== MISTAKE BOOK (NEW) =====
+function renderMistakeBook() {
+  const filterType = state.mistake?.filterType || 'all';
+  const sortBy = state.mistake?.sortBy || 'rate';
+  const sortDir = state.mistake?.sortDir || (sortBy === 'attempts' ? 'desc' : 'asc');
+  let allItems = [];
+  const types = filterType === 'all' ? ['single', 'multi', 'judge'] : [filterType];
+  for (const type of types) {
+    const qList = type === 'single' ? DATA.singleChoice : type === 'multi' ? DATA.multiChoice : DATA.judgeQuestions;
+    for (const q of qList) {
+      const s = questionStats[type]?.[q.id];
+      if (s && s.attempts > 0) {
+        allItems.push({ q, type, rate: Math.round(s.correct / s.attempts * 100), attempts: s.attempts, correct: s.correct, wrong: s.wrong, lastResult: s.lastResult });
+      }
+    }
+  }
+  if (sortBy === 'rate') allItems.sort((a, b) => sortDir === 'asc' ? a.rate - b.rate : b.rate - a.rate);
+  else if (sortBy === 'attempts') allItems.sort((a, b) => sortDir === 'asc' ? a.attempts - b.attempts : b.attempts - a.attempts);
+  else if (sortBy === 'recent') allItems.sort((a, b) => { if (a.lastResult !== b.lastResult) return a.lastResult === 'wrong' ? -1 : 1; return a.rate - b.rate; });
+  const totalAttempts = allItems.reduce((s, i) => s + i.attempts, 0);
+  const totalCorrect = allItems.reduce((s, i) => s + i.correct, 0);
+  const overallRate = totalAttempts > 0 ? Math.round(totalCorrect / totalAttempts * 100) : 0;
+  const mistakeCount = allItems.filter(i => i.wrong > 0).length;
+  let html = '<div class="mistake-book">';
+  html += '<div class="mistake-summary">' +
+    '<div class="mistake-stat-card"><div class="stat-icon">📊</div><div class="stat-value">' + allItems.length + '</div><div class="stat-label">已做题数</div></div>' +
+    '<div class="mistake-stat-card wrong"><div class="stat-icon">❌</div><div class="stat-value">' + mistakeCount + '</div><div class="stat-label">错题数</div></div>' +
+    '<div class="mistake-stat-card rate"><div class="stat-icon">🎯</div><div class="stat-value">' + overallRate + '%</div><div class="stat-label">总正确率</div></div>' +
+    '<div class="mistake-stat-card"><div class="stat-icon">📝</div><div class="stat-value">' + totalAttempts + '</div><div class="stat-label">总作答次数</div></div>' +
+  '</div>';
+  html += '<div class="mistake-filter"><span class="mistake-filter-label">题型：</span>' +
+    '<button class="mistake-filter-btn' + (filterType === 'all' ? ' active' : '') + '" data-filter="all">全部</button>' +
+    '<button class="mistake-filter-btn' + (filterType === 'single' ? ' active' : '') + '" data-filter="single">单选题</button>' +
+    '<button class="mistake-filter-btn' + (filterType === 'multi' ? ' active' : '') + '" data-filter="multi">多选题</button>' +
+    '<button class="mistake-filter-btn' + (filterType === 'judge' ? ' active' : '') + '" data-filter="judge">判断题</button>' +
+    '<span class="mistake-filter-label" style="margin-left:12px;">排序：</span>' +
+    '<button class="mistake-filter-btn' + (sortBy === 'rate' ? ' active' : '') + '" data-sort="rate">正确率' + (sortBy === 'rate' ? (sortDir === 'asc' ? '↑' : '↓') : '') + '</button>' +
+    '<button class="mistake-filter-btn' + (sortBy === 'attempts' ? ' active' : '') + '" data-sort="attempts">作答次数' + (sortBy === 'attempts' ? (sortDir === 'asc' ? '↑' : '↓') : '') + '</button>' +
+    '<button class="mistake-filter-btn' + (sortBy === 'recent' ? ' active' : '') + '" data-sort="recent">最近错题</button>' +
+  '</div>';
+  if (allItems.length === 0) {
+    html += '<div class="empty-state" style="text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:12px;">📒</div><h3>暂无答题记录</h3><p style="color:var(--text-secondary);">开始做题后，错题本将自动统计每道题的正确率</p></div>';
+  } else {
+    html += '<div class="mistake-list">';
+    for (const item of allItems) {
+      const typeLabel = item.type === 'single' ? '单选题' : item.type === 'multi' ? '多选题' : '判断题';
+      const typeClass = item.type;
+      const rateClass = item.rate >= 80 ? 'rate-high' : (item.rate >= 50 ? 'rate-mid' : 'rate-low');
+      const correctAnswer = item.type === 'multi' ? item.q.answer.split('').sort().join('') : item.q.answer;
+      html += '<div class="mistake-item ' + (item.wrong > 0 ? 'wrong' : 'good') + '" data-goto="' + item.type + '" data-goto-id="' + item.q.id + '">' +
+        '<button class="mi-delete" data-delete-type="' + item.type + '" data-delete-id="' + item.q.id + '" title="删除此题记录">✕</button>' +
+        '<div class="mi-header"><span class="mi-type q-type ' + typeClass + '">' + typeLabel + ' #' + item.q.originalNum + '</span><span class="' + rateClass + '" style="font-weight:700;font-size:0.9rem;">' + item.rate + '%</span></div>' +
+        '<div class="mi-question">' + item.q.question + '</div>' +
+        '<div class="mi-answer">✅ 正确答案：<strong>' + correctAnswer + '</strong></div>' +
+        '<div class="mi-stats"><span>📝 作答 ' + item.attempts + ' 次</span><span>✅ ' + item.correct + ' 次</span><span>❌ ' + item.wrong + ' 次</span><span>📌 最近：<strong>' + (item.lastResult === 'correct' ? '✅ 正确' : '❌ 错误') + '</strong></span></div>' +
+      '</div>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '<div class="reset-area" style="margin-top:14px;"><button class="btn-reset" id="btnResetStats">🔄 重置统计数据</button><button class="btn-reset" id="btnResetAll">🗑 清除全部记录</button></div>';
+  return html;
+}
+
+function bindMistakeEvents() {
+  document.querySelectorAll('.mistake-filter-btn[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => { if (!state.mistake) state.mistake = {}; state.mistake.filterType = btn.dataset.filter; saveState(); render(); });
+  });
+  document.querySelectorAll('.mistake-filter-btn[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!state.mistake) state.mistake = {};
+      const newSort = btn.dataset.sort;
+      if (state.mistake.sortBy === newSort) {
+        // Toggle direction for rate and attempts
+        if (newSort === 'rate' || newSort === 'attempts') {
+          state.mistake.sortDir = state.mistake.sortDir === 'asc' ? 'desc' : 'asc';
+        }
+      } else {
+        state.mistake.sortBy = newSort;
+        state.mistake.sortDir = newSort === 'attempts' ? 'desc' : 'asc';
+      }
+      saveState(); render();
+    });
+  });
+  document.querySelectorAll('.mistake-item[data-goto]').forEach(item => {
+    item.addEventListener('click', () => {
+      const targetMode = item.dataset.goto;
+      const targetId = parseInt(item.dataset.gotoId, 10);
+      if (!targetMode || isNaN(targetId)) return;
+      state.currentMode = targetMode;
+      const modeState = state[targetMode];
+      const questions = getModeQuestions(targetMode);
+      const idx = questions.findIndex(q => q.id === targetId);
+      if (idx >= 0) { modeState.currentIndex = idx; modeState.orderMode = 'seq'; }
+      saveState(); render();
+    });
+  });
+  document.querySelectorAll('.mi-delete[data-delete-type][data-delete-id]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const delType = btn.dataset.deleteType;
+      const delId = parseInt(btn.dataset.deleteId, 10);
+      if (!delType || isNaN(delId)) return;
+      if (!confirm('删除这道题的答题记录？')) return;
+      if (questionStats[delType] && questionStats[delType][delId]) {
+        delete questionStats[delType][delId];
+      }
+      saveStats();
+      render();
+    });
+  });
+  document.getElementById('btnResetStats')?.addEventListener('click', () => { if (!confirm('重置所有题目统计数据？这将清除正确率记录。')) return; questionStats = makeDefaultStats(); saveStats(); render(); });
+  document.getElementById('btnResetAll')?.addEventListener('click', () => { if (!confirm('清除全部答题记录和统计数据？')) return; localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(STATS_KEY); state = loadState(); questionStats = loadStats(); render(); });
+}
+
+function genExamQuestions() {
+  const singles = shuffle(DATA.singleChoice).slice(0, 18);
+  const multis = shuffle(DATA.multiChoice).slice(0, 12);
+  const judges = shuffle(DATA.judgeQuestions).slice(0, 10);
+  const jianDa = shuffle(JIANDA_ESSAYS).slice(0, 3).map(q => ({ ...q, _isEssay: true, type: 'essay', key: 'essay-' + q.id }));
+  const lunShu = shuffle(LUNSHU_ESSAYS).slice(0, 1).map(q => ({ ...q, _isEssay: true, type: 'essay', key: 'essay-' + q.id }));
+  return [...singles, ...multis, ...judges, ...jianDa, ...lunShu];
+}
+
+function renderPracticeMode(mode, questions, modeState) {
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  const total = questions.length;
+
+  let answered = 0, correct = 0;
+  for (const q of questions) {
+    const ua = getAnswerValue(q, modeState);
+    if (ua !== null && ua !== undefined) {
+      answered++;
+      if (isCorrectAnswer(q, ua)) correct++;
+    }
+  }
+  const wrong = answered - correct;
+
+  return '<div class="reset-area">' +
+      '<button class="btn-reset" id="btnResetMode">🔄 重置此模式</button>' +
+      '<button class="btn-reset" id="btnResetAll">🗑 清除全部</button>' +
+    '</div>' +
+    renderOrderToggle(mode) +
+    renderProgressSection(answered, correct, wrong, total) +
+    renderQuestionCard(currentQ, idx, total, modeState, mode) +
+    renderAnswerCard(mode, questions, modeState, idx) +
+    (!window.IS_MOBILE ? '<div class="kbd-hints">' +
+      '<span><kbd class="kbd">1-5</kbd> 选择</span>' +
+      '<span><kbd class="kbd">Enter</kbd> 提交</span>' +
+      '<span><kbd class="kbd">← →</kbd> 上下题</span>' +
+      '<span><kbd class="kbd">R</kbd> 显示答案</span>' +
+    '</div>' : '');
+}
+
+function renderExamMode() {
+  const questions = state.exam.questions || [];
+  const modeState = state.exam;
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  const total = questions.length;
+
+  if (total === 0) {
+    return '<div class="card"><div class="card-body essay-card">' +
+      '<p style="margin-bottom:16px;">🧪 考试模式：从题库随机抽取 18道单选 + 12道多选 + 10道判断 + 3道简答 + 1道论述</p>' +
+      '<button class="btn btn-primary" id="btnGenExam" style="font-size:1rem;">🎲 生成试卷</button>' +
+      '</div></div>';
+  }
+
+  const choiceQs = questions.filter(q => !q._isEssay);
+  const essayQs = questions.filter(q => q._isEssay);
+  let answered = 0, correct = 0;
+  for (const q of choiceQs) {
+    const ua = getAnswerValue(q, modeState);
+    if (ua !== null && ua !== undefined) {
+      answered++;
+      if (isCorrectAnswer(q, ua)) correct++;
+    }
+  }
+  const wrong = answered - correct;
+
+  let cardHtml;
+  if (currentQ._isEssay) {
+    const navBtns = (window.IS_MOBILE ? '' :
+      '<div class="actions" style="justify-content:center;">' +
+        (idx > 0 ? '<button class="btn btn-outline" id="btnPrev">← 上题</button>' : '') +
+        (idx < total - 1 ? '<button class="btn btn-outline" id="btnNext">下一题 →</button>' : '') +
+      '</div>');
+    cardHtml = '<div class="card">' +
+      '<div class="card-header">' +
+        '<span class="q-number">第 ' + (idx + 1) + ' / ' + total + ' 题</span>' +
+        '<span class="q-type essay">' + (currentQ.id <= 13 ? '简答题' : '论述题') + '</span>' +
+      '</div>' +
+      '<div class="card-body essay-card">' +
+        '<div class="essay-question"><span style="color:#92400e;font-weight:700;">' + currentQ.id + '.</span> ' + currentQ.question + '</div>' +
+        '<div class="essay-meta">📖 请参考教材相关章节进行复习</div>' +
+        navBtns +
+      '</div>' +
+    '</div>';
+  } else {
+    cardHtml = renderQuestionCard(currentQ, idx, total, modeState, 'exam', { showReveal: false, showActions: !window.IS_MOBILE });
+  }
+
+  return '<div class="reset-area">' +
+      '<button class="btn-reset" id="btnRegenExam">🎲 重新出题</button>' +
+      '<button class="btn-reset" id="btnResetExam">🔄 重置答案</button>' +
+    '</div>' +
+    '<div class="exam-meta" style="margin-bottom:10px;font-size:0.85rem;color:var(--text-secondary);">' +
+      '📌 考试模式：单选18 + 多选12 + 判断10 + 简答3 + 论述1 = 共 ' + total + ' 题 | 当前第 ' + (idx + 1) + ' 题' +
+    '</div>' +
+    renderProgressSection(answered, correct, wrong, choiceQs.length) +
+    cardHtml +
+    renderExamAnswerCard() +
+    (!window.IS_MOBILE && !currentQ._isEssay ? '<div class="kbd-hints">' +
+      '<span><kbd class="kbd">1-5</kbd> 选择</span>' +
+      '<span><kbd class="kbd">Enter</kbd> 提交</span>' +
+      '<span><kbd class="kbd">← →</kbd> 上下题</span>' +
+    '</div>' : '');
+}
+
+function renderEssayMode(mode) {
+  const questions = getModeQuestions(mode);
+  const modeState = state[mode];
+  const ei = clampIndex(modeState.currentIndex || 0, questions.length);
+  const essay = questions[ei];
+  const total = questions.length;
+  const title = mode === 'jianDa' ? '简答题' : '论述题';
+  const startNum = mode === 'jianDa' ? 1 : 14;
+
+  const listHtml = questions.map((eq, i) =>
+    '<div class="essay-item" style="' + (i === ei ? 'border-color:var(--primary);background:var(--primary-light);' : '') + '">' +
+    '<span class="num">' + eq.id + '.</span><span>' + eq.question + '</span></div>'
+  ).join('');
+
+  const essayBtns = window.IS_MOBILE
+    ? ''
+    : '<div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+        '<button class="btn btn-outline" id="btnPrevEssay"' + (ei === 0 ? ' disabled' : '') + '>← 上一题</button>' +
+        '<button class="btn btn-outline" id="btnNextEssay"' + (ei >= total - 1 ? ' disabled' : '') + '>下一题 →</button>' +
+      '</div>';
+
+  return '<div class="reset-area">' +
+      '<button class="btn-reset" id="btnResetEssay">🔄 重置浏览记录</button>' +
+    '</div>' +
+    renderOrderToggle(mode) +
+    '<div class="card"><div class="card-header"><span class="q-number">📄 ' + title + '</span><span class="q-type essay">共 ' + total + ' 题（第' + startNum + '-' + (startNum + total - 1) + '题）</span></div>' +
+    '<div class="card-body essay-card">' +
+      '<p style="color:var(--text-secondary);font-size:0.88rem;">当前题目：<strong>' + (ei + 1) + ' / ' + total + '</strong></p>' +
+      '<div class="essay-question"><span style="color:#92400e;font-weight:700;">' + essay.id + '.</span> ' + essay.question + '</div>' +
+      '<div class="essay-meta">📖 请参考教材相关章节进行复习</div>' +
+      essayBtns +
+    '</div></div>' +
+    '<div style="margin-top:16px;">' +
+    '<h3 style="margin-bottom:10px;font-size:0.95rem;">📋 全部' + title + '列表</h3>' +
+    '<div class="essay-list">' + listHtml + '</div></div>' +
+    renderAnswerCard(mode, questions, modeState, ei);
+}
+
+function doSubmit(mode, modeState, questions) {
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  const ua = getAnswerValue(currentQ, modeState);
+  if (ua !== null && ua !== undefined) return;
+
+  const isMulti = currentQ.type === 'multi';
+  const ans = isMulti ? _selected.slice().sort().join('') : (_selected[0] || '');
+  if (!ans) return;
+
+  modeState.answers[currentQ.key] = ans;
+  // ★ 记录统计数据
+  recordAnswer(currentQ, isCorrectAnswer(currentQ, ans));
+  saveState();
+  render();
+}
+
+function doReveal(mode, modeState, questions) {
+  if (mode === 'exam') return;
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  const ua = getAnswerValue(currentQ, modeState);
+  if (ua !== null && ua !== undefined) return;
+  modeState.revealed[currentQ.key] = true;
+  saveState();
+  render();
+}
+
+function navigate(mode, modeState, questions, dir) {
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const newIdx = idx + dir;
+  if (newIdx >= 0 && newIdx < questions.length) {
+    modeState.currentIndex = newIdx;
+    if (modeState.visited && questions[newIdx]) {
+      modeState.visited[questions[newIdx].id] = true;
+    }
+    saveState();
+    render();
+  }
+}
+
+function bindChoiceEvents(mode, modeState, questions) {
+  _selected = [];
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  if (!currentQ) return;
+  const answered = isAnswered(modeState, currentQ) || isRevealed(modeState, currentQ);
+  const isMulti = currentQ.type === 'multi';
+
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (answered) return;
+      const letter = btn.dataset.letter;
+      if (isMulti) {
+        const i = _selected.indexOf(letter);
+        if (i >= 0) {
+          _selected.splice(i, 1);
+          btn.classList.remove('selected');
+        } else {
+          _selected.push(letter);
+          btn.classList.add('selected');
+        }
+      } else {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        _selected = [letter];
+        btn.classList.add('selected');
+      }
+    });
+  });
+
+  document.getElementById('btnSubmit')?.addEventListener('click', () => doSubmit(mode, modeState, questions));
+  document.getElementById('btnPrev')?.addEventListener('click', () => navigate(mode, modeState, questions, -1));
+  document.getElementById('btnNext')?.addEventListener('click', () => navigate(mode, modeState, questions, 1));
+  document.getElementById('btnReveal')?.addEventListener('click', () => doReveal(mode, modeState, questions));
+
+  document.getElementById('btnResetMode')?.addEventListener('click', () => {
+    if (!confirm('重置当前模式的所有答题记录？')) return;
+    const fresh = makeDefaultState()[mode];
+    state[mode] = fresh;
+    saveState();
+    render();
+  });
+  document.getElementById('btnResetAll')?.addEventListener('click', () => {
+    if (!confirm('清除全部答题记录？')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state = loadState();
+    render();
+  });
+
+  document.getElementById('btnResetExam')?.addEventListener('click', () => {
+    if (!confirm('重置考试答案记录？')) return;
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    saveState();
+    render();
+  });
+  document.getElementById('btnRegenExam')?.addEventListener('click', () => {
+    if (!confirm('重新生成试卷？当前答题记录将丢失。')) return;
+    state.exam.questions = genExamQuestions();
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    state.exam.cardOpen = true;
+    saveState();
+    render();
+  });
+  document.getElementById('btnGenExam')?.addEventListener('click', () => {
+    state.exam.questions = genExamQuestions();
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    state.exam.cardOpen = true;
+    saveState();
+    render();
+  });
+
+  document.getElementById('btnResetEssay')?.addEventListener('click', () => {
+    if (!confirm('重置浏览记录？')) return;
+    state[mode].visited = {};
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+
+  document.querySelectorAll('[data-jump]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = parseInt(btn.dataset.jump, 10);
+      if (!Number.isNaN(target)) {
+        modeState.currentIndex = target;
+        if (modeState.visited && questions[target]) {
+          modeState.visited[questions[target].id] = true;
+        }
+        saveState();
+        render();
+      }
+    });
+  });
+
+  document.getElementById('orderSeq')?.addEventListener('click', () => {
+    state[mode].orderMode = 'seq';
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+  document.getElementById('orderRand')?.addEventListener('click', () => {
+    state[mode].orderMode = 'rand';
+    // Always re-shuffle from source to ensure true random order each click
+    const sourceList = mode === 'single' ? DATA.singleChoice : mode === 'multi' ? DATA.multiChoice : DATA.judgeQuestions;
+    state[mode].shuffled = shuffle(sourceList);
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+
+  updateMobileActionBar(mode, modeState, questions);
+
+  if (!window.IS_MOBILE && !currentQ._isEssay) {
+    if (window._kbCleanup) window._kbCleanup();
+    const handler = function(e) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+      if (!answered) {
+        const num = parseInt(e.key, 10);
+        if (num >= 1 && num <= currentQ.options.length) {
+          const opt = currentQ.options[num - 1];
+          const btn = document.querySelector('.option-btn[data-letter="' + opt.letter + '"]');
+          if (btn) btn.click();
+        }
+      }
+      if (e.key === 'Enter' && !answered) {
+        e.preventDefault();
+        doSubmit(mode, modeState, questions);
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigate(mode, modeState, questions, 1);
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigate(mode, modeState, questions, -1);
+      }
+      if ((e.key === 'r' || e.key === 'R') && !answered && mode !== 'exam') {
+        e.preventDefault();
+        doReveal(mode, modeState, questions);
+      }
+    };
+    document.addEventListener('keydown', handler);
+    window._kbCleanup = () => document.removeEventListener('keydown', handler);
+  }
+}
+
+function updateMobileActionBar(mode, modeState, questions) {
+  if (!window.IS_MOBILE) return;
+  const bar = document.getElementById('mobileActionBar');
+  if (!bar) return;
+
+  if (mode === 'jianDa' || mode === 'lunShu') {
+    const ei = clampIndex(modeState.currentIndex || 0, questions.length);
+    const total = questions.length;
+    bar.innerHTML =
+      '<button class="btn btn-outline" id="mbPrevEssay"' + (ei === 0 ? ' disabled' : '') + ' style="flex:0 0 auto">← 上题</button>' +
+      '<button class="btn btn-primary" id="mbNextEssay"' + (ei >= total - 1 ? ' disabled' : '') + ' style="flex:1;justify-content:center">下一题 →</button>';
+    document.getElementById('mbPrevEssay')?.addEventListener('click', () => {
+      if (modeState.currentIndex > 0) { modeState.currentIndex--; saveState(); render(); }
+    });
+    document.getElementById('mbNextEssay')?.addEventListener('click', () => {
+      if (modeState.currentIndex < questions.length - 1) { modeState.currentIndex++; saveState(); render(); }
+    });
+    return;
+  }
+
+  if (mode === 'exam') {
+    const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+    const currentQ = questions[idx];
+    if (!currentQ) { bar.innerHTML = ''; return; }
+    if (currentQ._isEssay) {
+      bar.innerHTML =
+        (idx > 0 ? '<button class="btn btn-outline" id="mbPrev" style="flex:0 0 auto">←</button>' : '<span style="flex:0 0 36px"></span>') +
+        '<button class="btn btn-primary" id="mbNext" style="flex:1;justify-content:center"' + (idx >= questions.length - 1 ? ' disabled' : '') + '>' + (idx < questions.length - 1 ? '下一题 →' : '已完成 ✓') + '</button>' +
+        '<button class="btn btn-ghost" id="mbCard" style="flex:0 0 auto">答题卡</button>';
+    } else {
+      const answered = isAnswered(modeState, currentQ) || isRevealed(modeState, currentQ);
+      bar.innerHTML =
+        (idx > 0 ? '<button class="btn btn-outline" id="mbPrev" style="flex:0 0 auto">←</button>' : '<span style="flex:0 0 36px"></span>') +
+        (!answered
+          ? '<button class="btn btn-primary" id="mbSubmit" style="flex:1;justify-content:center">✔ 提交</button>'
+          : '<button class="btn btn-primary" id="mbNext" style="flex:1;justify-content:center"' + (idx >= questions.length - 1 ? ' disabled' : '') + '>' + (idx < questions.length - 1 ? '下一题 →' : '已完成 ✓') + '</button>'
+        ) +
+        '<button class="btn btn-ghost" id="mbCard" style="flex:0 0 auto">答题卡</button>';
+    }
+    document.getElementById('mbPrev')?.addEventListener('click', () => navigate(mode, modeState, questions, -1));
+    document.getElementById('mbNext')?.addEventListener('click', () => navigate(mode, modeState, questions, 1));
+    document.getElementById('mbSubmit')?.addEventListener('click', () => doSubmit(mode, modeState, questions));
+    document.getElementById('mbCard')?.addEventListener('click', () => {
+      state.exam.cardOpen = !state.exam.cardOpen;
+      saveState();
+      render();
+    });
+    return;
+  }
+
+  if (!questions || questions.length === 0) {
+    bar.innerHTML = '';
+    return;
+  }
+
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  const answered = isAnswered(modeState, currentQ) || isRevealed(modeState, currentQ);
+
+  bar.innerHTML =
+    (idx > 0 ? '<button class="btn btn-outline" id="mbPrev" style="flex:0 0 auto">←</button>' : '<span style="flex:0 0 36px"></span>') +
+    (!answered
+      ? '<button class="btn btn-primary" id="mbSubmit" style="flex:1;justify-content:center">✔ 提交</button>'
+      : '<button class="btn btn-primary" id="mbNext" style="flex:1;justify-content:center"' + (idx >= questions.length - 1 ? ' disabled' : '') + '>' + (idx < questions.length - 1 ? '下一题 →' : '已完成 ✓') + '</button>'
+    ) +
+    (!answered ? '<button class="btn btn-ghost" id="mbReveal" style="flex:0 0 auto">👁</button>' : '');
+
+  document.getElementById('mbPrev')?.addEventListener('click', () => navigate(mode, modeState, questions, -1));
+  document.getElementById('mbNext')?.addEventListener('click', () => navigate(mode, modeState, questions, 1));
+  document.getElementById('mbSubmit')?.addEventListener('click', () => doSubmit(mode, modeState, questions));
+  document.getElementById('mbReveal')?.addEventListener('click', () => doReveal(mode, modeState, questions));
+}
+
+function render() {
+  const mode = state.currentMode;
+  const mainEl = document.getElementById('mainContent');
+
+  document.querySelectorAll('.nav-tab, .mobile-nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.mode === mode);
+  });
+
+  if (mode === 'jianDa' || mode === 'lunShu') {
+    mainEl.innerHTML = renderEssayMode(mode);
+    bindEssayEvents(mode);
+  } else if (mode === 'mistake') {
+    // ★ 错题本模式
+    mainEl.innerHTML = renderMistakeBook();
+    bindMistakeEvents();
+  } else if (mode === 'exam') {
+    if (!state.exam.questions) {
+      state.exam.questions = genExamQuestions();
+    }
+    mainEl.innerHTML = renderExamMode();
+    bindExamEvents();
+  } else {
+    const questions = getModeQuestions(mode);
+    const modeState = state[mode];
+    mainEl.innerHTML = renderPracticeMode(mode, questions, modeState);
+    bindChoiceEvents(mode, modeState, questions);
+  }
+  updateGlobalStats();
+}
+
+function bindEssayEvents(mode) {
+  const questions = getModeQuestions(mode);
+  const modeState = state[mode];
+  const ei = clampIndex(modeState.currentIndex || 0, questions.length);
+  const total = questions.length;
+
+  document.getElementById('btnPrevEssay')?.addEventListener('click', () => {
+    if (modeState.currentIndex > 0) {
+      modeState.currentIndex--;
+      if (modeState.visited && questions[modeState.currentIndex]) {
+        modeState.visited[questions[modeState.currentIndex].id] = true;
+      }
+      saveState();
+      render();
+    }
+  });
+  document.getElementById('btnNextEssay')?.addEventListener('click', () => {
+    if (modeState.currentIndex < questions.length - 1) {
+      modeState.currentIndex++;
+      if (modeState.visited && questions[modeState.currentIndex]) {
+        modeState.visited[questions[modeState.currentIndex].id] = true;
+      }
+      saveState();
+      render();
+    }
+  });
+
+  document.querySelectorAll('[data-jump]')?.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = parseInt(btn.dataset.jump, 10);
+      if (!Number.isNaN(target)) {
+        modeState.currentIndex = target;
+        if (modeState.visited && questions[target]) {
+          modeState.visited[questions[target].id] = true;
+        }
+        saveState();
+        render();
+      }
+    });
+  });
+
+  document.getElementById('btnResetEssay')?.addEventListener('click', () => {
+    if (!confirm('重置浏览记录？')) return;
+    state[mode].visited = {};
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+  document.getElementById('btnResetAll')?.addEventListener('click', () => {
+    if (!confirm('清除全部答题记录？')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state = loadState();
+    render();
+  });
+
+  document.getElementById('orderSeq')?.addEventListener('click', () => {
+    state[mode].orderMode = 'seq';
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+  document.getElementById('orderRand')?.addEventListener('click', () => {
+    state[mode].orderMode = 'rand';
+    state[mode].shuffled = shuffle(mode === 'jianDa' ? JIANDA_ESSAYS : LUNSHU_ESSAYS);
+    state[mode].currentIndex = 0;
+    saveState();
+    render();
+  });
+
+  updateMobileActionBar(mode, modeState, questions);
+}
+
+function bindExamEvents() {
+  const questions = state.exam.questions || [];
+  const modeState = state.exam;
+  const idx = clampIndex(modeState.currentIndex || 0, questions.length);
+  const currentQ = questions[idx];
+  if (!currentQ) return;
+
+  if (!currentQ._isEssay) {
+    bindChoiceEvents('exam', modeState, questions);
+  } else {
+    // Essay question in exam mode - simple next/prev
+    document.getElementById('btnPrev')?.addEventListener('click', () => navigate('exam', modeState, questions, -1));
+    document.getElementById('btnNext')?.addEventListener('click', () => navigate('exam', modeState, questions, 1));
+    updateMobileActionBar('exam', modeState, questions);
+
+    if (!window.IS_MOBILE) {
+      if (window._kbCleanup) window._kbCleanup();
+      const handler = function(e) {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          navigate('exam', modeState, questions, 1);
+        }
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          navigate('exam', modeState, questions, -1);
+        }
+      };
+      document.addEventListener('keydown', handler);
+      window._kbCleanup = () => document.removeEventListener('keydown', handler);
+    }
+  }
+
+  document.getElementById('btnRegenExam')?.addEventListener('click', () => {
+    if (!confirm('重新生成试卷？当前答题记录将丢失。')) return;
+    state.exam.questions = genExamQuestions();
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    state.exam.cardOpen = true;
+    saveState();
+    render();
+  });
+  document.getElementById('btnResetExam')?.addEventListener('click', () => {
+    if (!confirm('重置考试答案记录？')) return;
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    saveState();
+    render();
+  });
+  document.getElementById('btnGenExam')?.addEventListener('click', () => {
+    state.exam.questions = genExamQuestions();
+    state.exam.answers = {};
+    state.exam.revealed = {};
+    state.exam.currentIndex = 0;
+    state.exam.visited = {};
+    state.exam.cardOpen = true;
+    saveState();
+    render();
+  });
+
+  document.querySelectorAll('[data-jump]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = parseInt(btn.dataset.jump, 10);
+      if (!Number.isNaN(target)) {
+        modeState.currentIndex = target;
+        if (modeState.visited && questions[target]) {
+          modeState.visited[questions[target].id || questions[target].key] = true;
+        }
+        saveState();
+        render();
+      }
+    });
+  });
+
+  updateMobileActionBar('exam', modeState, questions);
+
+  if (!window.IS_MOBILE && !currentQ._isEssay) {
+    if (window._kbCleanup) window._kbCleanup();
+    const answered = isAnswered(modeState, currentQ) || isRevealed(modeState, currentQ);
+    const handler = function(e) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+      if (!answered) {
+        const num = parseInt(e.key, 10);
+        if (num >= 1 && num <= currentQ.options.length) {
+          const opt = currentQ.options[num - 1];
+          const btn = document.querySelector('.option-btn[data-letter="' + opt.letter + '"]');
+          if (btn) btn.click();
+        }
+      }
+      if (e.key === 'Enter' && !answered) {
+        e.preventDefault();
+        doSubmit('exam', modeState, questions);
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigate('exam', modeState, questions, 1);
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigate('exam', modeState, questions, -1);
+      }
+    };
+    document.addEventListener('keydown', handler);
+    window._kbCleanup = () => document.removeEventListener('keydown', handler);
+  }
+}
+
+let state = loadState();
+
+document.querySelectorAll('.nav-tab, .mobile-nav-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    state.currentMode = btn.dataset.mode;
+    saveState();
+    render();
+  });
+});
+
+// Mark first essay as visited on load
+if (state.jianDa.visited && Object.keys(state.jianDa.visited).length === 0 && JIANDA_ESSAYS.length > 0) {
+  state.jianDa.visited[JIANDA_ESSAYS[0].id] = true;
+}
+if (state.lunShu.visited && Object.keys(state.lunShu.visited).length === 0 && LUNSHU_ESSAYS.length > 0) {
+  state.lunShu.visited[LUNSHU_ESSAYS[0].id] = true;
+}
+
+render();
+</script>
+
+</body>
+</html>

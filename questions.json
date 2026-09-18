@@ -1,0 +1,4694 @@
+{
+  "singleChoice": [
+    {
+      "id": 1,
+      "originalNum": 1,
+      "type": "single",
+      "question": "1938年，(    )在党的六届六中全会上作了《论新阶段》的报告，正式提出“马克思主义的中国化”这一命题。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "毛泽东"
+        },
+        {
+          "letter": "B",
+          "text": "任弼时"
+        },
+        {
+          "letter": "C",
+          "text": "刘少奇"
+        },
+        {
+          "letter": "D",
+          "text": "周恩来"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 2,
+      "originalNum": 2,
+      "type": "single",
+      "question": "党的十八大以来，以习近平同志为核心的党中央明确提出要不断推进（  ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义现代化"
+        },
+        {
+          "letter": "B",
+          "text": "马克思主义中国化时代化"
+        },
+        {
+          "letter": "C",
+          "text": "“两个结合”"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义现代化强国"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 3,
+      "originalNum": 3,
+      "type": "single",
+      "question": "(    )明确把“不断谱写马克思主义中国化时代化新篇章”作为当代中国共产党人的庄严历史责任，并提出了继续推进马克思主义中国化时代化的新要求。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "党的十七大"
+        },
+        {
+          "letter": "B",
+          "text": "党的十八大"
+        },
+        {
+          "letter": "C",
+          "text": "党的十九大"
+        },
+        {
+          "letter": "D",
+          "text": "党的二十大"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 4,
+      "originalNum": 4,
+      "type": "single",
+      "question": "(    )是马克思主义中国化时代化的第一次历史性飞跃。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "毛泽东思想"
+        },
+        {
+          "letter": "B",
+          "text": "邓小平理论"
+        },
+        {
+          "letter": "C",
+          "text": "“三个代表”重要思想"
+        },
+        {
+          "letter": "D",
+          "text": "科学发展观"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 5,
+      "originalNum": 5,
+      "type": "single",
+      "question": "1978年召开的党的（   ），实现了新中国成立以来党的历史上具有深远意义的伟大转折，开启了改革开放和社会主义现代化建设历史新时期。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "十一届三中全会"
+        },
+        {
+          "letter": "B",
+          "text": "十二大"
+        },
+        {
+          "letter": "C",
+          "text": "十三大"
+        },
+        {
+          "letter": "D",
+          "text": "十一届六中全会"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 6,
+      "originalNum": 6,
+      "type": "single",
+      "question": "马克思主义中国化时代化的理论成果是一脉相承又(    )的关系。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "与时俱进"
+        },
+        {
+          "letter": "C",
+          "text": "独立自主"
+        },
+        {
+          "letter": "D",
+          "text": "精益求精"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 7,
+      "originalNum": 7,
+      "type": "single",
+      "question": "马克思主义中国化时代化的最新理论成果是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "毛泽东思想"
+        },
+        {
+          "letter": "B",
+          "text": "科学发展观"
+        },
+        {
+          "letter": "C",
+          "text": "习近平新时代中国特色社会主义思想"
+        },
+        {
+          "letter": "D",
+          "text": "邓小平理论"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 8,
+      "originalNum": 8,
+      "type": "single",
+      "question": "1917年（  ）的胜利开辟了世界无产阶级社会主义革命的新时代，也给中国送来了马克思列宁主义，中国革命从此有了科学的指导思想。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "俄国十月革命"
+        },
+        {
+          "letter": "B",
+          "text": "五四运动"
+        },
+        {
+          "letter": "C",
+          "text": "中国共产党成立"
+        },
+        {
+          "letter": "D",
+          "text": "中华人民共和国建立"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 9,
+      "originalNum": 9,
+      "type": "single",
+      "question": "(    )是毛泽东思想形成和发展的实践基础。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "中国共产党领导人民进行革命和建设的成功实践"
+        },
+        {
+          "letter": "B",
+          "text": "中国共产党领导的工人运动"
+        },
+        {
+          "letter": "C",
+          "text": "中国共产党领导的农民运动"
+        },
+        {
+          "letter": "D",
+          "text": "中国共产党领导的学生运动"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 10,
+      "originalNum": 10,
+      "type": "single",
+      "question": "毛泽东思想是在中国革命和建设的实践过程中，在总结我国革命和建设正反两方面历史经验的基础上，逐步形成和发展起来的，其初步形成的标志是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "提出了新民主主义革命的基本思想"
+        },
+        {
+          "letter": "B",
+          "text": "提出并深入阐述的农村包围城市、武装夺取政权的思想"
+        },
+        {
+          "letter": "C",
+          "text": "提出了系统的新民主主义革命理论"
+        },
+        {
+          "letter": "D",
+          "text": "提出了人民民主专政、社会主义改造和建设理论"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 11,
+      "originalNum": 11,
+      "type": "single",
+      "question": "(    )开始形成以毛泽东同志为核心的党的第一代中央领导集体。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "党的一大"
+        },
+        {
+          "letter": "B",
+          "text": "党的二大"
+        },
+        {
+          "letter": "C",
+          "text": "八七会议"
+        },
+        {
+          "letter": "D",
+          "text": "遵义会议"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 12,
+      "originalNum": 12,
+      "type": "single",
+      "question": "(    )把毛泽东思想确立为党必须长期坚持的指导思想并写入党章。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "遵义会议"
+        },
+        {
+          "letter": "B",
+          "text": "党的六届六中全会"
+        },
+        {
+          "letter": "C",
+          "text": "党的七大"
+        },
+        {
+          "letter": "D",
+          "text": "党的八大"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 13,
+      "originalNum": 13,
+      "type": "single",
+      "question": "(    )创造性地将支部建在连上，成立各级士兵委员会，实行民主制度，在政治上官兵平等。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "南昌起义"
+        },
+        {
+          "letter": "B",
+          "text": "秋收起义"
+        },
+        {
+          "letter": "C",
+          "text": "三湾改编"
+        },
+        {
+          "letter": "D",
+          "text": "古田会议"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 14,
+      "originalNum": 14,
+      "type": "single",
+      "question": "(    )是毛泽东思想的基本点，毛泽东思想的精髓。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "群众路线"
+        },
+        {
+          "letter": "C",
+          "text": "独立自主"
+        },
+        {
+          "letter": "D",
+          "text": "艰苦奋斗"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 15,
+      "originalNum": 15,
+      "type": "single",
+      "question": "(    )是中国共产党的生命线和根本工作路线，是我们党永葆青春活力和战斗力的重要传家宝。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "群众路线"
+        },
+        {
+          "letter": "C",
+          "text": "独立自主"
+        },
+        {
+          "letter": "D",
+          "text": "自力更生"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 16,
+      "originalNum": 16,
+      "type": "single",
+      "question": "毛泽东在《反对本本主义》一文中就指出：“中国革命斗争的胜利要靠中国同志了解中国情况。”这句话的意思是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "加强学习马克思主义理论"
+        },
+        {
+          "letter": "B",
+          "text": "保持与共产国际的联系"
+        },
+        {
+          "letter": "C",
+          "text": "坚持独立自主原则"
+        },
+        {
+          "letter": "D",
+          "text": "必须走群众路线"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 17,
+      "originalNum": 17,
+      "type": "single",
+      "question": "马克思主义中国化时代化的第一个重大理论成果是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "邓小平理论"
+        },
+        {
+          "letter": "B",
+          "text": "毛泽东思想"
+        },
+        {
+          "letter": "C",
+          "text": "“三个代表”重要思想"
+        },
+        {
+          "letter": "D",
+          "text": "科学发展观"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 18,
+      "originalNum": 18,
+      "type": "single",
+      "question": "(    )是解决中国革命问题的基本前提。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "认清中国国情"
+        },
+        {
+          "letter": "B",
+          "text": "分清敌友"
+        },
+        {
+          "letter": "C",
+          "text": "成立无产阶级政党"
+        },
+        {
+          "letter": "D",
+          "text": "以马克思列宁主义为指导"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 19,
+      "originalNum": 19,
+      "type": "single",
+      "question": "近代中国最基本的国情是中国逐步成为(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "殖民地"
+        },
+        {
+          "letter": "B",
+          "text": "封建社会"
+        },
+        {
+          "letter": "C",
+          "text": "半殖民地半封建社会"
+        },
+        {
+          "letter": "D",
+          "text": "资本主义社会"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 20,
+      "originalNum": 20,
+      "type": "single",
+      "question": "中国革命的首要对象是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "资产阶级"
+        },
+        {
+          "letter": "B",
+          "text": "官僚资本主义"
+        },
+        {
+          "letter": "C",
+          "text": "帝国主义"
+        },
+        {
+          "letter": "D",
+          "text": "封建主义"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 21,
+      "originalNum": 21,
+      "type": "single",
+      "question": "中国革命最基本的动力是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "城市小资产阶级"
+        },
+        {
+          "letter": "B",
+          "text": "无产阶级"
+        },
+        {
+          "letter": "C",
+          "text": "农民阶级"
+        },
+        {
+          "letter": "D",
+          "text": "民族资产阶级"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 22,
+      "originalNum": 22,
+      "type": "single",
+      "question": "(    )是中国革命的中心问题，也是新民主主义革命理论的核心问题。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "无产阶级的领导权"
+        },
+        {
+          "letter": "B",
+          "text": "农民阶级的主力军地位"
+        },
+        {
+          "letter": "C",
+          "text": "民族资产阶级的领导权"
+        },
+        {
+          "letter": "D",
+          "text": "无产阶级同资产阶级的联盟"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 23,
+      "originalNum": 23,
+      "type": "single",
+      "question": "新民主主义革命的性质是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "无产阶级革命"
+        },
+        {
+          "letter": "B",
+          "text": "农民阶级革命"
+        },
+        {
+          "letter": "C",
+          "text": "资产阶级民主主义革命"
+        },
+        {
+          "letter": "D",
+          "text": "地主阶级革命"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 24,
+      "originalNum": 24,
+      "type": "single",
+      "question": "新民主主义革命的前途是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "新民主主义"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义"
+        },
+        {
+          "letter": "C",
+          "text": "资本主义"
+        },
+        {
+          "letter": "D",
+          "text": "民主主义"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 25,
+      "originalNum": 25,
+      "type": "single",
+      "question": "新民主主义国家的国体是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "无产阶级专政"
+        },
+        {
+          "letter": "B",
+          "text": "各革命阶级联合专政"
+        },
+        {
+          "letter": "C",
+          "text": "民主集中制的人民代表大会制度"
+        },
+        {
+          "letter": "D",
+          "text": "人民民主专政"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 26,
+      "originalNum": 26,
+      "type": "single",
+      "question": "新民主主义的经济纲领中极具特色的一项内容是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "没收封建地主阶级的土地"
+        },
+        {
+          "letter": "B",
+          "text": "没收民族资本"
+        },
+        {
+          "letter": "C",
+          "text": "没收官僚资本"
+        },
+        {
+          "letter": "D",
+          "text": "保护民族工商业"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 27,
+      "originalNum": 27,
+      "type": "single",
+      "question": "新民主主义文化的特征是无产阶级领导的(    )文化。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "民族的科学的大众的"
+        },
+        {
+          "letter": "B",
+          "text": "新民主主义"
+        },
+        {
+          "letter": "C",
+          "text": "社会主义"
+        },
+        {
+          "letter": "D",
+          "text": "共产主义"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 28,
+      "originalNum": 28,
+      "type": "single",
+      "question": "新民主主义革命的道路是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "城市暴动和起义"
+        },
+        {
+          "letter": "B",
+          "text": "农村包围城市、武装夺取政权"
+        },
+        {
+          "letter": "C",
+          "text": "经过长期的合法斗争以进入起义和战争"
+        },
+        {
+          "letter": "D",
+          "text": "先占城市后取乡村"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 29,
+      "originalNum": 29,
+      "type": "single",
+      "question": "毛泽东系统阐述中国革命三大法宝的文章是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "《井冈山的斗争》"
+        },
+        {
+          "letter": "B",
+          "text": "《&lt;共产党人&gt;发刊词》"
+        },
+        {
+          "letter": "C",
+          "text": "《星星之火，可以燎原》"
+        },
+        {
+          "letter": "D",
+          "text": "《战争和战略问题》"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 30,
+      "originalNum": 30,
+      "type": "single",
+      "question": "在新民主主义革命的三大法宝中，(    )是无产阶级政党策略思想的重要内容。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "统一战线"
+        },
+        {
+          "letter": "B",
+          "text": "武装斗争"
+        },
+        {
+          "letter": "C",
+          "text": "党的建设"
+        },
+        {
+          "letter": "D",
+          "text": "军队建设"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 31,
+      "originalNum": 31,
+      "type": "single",
+      "question": "从中华人民共和国成立到社会主义改造基本完成，是我国从新民主主义到社会主义的(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "转变时期"
+        },
+        {
+          "letter": "B",
+          "text": "过渡时期"
+        },
+        {
+          "letter": "C",
+          "text": "继承时期"
+        },
+        {
+          "letter": "D",
+          "text": "发展时期"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 32,
+      "originalNum": 32,
+      "type": "single",
+      "question": "1952年底，随着土地改革的基本完成，(    )逐步成为我国社会的主要矛盾。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "人民大众同帝国主义、封建主义及国民党反动派残余的矛盾"
+        },
+        {
+          "letter": "B",
+          "text": "帝国主义和中华民族的矛盾、封建主义和人民大众的矛盾"
+        },
+        {
+          "letter": "C",
+          "text": "工人阶级同资产阶级的矛盾"
+        },
+        {
+          "letter": "D",
+          "text": "人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 33,
+      "originalNum": 33,
+      "type": "single",
+      "question": "在新民主主义社会中，(    )是私人资本主义经济向社会主义国营经济过渡的形式。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "国营经济"
+        },
+        {
+          "letter": "B",
+          "text": "国家资本主义经济"
+        },
+        {
+          "letter": "C",
+          "text": "个体经济"
+        },
+        {
+          "letter": "D",
+          "text": "合作社经济"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 34,
+      "originalNum": 34,
+      "type": "single",
+      "question": "党在过渡时期总路线的主要内容被概括为(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“一化两改”"
+        },
+        {
+          "letter": "B",
+          "text": "“两化一改”"
+        },
+        {
+          "letter": "C",
+          "text": "“一化三改”"
+        },
+        {
+          "letter": "D",
+          "text": "“两化三改”"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 35,
+      "originalNum": 35,
+      "type": "single",
+      "question": "党在过渡时期总路线的主体是实现(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "国家的社会主义工业化"
+        },
+        {
+          "letter": "B",
+          "text": "私营经济的国有化"
+        },
+        {
+          "letter": "C",
+          "text": "个体农业的集体化"
+        },
+        {
+          "letter": "D",
+          "text": "对个体农业、手工业和资本主义工商业的改造"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 36,
+      "originalNum": 36,
+      "type": "single",
+      "question": "对(    )的社会主义改造，是三大改造中首先进行的。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "工业"
+        },
+        {
+          "letter": "B",
+          "text": "手工业"
+        },
+        {
+          "letter": "C",
+          "text": "资本主义工商业"
+        },
+        {
+          "letter": "D",
+          "text": "农业"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 37,
+      "originalNum": 37,
+      "type": "single",
+      "question": "对手工业的社会主义改造是通过(    )道路，把个体手工业经济改造成为社会主义经济的过程。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "互助组"
+        },
+        {
+          "letter": "B",
+          "text": "高级社"
+        },
+        {
+          "letter": "C",
+          "text": "公私合营"
+        },
+        {
+          "letter": "D",
+          "text": "合作化"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 38,
+      "originalNum": 38,
+      "type": "single",
+      "question": "中国共产党对资本主义工商业进行社会主义改造的方法是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "和平赎买"
+        },
+        {
+          "letter": "B",
+          "text": "统购统销"
+        },
+        {
+          "letter": "C",
+          "text": "公私合营"
+        },
+        {
+          "letter": "D",
+          "text": "合作化"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 39,
+      "originalNum": 39,
+      "type": "single",
+      "question": "我国对农业、手工业和资本主义工商业的社会主义改造基本完成是在(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "1955年底"
+        },
+        {
+          "letter": "B",
+          "text": "1956年底"
+        },
+        {
+          "letter": "C",
+          "text": "1957年底"
+        },
+        {
+          "letter": "D",
+          "text": "1958年底"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 40,
+      "originalNum": 40,
+      "type": "single",
+      "question": "(    )为当代中国一切发展进步奠定了制度基础。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "新中国成立"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义制度的确立"
+        },
+        {
+          "letter": "C",
+          "text": "国民经济恢复任务的完成"
+        },
+        {
+          "letter": "D",
+          "text": "一五计划的完成"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 41,
+      "originalNum": 41,
+      "type": "single",
+      "question": "(    )的发表，标志着党探索中国社会主义建设道路的良好开端。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "整风运动"
+        },
+        {
+          "letter": "B",
+          "text": "《论十大关系》"
+        },
+        {
+          "letter": "C",
+          "text": "党的八大"
+        },
+        {
+          "letter": "D",
+          "text": "《关于正确处理人民内部矛盾的问题》"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 42,
+      "originalNum": 42,
+      "type": "single",
+      "question": "《论十大关系》的报告围绕的基本方针是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "独立自主"
+        },
+        {
+          "letter": "B",
+          "text": "自力更生为主，争取外援为辅"
+        },
+        {
+          "letter": "C",
+          "text": "调动一切积极因素为社会主义建设服务"
+        },
+        {
+          "letter": "D",
+          "text": "走中国特色社会主义道路"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 43,
+      "originalNum": 43,
+      "type": "single",
+      "question": "不属于《论十大关系》讨论范畴的是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "重工业和轻工业、农业的关系"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义市场经济和计划经济的关系"
+        },
+        {
+          "letter": "C",
+          "text": "国家、生产单位和生产者个人的关系"
+        },
+        {
+          "letter": "D",
+          "text": "革命和反革命的关系"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 44,
+      "originalNum": 44,
+      "type": "single",
+      "question": "毛泽东系统论述社会主义社会矛盾理论的著作是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "《关于正确处理人民内部矛盾的问题》"
+        },
+        {
+          "letter": "B",
+          "text": "《新民主主义论》"
+        },
+        {
+          "letter": "C",
+          "text": "《论十大关系》"
+        },
+        {
+          "letter": "D",
+          "text": "《中国社会各阶级的分析》"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 45,
+      "originalNum": 45,
+      "type": "single",
+      "question": "毛泽东在《关于正确处理人民内部矛盾的问题》的报告中指出，社会主义社会的基本矛盾仍然是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "人民内部的非对抗性的矛盾"
+        },
+        {
+          "letter": "B",
+          "text": "无产阶级和资产阶级之间、社会主义和资本主义之间的矛盾"
+        },
+        {
+          "letter": "C",
+          "text": "生产关系和生产力之间、上层建筑和经济基础之间的矛盾"
+        },
+        {
+          "letter": "D",
+          "text": "人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 46,
+      "originalNum": 46,
+      "type": "single",
+      "question": "毛泽东指出：在人民民主专政下面，解决敌我之间的和人民内部的这两类不同性质的矛盾，采用(    )这样两种不同的方法。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "依法严惩和说服教育"
+        },
+        {
+          "letter": "B",
+          "text": "暴力镇压和说服教育"
+        },
+        {
+          "letter": "C",
+          "text": "批评和团结"
+        },
+        {
+          "letter": "D",
+          "text": "专政和民主"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 47,
+      "originalNum": 47,
+      "type": "single",
+      "question": "走中国工业化道路的关键问题是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "正确处理重工业和轻工业、农业的关系"
+        },
+        {
+          "letter": "B",
+          "text": "正确处理人民内部的矛盾"
+        },
+        {
+          "letter": "C",
+          "text": "正确处理两类不同性质的矛盾"
+        },
+        {
+          "letter": "D",
+          "text": "调动一切积极因素为社会主义事业服务"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 48,
+      "originalNum": 48,
+      "type": "single",
+      "question": "党的八大提出的经济建设的正确方针是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "统筹兼顾，全面安排"
+        },
+        {
+          "letter": "B",
+          "text": "既反保守又反冒进、在综合平衡中稳步前进"
+        },
+        {
+          "letter": "C",
+          "text": "团结互助，统筹兼顾"
+        },
+        {
+          "letter": "D",
+          "text": "具体问题具体分析"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 49,
+      "originalNum": 49,
+      "type": "single",
+      "question": "在社会主义建设道路初步探索过程中，关于生产资料所有制结构调整方面，提出了“三个主体，三个补充”设想的是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "毛泽东"
+        },
+        {
+          "letter": "B",
+          "text": "刘少奇"
+        },
+        {
+          "letter": "C",
+          "text": "陈云"
+        },
+        {
+          "letter": "D",
+          "text": "邓小平"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 50,
+      "originalNum": 50,
+      "type": "single",
+      "question": "下列关于中国社会主义建设道路初步探索的意义，错误的是（   ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "巩固和发展了我国的社会主义制度"
+        },
+        {
+          "letter": "B",
+          "text": "确立了中国特色社会主义道路"
+        },
+        {
+          "letter": "C",
+          "text": "丰富了科学社会主义的理论和实践"
+        },
+        {
+          "letter": "D",
+          "text": "为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 51,
+      "originalNum": 51,
+      "type": "single",
+      "question": "20世纪70年代，整个世界发生着大变动大调整，最显著的变化就是(    )成为时代主题。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "和平与发展"
+        },
+        {
+          "letter": "B",
+          "text": "革命与战争"
+        },
+        {
+          "letter": "C",
+          "text": "合作与共赢"
+        },
+        {
+          "letter": "D",
+          "text": "开放与融通"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 52,
+      "originalNum": 52,
+      "type": "single",
+      "question": "党的十一届三中全会以后，以（  ）同志为主要代表的中国共产党人，领导全党和全国人民果断地纠正了社会主义建设时期的错误，深刻地分析了错误出现的原因，同时又坚决地维护和继承了过去在理论上和实践上所取得的一切积极成果。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "邓小平"
+        },
+        {
+          "letter": "B",
+          "text": "陈云"
+        },
+        {
+          "letter": "C",
+          "text": "叶剑英"
+        },
+        {
+          "letter": "D",
+          "text": "胡耀邦"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 53,
+      "originalNum": 53,
+      "type": "single",
+      "question": "“三个代表”重要思想创造性地回答了(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "什么是社会主义、怎样建设社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "建设什么样的党、怎样建设党"
+        },
+        {
+          "letter": "C",
+          "text": "实现什么样的发展、怎样发展"
+        },
+        {
+          "letter": "D",
+          "text": "新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 54,
+      "originalNum": 54,
+      "type": "single",
+      "question": "党的十八大以来，中国特色社会主义进入（    ），这是我国发展新的历史方位。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "新时代"
+        },
+        {
+          "letter": "B",
+          "text": "新时期"
+        },
+        {
+          "letter": "C",
+          "text": "新阶段"
+        },
+        {
+          "letter": "D",
+          "text": "新跨越"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 55,
+      "originalNum": 55,
+      "type": "single",
+      "question": "1982年，邓小平在党的十二大开幕词中明确提出：走自己的道路，(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "建设有中国特色的社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "建设社会主义初级阶段"
+        },
+        {
+          "letter": "C",
+          "text": "实现马克思主义中国化时代化"
+        },
+        {
+          "letter": "D",
+          "text": "建设社会主义市场经济"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 56,
+      "originalNum": 56,
+      "type": "single",
+      "question": "(    )是中国特色社会主义理论体系在新世纪新阶段的新发展。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "邓小平理论"
+        },
+        {
+          "letter": "B",
+          "text": "“三个代表”重要思想"
+        },
+        {
+          "letter": "C",
+          "text": "科学发展观"
+        },
+        {
+          "letter": "D",
+          "text": "习近平新时代中国特色社会主义思想"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 57,
+      "originalNum": 57,
+      "type": "single",
+      "question": "（    ）是中国特色社会主义理论体系在新时代的新篇章。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "邓小平理论"
+        },
+        {
+          "letter": "B",
+          "text": "“三个代表”重要思想"
+        },
+        {
+          "letter": "C",
+          "text": "科学发展观"
+        },
+        {
+          "letter": "D",
+          "text": "习近平新时代中国特色社会主义思想"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 58,
+      "originalNum": 58,
+      "type": "single",
+      "question": "邓小平理论首要的基本的理论问题是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "什么是社会主义、怎样建设社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "建设什么样的党、怎样建设党"
+        },
+        {
+          "letter": "C",
+          "text": "实现什么样的发展、怎样发展"
+        },
+        {
+          "letter": "D",
+          "text": "新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 59,
+      "originalNum": 59,
+      "type": "single",
+      "question": "1992年初，邓小平在南方谈话中指出：社会主义的本质，是解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "小康社会"
+        },
+        {
+          "letter": "B",
+          "text": "共同富裕"
+        },
+        {
+          "letter": "C",
+          "text": "现代化国家"
+        },
+        {
+          "letter": "D",
+          "text": "现代化强国"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 60,
+      "originalNum": 60,
+      "type": "single",
+      "question": "邓小平理论的精髓是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "解放思想、实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "实事求是、与时俱进"
+        },
+        {
+          "letter": "C",
+          "text": "解放思想、实事求是、与时俱进"
+        },
+        {
+          "letter": "D",
+          "text": "解放思想、实事求是、与时俱进、求真务实"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 61,
+      "originalNum": 61,
+      "type": "single",
+      "question": "邓小平和我们党对当代中国基本国情的科学判断是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "我国是不发达的社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "我国已经是发达社会主义"
+        },
+        {
+          "letter": "C",
+          "text": "我国正处于并将长期处于社会主义初级阶段"
+        },
+        {
+          "letter": "D",
+          "text": "中国特色社会主义进入新时代"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 62,
+      "originalNum": 62,
+      "type": "single",
+      "question": "党的(    )系统地阐述了社会主义初级阶段的科学内涵。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "十一届三中全会"
+        },
+        {
+          "letter": "B",
+          "text": "十二大"
+        },
+        {
+          "letter": "C",
+          "text": "十三大"
+        },
+        {
+          "letter": "D",
+          "text": "十四大"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 63,
+      "originalNum": 63,
+      "type": "single",
+      "question": "(    )是建设中国特色社会主义的总依据。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义本质理论"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义初级阶段理论"
+        },
+        {
+          "letter": "C",
+          "text": "社会主义改革开放理论"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义根本任务理论"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 64,
+      "originalNum": 64,
+      "type": "single",
+      "question": "党在社会主义初级阶段基本路线的简明概括是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“一个中心、两个基本点”"
+        },
+        {
+          "letter": "B",
+          "text": "“一个中心、三个基本点”"
+        },
+        {
+          "letter": "C",
+          "text": "“两个中心、一个基本点”"
+        },
+        {
+          "letter": "D",
+          "text": "“两个中心、两个基本点”"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 65,
+      "originalNum": 65,
+      "type": "single",
+      "question": "社会主义的根本任务是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "解放生产力"
+        },
+        {
+          "letter": "B",
+          "text": "发展生产力"
+        },
+        {
+          "letter": "C",
+          "text": "消灭剥削"
+        },
+        {
+          "letter": "D",
+          "text": "实现共同富裕"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 66,
+      "originalNum": 66,
+      "type": "single",
+      "question": "党的十三大把邓小平提出的“三步走”发展战略构想确定下来，其中第三步战略目标是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "到21世纪中叶，人均国民生产总值达到中等发达国家水平，人民生活比较富裕，基本实现现代化。然后，在这个基础上继续前进"
+        },
+        {
+          "letter": "B",
+          "text": "把我国建设成为富强、民主、文明的社会主义现代化国家"
+        },
+        {
+          "letter": "C",
+          "text": "把我国建设成为富强、民主、文明、和谐的社会主义现代化国家"
+        },
+        {
+          "letter": "D",
+          "text": "把我国建设成为富强、民主、文明、和谐、美丽的社会主义现代化强国"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 67,
+      "originalNum": 67,
+      "type": "single",
+      "question": "社会主义社会发展的直接动力是（   ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "改革"
+        },
+        {
+          "letter": "B",
+          "text": "革命"
+        },
+        {
+          "letter": "C",
+          "text": "和谐"
+        },
+        {
+          "letter": "D",
+          "text": "开放"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 68,
+      "originalNum": 68,
+      "type": "single",
+      "question": "在推进经济体制改革的进程中，邓小平提出社会主义也可以搞市场经济的思想，创立了(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义本质理论"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义初级阶段理论"
+        },
+        {
+          "letter": "C",
+          "text": "社会主义改革开放理论"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义市场经济理论"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 69,
+      "originalNum": 69,
+      "type": "single",
+      "question": "(    )是邓小平在坚持四项基本原则的基础上，从中国实际出发提出的实现祖国和平统一的伟大构想。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“一国两制”"
+        },
+        {
+          "letter": "B",
+          "text": "“两制一国”"
+        },
+        {
+          "letter": "C",
+          "text": "“一国三制”"
+        },
+        {
+          "letter": "D",
+          "text": "“三制一国”"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 70,
+      "originalNum": 70,
+      "type": "single",
+      "question": "建设中国特色社会主义，关键在于坚持、加强和改善(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "改革开放"
+        },
+        {
+          "letter": "B",
+          "text": "人民当家做主"
+        },
+        {
+          "letter": "C",
+          "text": "党的领导"
+        },
+        {
+          "letter": "D",
+          "text": "国家发展战略"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 71,
+      "originalNum": 71,
+      "type": "single",
+      "question": "（  ）是我们党站在时代前列、保持先进性的根本体现和根本要求。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "始终代表中国先进文化的前进方向"
+        },
+        {
+          "letter": "B",
+          "text": "始终代表中国最广大人民的根本利益"
+        },
+        {
+          "letter": "C",
+          "text": "满足人民群众日益增长的物质文化需要"
+        },
+        {
+          "letter": "D",
+          "text": "始终代表中国先进生产力的发展要求，大力促进先进生产力的发展"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 72,
+      "originalNum": 72,
+      "type": "single",
+      "question": "江泽民指出：（  ）是第一生产力，是先进生产力的集中体现和主要标志。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "科学技术"
+        },
+        {
+          "letter": "B",
+          "text": "教育"
+        },
+        {
+          "letter": "C",
+          "text": "文化"
+        },
+        {
+          "letter": "D",
+          "text": "人才"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 73,
+      "originalNum": 73,
+      "type": "single",
+      "question": "发展先进文化的重要内容和中心环节是加强(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义经济建设"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义思想道德建设"
+        },
+        {
+          "letter": "C",
+          "text": "社会主义政治建设"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义精神文明建设"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 74,
+      "originalNum": 74,
+      "type": "single",
+      "question": "江泽民同志强调，我们全部工作的出发点和落脚点，就是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "构建人类命运共同体"
+        },
+        {
+          "letter": "B",
+          "text": "建立和谐世界"
+        },
+        {
+          "letter": "C",
+          "text": "建设社会主义精神文明"
+        },
+        {
+          "letter": "D",
+          "text": "不断实现好维护好发展好最广大人民的根本利益"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 75,
+      "originalNum": 75,
+      "type": "single",
+      "question": "贯彻“三个代表”重要思想 ，关键在坚持(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "与时俱进"
+        },
+        {
+          "letter": "B",
+          "text": "党的先进性"
+        },
+        {
+          "letter": "C",
+          "text": "执政为民"
+        },
+        {
+          "letter": "D",
+          "text": "以人为本"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 76,
+      "originalNum": 76,
+      "type": "single",
+      "question": "贯彻“三个代表”重要思想 ，核心在坚持(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "与时俱进"
+        },
+        {
+          "letter": "B",
+          "text": "党的先进性"
+        },
+        {
+          "letter": "C",
+          "text": "执政为民"
+        },
+        {
+          "letter": "D",
+          "text": "以人为本"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 77,
+      "originalNum": 77,
+      "type": "single",
+      "question": "贯彻“三个代表”重要思想，本质在坚持（    ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "与时俱进"
+        },
+        {
+          "letter": "B",
+          "text": "党的先进性"
+        },
+        {
+          "letter": "C",
+          "text": "执政为民"
+        },
+        {
+          "letter": "D",
+          "text": "以人为本"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 78,
+      "originalNum": 78,
+      "type": "single",
+      "question": "党要承担起推动中国社会进步的历史责任，必须始终紧紧抓住(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "战略机遇期"
+        },
+        {
+          "letter": "B",
+          "text": "科教兴国战略"
+        },
+        {
+          "letter": "C",
+          "text": "发展这个执政兴国的第一要务"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义政治文明建设"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 79,
+      "originalNum": 79,
+      "type": "single",
+      "question": "在建立什么样的经济体制问题上，江泽民明确提出使用(    )这个提法。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义市场经济体制"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义政治体制"
+        },
+        {
+          "letter": "C",
+          "text": "社会主义文化体制"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义生态文明体制"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 80,
+      "originalNum": 80,
+      "type": "single",
+      "question": "江泽民强调推进党的建设新的伟大工程，重点是加强党的(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "群众基础"
+        },
+        {
+          "letter": "B",
+          "text": "执政能力建设"
+        },
+        {
+          "letter": "C",
+          "text": "作风建设"
+        },
+        {
+          "letter": "D",
+          "text": "组织建设"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 81,
+      "originalNum": 81,
+      "type": "single",
+      "question": "科学发展观的第一要义是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "发展"
+        },
+        {
+          "letter": "B",
+          "text": "以人为本"
+        },
+        {
+          "letter": "C",
+          "text": "全面协调可持续"
+        },
+        {
+          "letter": "D",
+          "text": "统筹兼顾"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 82,
+      "originalNum": 82,
+      "type": "single",
+      "question": "科学发展观的核心立场是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "发展"
+        },
+        {
+          "letter": "B",
+          "text": "以人为本"
+        },
+        {
+          "letter": "C",
+          "text": "全面协调可持续"
+        },
+        {
+          "letter": "D",
+          "text": "统筹兼顾"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 83,
+      "originalNum": 83,
+      "type": "single",
+      "question": "科学发展观的基本要求是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "发展"
+        },
+        {
+          "letter": "B",
+          "text": "以人为本"
+        },
+        {
+          "letter": "C",
+          "text": "全面协调可持续"
+        },
+        {
+          "letter": "D",
+          "text": "统筹兼顾"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 84,
+      "originalNum": 84,
+      "type": "single",
+      "question": "科学发展观的根本方法是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "发展"
+        },
+        {
+          "letter": "B",
+          "text": "以人为本"
+        },
+        {
+          "letter": "C",
+          "text": "全面协调可持续"
+        },
+        {
+          "letter": "D",
+          "text": "统筹兼顾"
+        }
+      ],
+      "answer": "D"
+    },
+    {
+      "id": 85,
+      "originalNum": 85,
+      "type": "single",
+      "question": "坚持以人为本，最终是为了实现(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义现代化"
+        },
+        {
+          "letter": "B",
+          "text": "人的全面发展"
+        },
+        {
+          "letter": "C",
+          "text": "民族复兴"
+        },
+        {
+          "letter": "D",
+          "text": "共同富裕"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 86,
+      "originalNum": 86,
+      "type": "single",
+      "question": "科学发展观强调，社会主义民主政治的本质和核心是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "人民当家作主"
+        },
+        {
+          "letter": "B",
+          "text": "发展先进生产力"
+        },
+        {
+          "letter": "C",
+          "text": "发展先进文化"
+        },
+        {
+          "letter": "D",
+          "text": "维护人民利益"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 87,
+      "originalNum": 87,
+      "type": "single",
+      "question": "(    )是马克思主义政党的本质属性，是马克思主义政党的生命所系、力量所在。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "先进性"
+        },
+        {
+          "letter": "B",
+          "text": "阶级性"
+        },
+        {
+          "letter": "C",
+          "text": "全民性"
+        },
+        {
+          "letter": "D",
+          "text": "群众性"
+        }
+      ],
+      "answer": "A"
+    },
+    {
+      "id": 88,
+      "originalNum": 88,
+      "type": "single",
+      "question": "胡锦涛明确指出（    ）是中国特色社会主义的本质属性。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会发展"
+        },
+        {
+          "letter": "B",
+          "text": "社会和谐"
+        },
+        {
+          "letter": "C",
+          "text": "社会进步"
+        },
+        {
+          "letter": "D",
+          "text": "社会繁荣"
+        }
+      ],
+      "answer": "B"
+    },
+    {
+      "id": 89,
+      "originalNum": 89,
+      "type": "single",
+      "question": "科学发展观在邓小平理论和“三个代表”重要思想的基础上，创造性地回答了(    )等重大问题。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "什么是社会主义、怎样建设社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "建设什么样的党、怎样建设党"
+        },
+        {
+          "letter": "C",
+          "text": "新形势下实现什么样的发展、怎样发展"
+        },
+        {
+          "letter": "D",
+          "text": "新时代进行什么样的伟大革命、怎样进行伟大革命"
+        }
+      ],
+      "answer": "C"
+    },
+    {
+      "id": 90,
+      "originalNum": 90,
+      "type": "single",
+      "question": "科学发展观最鲜明的精神实质是（    ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "解放思想、实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "立党为公、执政为民"
+        },
+        {
+          "letter": "C",
+          "text": "独立自主、自力更生"
+        },
+        {
+          "letter": "D",
+          "text": "解放思想、实事求是、与时俱进、求真务实"
+        }
+      ],
+      "answer": "D"
+    }
+  ],
+  "multiChoice": [
+    {
+      "id": 1,
+      "originalNum": 1,
+      "type": "multi",
+      "question": "推进马克思主义中国化时代化，是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "马克思主义唯物史观的要求"
+        },
+        {
+          "letter": "B",
+          "text": "马克思主义理论本身发展的内在要求"
+        },
+        {
+          "letter": "C",
+          "text": "解决中国实际问题的客观需要"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义经济社会发展的需要"
+        }
+      ],
+      "answer": "BC"
+    },
+    {
+      "id": 2,
+      "originalNum": 2,
+      "type": "multi",
+      "question": "坚持和发展马克思主义，必须(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "同中国具体实际相结合"
+        },
+        {
+          "letter": "B",
+          "text": "同中华优秀传统文化相结合"
+        },
+        {
+          "letter": "C",
+          "text": "同社会主义现代化发展相结合"
+        },
+        {
+          "letter": "D",
+          "text": "同中华民族伟大复兴相结合"
+        }
+      ],
+      "answer": "AB"
+    },
+    {
+      "id": 3,
+      "originalNum": 3,
+      "type": "multi",
+      "question": "实践证明，中国共产党为什么能，中国特色社会主义为什么好，归根到底是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "马克思主义经典作家行"
+        },
+        {
+          "letter": "B",
+          "text": "科学社会主义行"
+        },
+        {
+          "letter": "C",
+          "text": "马克思主义行"
+        },
+        {
+          "letter": "D",
+          "text": "中国化时代化的马克思主义行"
+        }
+      ],
+      "answer": "CD"
+    },
+    {
+      "id": 4,
+      "originalNum": 4,
+      "type": "multi",
+      "question": "以下对毛泽东思想科学内涵的理解中，正确的是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "马克思列宁主义在中国的运用和发展"
+        },
+        {
+          "letter": "B",
+          "text": "被实践证明了的关于中国革命和建设的正确的理论原则和经验总结"
+        },
+        {
+          "letter": "C",
+          "text": "中国共产党集体智慧的结晶"
+        },
+        {
+          "letter": "D",
+          "text": "毛泽东个人的思想"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 5,
+      "originalNum": 5,
+      "type": "multi",
+      "question": "毛泽东思想在(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "大革命时期萌芽"
+        },
+        {
+          "letter": "B",
+          "text": "土地革命战争时期形成"
+        },
+        {
+          "letter": "C",
+          "text": "抗日战争时期走向成熟"
+        },
+        {
+          "letter": "D",
+          "text": "解放战争时期和新中国成立后继续发展"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 6,
+      "originalNum": 6,
+      "type": "multi",
+      "question": "第一次国内革命战争时期，毛泽东提出的新民主主义革命基本思想主要体现在以下著作中(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "《星星之火，可以燎原》"
+        },
+        {
+          "letter": "B",
+          "text": "《中国社会各阶级的分析》"
+        },
+        {
+          "letter": "C",
+          "text": "《反对本本主义》"
+        },
+        {
+          "letter": "D",
+          "text": "《湖南农民运动考察报告》"
+        }
+      ],
+      "answer": "BD"
+    },
+    {
+      "id": 7,
+      "originalNum": 7,
+      "type": "multi",
+      "question": "标志着毛泽东思想初步形成的重要文章主要有(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "《中国的红色政权为什么能够存在？》"
+        },
+        {
+          "letter": "B",
+          "text": "《井冈山的斗争》"
+        },
+        {
+          "letter": "C",
+          "text": "《星星之火，可以燎原》"
+        },
+        {
+          "letter": "D",
+          "text": "《反对本本主义》"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 8,
+      "originalNum": 8,
+      "type": "multi",
+      "question": "在党的历史上，1935年1月召开的遵义会议是一次具有伟大转折意义的会议，这次会议(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "事实上确立了毛泽东同志在党中央和红军的领导地位"
+        },
+        {
+          "letter": "B",
+          "text": "开始确立以毛泽东同志为主要代表的马克思主义正确路线在党中央的领导地位"
+        },
+        {
+          "letter": "C",
+          "text": "开始形成以毛泽东同志为核心的党的第一代中央领导集体"
+        },
+        {
+          "letter": "D",
+          "text": "开启了党独立自主解决中国革命实际问题的新阶段，在最危急关头挽救了党、挽救了红军、挽救了中国革命"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 9,
+      "originalNum": 9,
+      "type": "multi",
+      "question": "毛泽东思想成熟的突出表现是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "科学阐述了新民主主义革命的对象、动力、领导力量、性质和前途等基本问题"
+        },
+        {
+          "letter": "B",
+          "text": "提出了新民主主义革命的总路线"
+        },
+        {
+          "letter": "C",
+          "text": "制定了相应的经济、政治、文化纲领"
+        },
+        {
+          "letter": "D",
+          "text": "指明了新民主主义革命的具体目标"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 10,
+      "originalNum": 10,
+      "type": "multi",
+      "question": "毛泽东思想有多方面的丰富内容，除了新民主主义革命理论外，还包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义革命和社会主义建设理论"
+        },
+        {
+          "letter": "B",
+          "text": "革命军队建设和军事战略的理论"
+        },
+        {
+          "letter": "C",
+          "text": "思想政治工作和文化工作的理论"
+        },
+        {
+          "letter": "D",
+          "text": "政策和策略以及党的建设的理论"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 11,
+      "originalNum": 11,
+      "type": "multi",
+      "question": "毛泽东思想活的灵魂包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "实事求是"
+        },
+        {
+          "letter": "B",
+          "text": "群众路线"
+        },
+        {
+          "letter": "C",
+          "text": "独立自主"
+        },
+        {
+          "letter": "D",
+          "text": "与时俱进"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 12,
+      "originalNum": 12,
+      "type": "multi",
+      "question": "毛泽东思想所确立的马克思主义中国化时代化的(    )，指导着我们党不断推进马克思主义中国化时代化，不断开辟马克思主义中国化时代化新境界。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "前进方向"
+        },
+        {
+          "letter": "B",
+          "text": "基本原则"
+        },
+        {
+          "letter": "C",
+          "text": "基本方法"
+        },
+        {
+          "letter": "D",
+          "text": "主要内容"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 13,
+      "originalNum": 13,
+      "type": "multi",
+      "question": "毛泽东思想的历史地位主要表现为(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "是马克思主义中国化时代化的第一个重大理论成果"
+        },
+        {
+          "letter": "B",
+          "text": "是中国革命和建设的科学指南"
+        },
+        {
+          "letter": "C",
+          "text": "是中国共产党和中国人民宝贵的精神财富"
+        },
+        {
+          "letter": "D",
+          "text": "是新时期全党全国各族人民团结奋斗的共同思想基础"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 14,
+      "originalNum": 14,
+      "type": "multi",
+      "question": "近代中国社会诸多矛盾中，占支配地位的主要矛盾是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "帝国主义和中华民族的矛盾"
+        },
+        {
+          "letter": "B",
+          "text": "地主阶级和农民阶级的矛盾"
+        },
+        {
+          "letter": "C",
+          "text": "资产阶级和工人阶级的矛盾"
+        },
+        {
+          "letter": "D",
+          "text": "封建主义和人民大众的矛盾"
+        }
+      ],
+      "answer": "AD"
+    },
+    {
+      "id": 15,
+      "originalNum": 15,
+      "type": "multi",
+      "question": "新民主主义革命理论的实践基础是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "旧民主主义革命的失败呼唤新的革命理论"
+        },
+        {
+          "letter": "B",
+          "text": "新民主主义革命的艰辛探索奠定了革命理论形成的实践基础"
+        },
+        {
+          "letter": "C",
+          "text": "世界进入帝国主义和无产阶级革命时代"
+        },
+        {
+          "letter": "D",
+          "text": "中国共产党领导人民进行革命和建设的成功实践"
+        }
+      ],
+      "answer": "AB"
+    },
+    {
+      "id": 16,
+      "originalNum": 16,
+      "type": "multi",
+      "question": "近代中国社会的性质和主要矛盾，决定了中国革命的主要敌人是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "资产阶级"
+        },
+        {
+          "letter": "B",
+          "text": "帝国主义"
+        },
+        {
+          "letter": "C",
+          "text": "封建主义"
+        },
+        {
+          "letter": "D",
+          "text": "官僚资本主义"
+        }
+      ],
+      "answer": "BCD"
+    },
+    {
+      "id": 17,
+      "originalNum": 17,
+      "type": "multi",
+      "question": "新民主主义革命的动力包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "无产阶级"
+        },
+        {
+          "letter": "B",
+          "text": "农民阶级"
+        },
+        {
+          "letter": "C",
+          "text": "城市小资产阶级"
+        },
+        {
+          "letter": "D",
+          "text": "民族资产阶级"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 18,
+      "originalNum": 18,
+      "type": "multi",
+      "question": "新民主主义的基本纲领包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "新民主主义的政治纲领"
+        },
+        {
+          "letter": "B",
+          "text": "新民主主义的经济纲领"
+        },
+        {
+          "letter": "C",
+          "text": "新民主主义的文化纲领"
+        },
+        {
+          "letter": "D",
+          "text": "新民主主义的社会纲领"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 19,
+      "originalNum": 19,
+      "type": "multi",
+      "question": "新民主主义经济纲领的主要内容是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "没收封建地主阶级的土地归农民所有"
+        },
+        {
+          "letter": "B",
+          "text": "没收外国在华资本归新民主主义的国家所有"
+        },
+        {
+          "letter": "C",
+          "text": "没收官僚资产阶级的垄断资本归新民主主义的国家所有"
+        },
+        {
+          "letter": "D",
+          "text": "保护民族工商业"
+        }
+      ],
+      "answer": "ACD"
+    },
+    {
+      "id": 20,
+      "originalNum": 20,
+      "type": "multi",
+      "question": "总结新民主主义革命时期党建立、巩固和发展统一战线的实践经验，主要是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "要建立巩固的工农联盟"
+        },
+        {
+          "letter": "B",
+          "text": "要正确对待资产阶级，尤其是民族资产阶级"
+        },
+        {
+          "letter": "C",
+          "text": "一切经过统一战线,一切服从统一战线"
+        },
+        {
+          "letter": "D",
+          "text": "采取区别对待的方针"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 21,
+      "originalNum": 21,
+      "type": "multi",
+      "question": "新民主主义革命时期，中国共产党在加强自身建设中积累了丰富的经验，归纳起来主要有(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "必须把思想建设始终放在党的建设的首位"
+        },
+        {
+          "letter": "B",
+          "text": "必须在任何时候都重视党的组织建设"
+        },
+        {
+          "letter": "C",
+          "text": "必须重视党的作风建设"
+        },
+        {
+          "letter": "D",
+          "text": "必须联系党的政治路线加强党的建设"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 22,
+      "originalNum": 22,
+      "type": "multi",
+      "question": "中国革命走农村包围城市、武装夺取政权的道路，根本在于处理好（    ）三者之间的关系。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "土地革命"
+        },
+        {
+          "letter": "B",
+          "text": "党的建设"
+        },
+        {
+          "letter": "C",
+          "text": "武装斗争"
+        },
+        {
+          "letter": "D",
+          "text": "农村革命根据地建设"
+        }
+      ],
+      "answer": "ACD"
+    },
+    {
+      "id": 23,
+      "originalNum": 23,
+      "type": "multi",
+      "question": "毛泽东在《&lt;共产党人&gt;发刊词》一文中，总结了中国革命两次胜利和两次失败的经验教训，揭示了中国革命发展的客观规律，提出了党在中国革命中战胜敌人的三个主要的法宝是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "统一战线"
+        },
+        {
+          "letter": "B",
+          "text": "武装斗争"
+        },
+        {
+          "letter": "C",
+          "text": "党的建设"
+        },
+        {
+          "letter": "D",
+          "text": "土地革命"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 24,
+      "originalNum": 24,
+      "type": "multi",
+      "question": "关于中国新民主主义社会，下列说法正确的是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "它是指从中华人民共和国的成立到社会主义改造基本完成"
+        },
+        {
+          "letter": "B",
+          "text": "它是一个独立的社会形态"
+        },
+        {
+          "letter": "C",
+          "text": "它是由新民主主义向社会主义转变的过渡性社会形态"
+        },
+        {
+          "letter": "D",
+          "text": "它是属于社会主义体系的"
+        }
+      ],
+      "answer": "ACD"
+    },
+    {
+      "id": 25,
+      "originalNum": 25,
+      "type": "multi",
+      "question": "在新民主主义社会中，主要的经济成分有(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "合作社经济"
+        },
+        {
+          "letter": "B",
+          "text": "社会主义经济"
+        },
+        {
+          "letter": "C",
+          "text": "个体经济"
+        },
+        {
+          "letter": "D",
+          "text": "资本主义经济"
+        }
+      ],
+      "answer": "BCD"
+    },
+    {
+      "id": 26,
+      "originalNum": 26,
+      "type": "multi",
+      "question": "新民主主义社会时期，中国社会的阶级构成主要包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "工人阶级"
+        },
+        {
+          "letter": "B",
+          "text": "农民阶级"
+        },
+        {
+          "letter": "C",
+          "text": "其他小资产阶级"
+        },
+        {
+          "letter": "D",
+          "text": "民族资产阶级"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 27,
+      "originalNum": 27,
+      "type": "multi",
+      "question": "20世纪50年代，中国共产党人开辟了一条适合我国情况的农业社会主义改造道路，其成功经验主要有(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "积极引导农民组织起来，走互助合作道路"
+        },
+        {
+          "letter": "B",
+          "text": "遵循自愿互利、典型示范、国家帮助的原则"
+        },
+        {
+          "letter": "C",
+          "text": "正确分析农村的阶级和阶层状况，制定正确的阶级政策"
+        },
+        {
+          "letter": "D",
+          "text": "坚持积极领导、稳步前进的方针，采取循序渐进的步骤"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 28,
+      "originalNum": 28,
+      "type": "multi",
+      "question": "新中国对手工业的社会主义改造经历了由小到大、由低级到高级的步骤，包括（  ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "供销小组"
+        },
+        {
+          "letter": "B",
+          "text": "供销合作社"
+        },
+        {
+          "letter": "C",
+          "text": "生产合作社"
+        },
+        {
+          "letter": "D",
+          "text": "公私合营"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 29,
+      "originalNum": 29,
+      "type": "multi",
+      "question": "新中国对资本主义工商业进行社会主义改造的经验有(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "用和平赎买的方法"
+        },
+        {
+          "letter": "B",
+          "text": "采取从低级到高级的国家资本主义的过渡形式"
+        },
+        {
+          "letter": "C",
+          "text": "对私人资本主义的赎买政策始终坚持“四马分肥”"
+        },
+        {
+          "letter": "D",
+          "text": "把资本工商业者改造成为自食其力的社会主义劳动者"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 30,
+      "originalNum": 30,
+      "type": "multi",
+      "question": "我国社会主义改造是一场伟大的社会变革，但是在改造过程中也出现了一些偏差，遗留了一些问题，主要表现在（  ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "要求过急"
+        },
+        {
+          "letter": "B",
+          "text": "工作过粗"
+        },
+        {
+          "letter": "C",
+          "text": "改变过快"
+        },
+        {
+          "letter": "D",
+          "text": "改造形式过于简单划一"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 31,
+      "originalNum": 31,
+      "type": "multi",
+      "question": "1956年，毛泽东提出探索适合中国情况的社会主义建设道路的思想，他强调(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "独立思考"
+        },
+        {
+          "letter": "B",
+          "text": "以苏为鉴"
+        },
+        {
+          "letter": "C",
+          "text": "进行“第二次结合”"
+        },
+        {
+          "letter": "D",
+          "text": "实行改革开放"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 32,
+      "originalNum": 32,
+      "type": "multi",
+      "question": "以下关于毛泽东作的《论十大关系》报告，正确的说法是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "标志着党探索中国社会主义建设道路的良好开端"
+        },
+        {
+          "letter": "B",
+          "text": "基本方针是调动一切积极因素为社会主义事业服务"
+        },
+        {
+          "letter": "C",
+          "text": "前五条主要讨论经济问题"
+        },
+        {
+          "letter": "D",
+          "text": "后五条论述的是政治生活和思想文化生活领域如何调动各种积极因素的问题"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 33,
+      "originalNum": 33,
+      "type": "multi",
+      "question": "党的八大正确分析了社会主义改造完成后我国社会主要矛盾的变化，指出我们国内的主要矛盾(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "是无产阶级和资产阶级的矛盾"
+        },
+        {
+          "letter": "B",
+          "text": "已经不再是工人阶级和资产阶级的矛盾"
+        },
+        {
+          "letter": "C",
+          "text": "是人民对于经济文化迅速发展的需要同当前经济文化不能满足人民需要的状况之间的矛盾"
+        },
+        {
+          "letter": "D",
+          "text": "是人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+        }
+      ],
+      "answer": "BC"
+    },
+    {
+      "id": 34,
+      "originalNum": 34,
+      "type": "multi",
+      "question": "毛泽东在《关于正确处理人民内部矛盾的问题》中提出了一系列正确处理人民内部矛盾的方针、原则，主要包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "“团结—批评—团结”"
+        },
+        {
+          "letter": "B",
+          "text": "统筹兼顾、适当安排"
+        },
+        {
+          "letter": "C",
+          "text": "“百花齐放、百家争鸣”"
+        },
+        {
+          "letter": "D",
+          "text": "“长期共存，互相监督”"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 35,
+      "originalNum": 35,
+      "type": "multi",
+      "question": "毛泽东关于社会主义发展阶段的观点表述正确的是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "第一个阶段是不发达的社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "第二个阶段是比较发达的社会主义"
+        },
+        {
+          "letter": "C",
+          "text": "不发达的社会主义比比较发达的社会主义需要更长的时间"
+        },
+        {
+          "letter": "D",
+          "text": "第二个阶段是相对发达的社会主义"
+        }
+      ],
+      "answer": "AB"
+    },
+    {
+      "id": 36,
+      "originalNum": 36,
+      "type": "multi",
+      "question": "党在社会主义建设道路初步探索中提出的理论成果包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "社会主义发展阶段的思想"
+        },
+        {
+          "letter": "B",
+          "text": "实现“四个现代化”的“两步走”发展战略"
+        },
+        {
+          "letter": "C",
+          "text": "从经济建设和国防建设的战略布局考虑的“三线建设”"
+        },
+        {
+          "letter": "D",
+          "text": "“一纲四目”的和平解决台湾问题的思想、政策和主张"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 37,
+      "originalNum": 37,
+      "type": "multi",
+      "question": "党领导人民探索社会主义建设道路，在理论和实践上取得了一系列重要成果，这些成果的重要意义体现在(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "巩固和发展了我国的社会主义制度"
+        },
+        {
+          "letter": "B",
+          "text": "为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础"
+        },
+        {
+          "letter": "C",
+          "text": "丰富了科学社会主义的理论和实践"
+        },
+        {
+          "letter": "D",
+          "text": "为资本主义国家的社会建设提供了经验和借鉴"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 38,
+      "originalNum": 38,
+      "type": "multi",
+      "question": "中国特色社会主义理论体系包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "邓小平理论"
+        },
+        {
+          "letter": "B",
+          "text": "“三个代表”重要思想"
+        },
+        {
+          "letter": "C",
+          "text": "科学发展观"
+        },
+        {
+          "letter": "D",
+          "text": "习近平新时代中国特色社会主义思想"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 39,
+      "originalNum": 39,
+      "type": "multi",
+      "question": "20世纪70年代，整个世界发生着大变动大调整，最显著的变化就是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "和平与发展成为时代主题"
+        },
+        {
+          "letter": "B",
+          "text": "世界多极化和经济全球化深入发展"
+        },
+        {
+          "letter": "C",
+          "text": "战争与革命仍然是时代主题"
+        },
+        {
+          "letter": "D",
+          "text": "综合国力竞争日趋激烈"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 40,
+      "originalNum": 40,
+      "type": "multi",
+      "question": "20世纪80年代末90年代初，中国特色社会主义理论体系形成发展面临的国际背景包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "东欧剧变、苏联解体，国际共产主义运动遭受了重大挫折"
+        },
+        {
+          "letter": "B",
+          "text": "和平与发展仍然是时代的主题，世界多极化仍然在曲折中获得发展"
+        },
+        {
+          "letter": "C",
+          "text": "经济全球化浪潮正在蓬勃发展"
+        },
+        {
+          "letter": "D",
+          "text": "科技进步日新月异"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 41,
+      "originalNum": 41,
+      "type": "multi",
+      "question": "我国在社会主义建设初期走了不少弯路、犯了不少错误，造成这些失误的深层次原因在于（  ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "经济上急于求成、盲目求纯和急于过渡"
+        },
+        {
+          "letter": "B",
+          "text": "政治上坚持以阶级斗争为纲"
+        },
+        {
+          "letter": "C",
+          "text": "偏离了党的实事求是的思想路线"
+        },
+        {
+          "letter": "D",
+          "text": "对什么是社会主义和如何建设社会主义的问题没有完全搞清楚"
+        }
+      ],
+      "answer": "CD"
+    },
+    {
+      "id": 42,
+      "originalNum": 42,
+      "type": "multi",
+      "question": "新世纪新阶段，我国进入（  ），经济社会发展呈现一系列新的阶段性特征。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "发展关键期"
+        },
+        {
+          "letter": "B",
+          "text": "改革攻坚期"
+        },
+        {
+          "letter": "C",
+          "text": "开放活跃期"
+        },
+        {
+          "letter": "D",
+          "text": "矛盾凸显期"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 43,
+      "originalNum": 43,
+      "type": "multi",
+      "question": "中国特色社会主义理论体系的形成发展过程，经历了以下(    )几个阶段。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "中国特色社会主义理论体系的形成"
+        },
+        {
+          "letter": "B",
+          "text": "中国特色社会主义理论体系的跨世纪发展"
+        },
+        {
+          "letter": "C",
+          "text": "中国特色社会主义理论体系在新世纪新阶段的新发展"
+        },
+        {
+          "letter": "D",
+          "text": "中国特色社会主义理论体系在新时代的新篇章"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 44,
+      "originalNum": 44,
+      "type": "multi",
+      "question": "1978年12月召开的党的十一届三中全会，实现了党的历史上具有深远意义的伟大转折，主要内容包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "重新确立了实事求是的思想路线"
+        },
+        {
+          "letter": "B",
+          "text": "彻底否定了“以阶级斗争为纲”的错误理论和实践"
+        },
+        {
+          "letter": "C",
+          "text": "确定把全党工作的着重点转移到社会主义现代化建设上来"
+        },
+        {
+          "letter": "D",
+          "text": "作出实行改革开放的重大决策"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 45,
+      "originalNum": 45,
+      "type": "multi",
+      "question": "中国特色社会主义理论体系是中国共产党长期探索的伟大理论创造，同（  ）一脉相承又与时俱进，是马克思主义中国化时代化的重大理论成果。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "空想社会主义"
+        },
+        {
+          "letter": "B",
+          "text": "科学社会主义"
+        },
+        {
+          "letter": "C",
+          "text": "马克思列宁主义"
+        },
+        {
+          "letter": "D",
+          "text": "毛泽东思想"
+        }
+      ],
+      "answer": "CD"
+    },
+    {
+      "id": 46,
+      "originalNum": 46,
+      "type": "multi",
+      "question": "1992年初，邓小平在南方谈话中对社会主义本质作出了总结性的理论概括，他指出：“社会主义本质，是(    )。”",
+      "options": [
+        {
+          "letter": "A",
+          "text": "解放生产力，发展生产力"
+        },
+        {
+          "letter": "B",
+          "text": "消灭剥削，消除两极分化"
+        },
+        {
+          "letter": "C",
+          "text": "最终达到共同富裕"
+        },
+        {
+          "letter": "D",
+          "text": "最终实现现代化"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 47,
+      "originalNum": 47,
+      "type": "multi",
+      "question": "邓小平强调：在改革中，我们始终坚持两条根本原则，一是(    )，一是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "以社会主义公有制经济为主体"
+        },
+        {
+          "letter": "B",
+          "text": "公有制"
+        },
+        {
+          "letter": "C",
+          "text": "共同富裕"
+        },
+        {
+          "letter": "D",
+          "text": "市场经济"
+        }
+      ],
+      "answer": "AC"
+    },
+    {
+      "id": 48,
+      "originalNum": 48,
+      "type": "multi",
+      "question": "党在社会主义初级阶段基本路线的主要内容概括为(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "一个中心"
+        },
+        {
+          "letter": "B",
+          "text": "两个中心"
+        },
+        {
+          "letter": "C",
+          "text": "两个基本点"
+        },
+        {
+          "letter": "D",
+          "text": "三个基本点"
+        }
+      ],
+      "answer": "AC"
+    },
+    {
+      "id": 49,
+      "originalNum": 49,
+      "type": "multi",
+      "question": "判断改革和各方面是非得失的“三个有利于”标准是指(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "是否有利于发展社会主义社会的生产力"
+        },
+        {
+          "letter": "B",
+          "text": "是否有利于增强社会主义国家的综合国力"
+        },
+        {
+          "letter": "C",
+          "text": "是否有利于实现共同富裕"
+        },
+        {
+          "letter": "D",
+          "text": "是否有利于提高人民生活水平"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 50,
+      "originalNum": 50,
+      "type": "multi",
+      "question": "邓小平强调的“两手抓，两手都要硬”思想包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "一手抓物质文明，一手抓精神文明"
+        },
+        {
+          "letter": "B",
+          "text": "“一手抓建设，一手抓法制”"
+        },
+        {
+          "letter": "C",
+          "text": "“一手抓改革开放，一手抓惩治腐败”"
+        },
+        {
+          "letter": "D",
+          "text": "“一手抓改革开放，一手抓打击各种犯罪活动”"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 51,
+      "originalNum": 51,
+      "type": "multi",
+      "question": "江泽民强调，我们想事情，做工作，想得对不对，做得好不好，根本的衡量尺度，就是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "人民拥护不拥护"
+        },
+        {
+          "letter": "B",
+          "text": "人民赞成不赞成"
+        },
+        {
+          "letter": "C",
+          "text": "人民高兴不高兴"
+        },
+        {
+          "letter": "D",
+          "text": "人民答应不答应"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 52,
+      "originalNum": 52,
+      "type": "multi",
+      "question": "“三个代表”重要思想的核心观点包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "始终代表中国先进生产力的发展要求"
+        },
+        {
+          "letter": "B",
+          "text": "始终代表中国先进文化的前进方向"
+        },
+        {
+          "letter": "C",
+          "text": "始终代表中国先进教育的发展要求"
+        },
+        {
+          "letter": "D",
+          "text": "始终代表中国最广大人民的根本利益"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 53,
+      "originalNum": 53,
+      "type": "multi",
+      "question": "江泽民要求领导干部一定要（  ）。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "讲公正"
+        },
+        {
+          "letter": "B",
+          "text": "讲学习"
+        },
+        {
+          "letter": "C",
+          "text": "讲政治"
+        },
+        {
+          "letter": "D",
+          "text": "讲正气"
+        }
+      ],
+      "answer": "BCD"
+    },
+    {
+      "id": 54,
+      "originalNum": 54,
+      "type": "multi",
+      "question": "在党的十六大报告中，把建设社会主义(    )一起确立为社会主义现代化全面发展的基本目标。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "物质文明"
+        },
+        {
+          "letter": "B",
+          "text": "政治文明"
+        },
+        {
+          "letter": "C",
+          "text": "生态文明"
+        },
+        {
+          "letter": "D",
+          "text": "精神文明"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 55,
+      "originalNum": 55,
+      "type": "multi",
+      "question": "“三个代表”重要思想是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "对马列主义、毛泽东思想和邓小平理论的继承和发展"
+        },
+        {
+          "letter": "B",
+          "text": "中国特色社会主义理论体系的重要组成部分"
+        },
+        {
+          "letter": "C",
+          "text": "中国特色社会主义理论体系的丰富发展"
+        },
+        {
+          "letter": "D",
+          "text": "加强和改进党的建设、推进中国特色社会主义事业的强大理论武器"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 56,
+      "originalNum": 56,
+      "type": "multi",
+      "question": "科学发展观的科学内涵集中概括为(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "第一要义是发展"
+        },
+        {
+          "letter": "B",
+          "text": "核心立场是以人为本"
+        },
+        {
+          "letter": "C",
+          "text": "基本要求是全面协调可持续"
+        },
+        {
+          "letter": "D",
+          "text": "根本方法是统筹兼顾"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 57,
+      "originalNum": 57,
+      "type": "multi",
+      "question": "社会主义协商民主，充分体现了社会主义民主的(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "真实性"
+        },
+        {
+          "letter": "B",
+          "text": "广泛性"
+        },
+        {
+          "letter": "C",
+          "text": "包容性"
+        },
+        {
+          "letter": "D",
+          "text": "开放性"
+        }
+      ],
+      "answer": "ABC"
+    },
+    {
+      "id": 58,
+      "originalNum": 58,
+      "type": "multi",
+      "question": "社会主义核心价值体系是兴国之魂，决定着中国特色社会主义发展方向，其基本内容包括(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "马克思主义指导思想"
+        },
+        {
+          "letter": "B",
+          "text": "中国特色社会主义共同理想"
+        },
+        {
+          "letter": "C",
+          "text": "以爱国主义为核心的民族精神和以改革创新为核心的时代精神"
+        },
+        {
+          "letter": "D",
+          "text": "社会主义荣辱观"
+        }
+      ],
+      "answer": "ABCD"
+    },
+    {
+      "id": 59,
+      "originalNum": 59,
+      "type": "multi",
+      "question": "构建社会主义和谐社会的总要求是(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "民主法治、公平正义"
+        },
+        {
+          "letter": "B",
+          "text": "诚信友爱、充满活力"
+        },
+        {
+          "letter": "C",
+          "text": "尊重自然、顺应自然、保护自然"
+        },
+        {
+          "letter": "D",
+          "text": "安定有序、人与自然和谐相处"
+        }
+      ],
+      "answer": "ABD"
+    },
+    {
+      "id": 60,
+      "originalNum": 60,
+      "type": "multi",
+      "question": "科学发展观同邓小平理论、“三个代表”重要思想，面对着共同的时代课题，面临着共同的历史任务，都(    )。",
+      "options": [
+        {
+          "letter": "A",
+          "text": "贯穿了中国特色社会主义这个主题"
+        },
+        {
+          "letter": "B",
+          "text": "坚持辩证唯物主义和历史唯物主义的世界观方法论"
+        },
+        {
+          "letter": "C",
+          "text": "坚持党的最高纲领和最低纲领的统一"
+        },
+        {
+          "letter": "D",
+          "text": "坚持代表最广大人民根本利益"
+        }
+      ],
+      "answer": "ABCD"
+    }
+  ],
+  "judgeQuestions": [
+    {
+      "id": 1,
+      "originalNum": 1,
+      "type": "judge",
+      "question": "中国共产党从成立之日起，就明确把马克思列宁主义确立为指导思想。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 2,
+      "originalNum": 2,
+      "type": "judge",
+      "question": "马克思主义中国化只有中国特色、没有时代特点。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 3,
+      "originalNum": 3,
+      "type": "judge",
+      "question": "2021年，党的十九届六中全会通过的《中共中央关于党的百年奋斗重大成就和历史经验的决议》总结了百年来中国共产党推进马克思主义中国化时代化的重大成就，阐释了马克思主义中国化时代化的重大历史意义。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 4,
+      "originalNum": 4,
+      "type": "judge",
+      "question": "坚持和发展马克思主义，必须同中国具体实际相结合、同中华优秀传统文化相结合。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 5,
+      "originalNum": 5,
+      "type": "judge",
+      "question": "党的十六大提出了“中国特色社会主义理论体系”的科学概念",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 6,
+      "originalNum": 6,
+      "type": "judge",
+      "question": "马克思主义中国化时代化的理论成果是一脉相承又与时俱进的关系。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 7,
+      "originalNum": 7,
+      "type": "judge",
+      "question": "毛泽东在《星星之火，可以燎原》《反对本本主义》等著作中指明了中国革命的发展规律，标志着毛泽东思想趋于成熟。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 8,
+      "originalNum": 8,
+      "type": "judge",
+      "question": "从进攻大城市转为向农村进军，是中国革命具有决定意义的新起点",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 9,
+      "originalNum": 9,
+      "type": "judge",
+      "question": "独立自主是毛泽东思想的基本点，是毛泽东思想的精髓。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 10,
+      "originalNum": 10,
+      "type": "judge",
+      "question": "毛泽东指出：“群众观点是共产党员革命的出发点与归宿。”",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 11,
+      "originalNum": 11,
+      "type": "judge",
+      "question": "毛泽东思想是毛泽东个人的全部思想的总和。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 12,
+      "originalNum": 12,
+      "type": "judge",
+      "question": "认清中国国情，是解决中国革命问题的基本前提。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 13,
+      "originalNum": 13,
+      "type": "judge",
+      "question": "封建主义和人民大众的矛盾是近代中国各种矛盾中最主要的矛盾。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 14,
+      "originalNum": 14,
+      "type": "judge",
+      "question": "新民主主义革命的领导力量是民族资产阶级。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 15,
+      "originalNum": 15,
+      "type": "judge",
+      "question": "农村包围城市、武装夺取政权是中国共产党探索出来的新民主主义革命的正确道路。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 16,
+      "originalNum": 16,
+      "type": "judge",
+      "question": "党领导的革命统一战线中工农联盟是非基本的、辅助性的。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 17,
+      "originalNum": 17,
+      "type": "judge",
+      "question": "人民军队必须以全心全意为人民服务为唯一宗旨。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 18,
+      "originalNum": 18,
+      "type": "judge",
+      "question": "中国共产党要领导中国革命取得胜利，必须不断加强党的思想建设、组织建设和作风建设。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 19,
+      "originalNum": 19,
+      "type": "judge",
+      "question": "新民主主义社会不是一个独立的社会形态，而是过渡性社会形态。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 20,
+      "originalNum": 20,
+      "type": "judge",
+      "question": "党在过渡时期总路线的主要内容被概括为“一化三改”。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 21,
+      "originalNum": 21,
+      "type": "judge",
+      "question": "对农业的社会主义改造是强迫农民走互助合作道路实现的。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 22,
+      "originalNum": 22,
+      "type": "judge",
+      "question": "对资本主义工商业改造实行暴力剥夺的方式。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 23,
+      "originalNum": 23,
+      "type": "judge",
+      "question": "1956年底，我国对农业、手工业和资本主义工商业的社会主义改造基本完成，标志着中国历史上长达数千年的阶级剥削制度的结束和社会主义基本制度的确立",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 24,
+      "originalNum": 24,
+      "type": "judge",
+      "question": "《论十大关系》标志着党探索社会主义建设道路的良好开端。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 25,
+      "originalNum": 25,
+      "type": "judge",
+      "question": "社会主义社会不存在矛盾。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 26,
+      "originalNum": 26,
+      "type": "judge",
+      "question": "解决人民内部矛盾的总方针是用专政方法",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 27,
+      "originalNum": 27,
+      "type": "judge",
+      "question": "走中国工业化道路要强调发展重工业，忽视农业和轻工业的发展。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 28,
+      "originalNum": 28,
+      "type": "judge",
+      "question": "党在探索社会主义建设道路过程中取得的重要理论成果，是毛泽东思想的重要组成部分，丰富和发展了科学社会主义理论，成为中国特色社会主义理论体系的重要思想来源。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 29,
+      "originalNum": 29,
+      "type": "judge",
+      "question": "战争与革命是20世纪70年代以来的时代主题。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 30,
+      "originalNum": 30,
+      "type": "judge",
+      "question": "邓小平理论是中国特色社会主义理论体系的开篇之作。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 31,
+      "originalNum": 31,
+      "type": "judge",
+      "question": "始终做到“三个代表”是我们党的立党之本、执政之基、力量之源。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 32,
+      "originalNum": 32,
+      "type": "judge",
+      "question": "党的十七大把科学发展观写入党章，并确立为党必须长期坚持的指导思想。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 33,
+      "originalNum": 33,
+      "type": "judge",
+      "question": "科学发展观所要解决的根本问题是“建设一个什么样的党、怎样建设党”。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 34,
+      "originalNum": 34,
+      "type": "judge",
+      "question": "社会主义的本质最终目的是实现少数人的富裕。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 35,
+      "originalNum": 35,
+      "type": "judge",
+      "question": "解放思想、实事求是是邓小平理论的精髓。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 36,
+      "originalNum": 36,
+      "type": "judge",
+      "question": "我国正处于并将长期处于社会主义高级阶段。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 37,
+      "originalNum": 37,
+      "type": "judge",
+      "question": "社会主义的根本任务是发展生产力。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 38,
+      "originalNum": 38,
+      "type": "judge",
+      "question": "改革开放是决定当代中国命运的关键一招。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 39,
+      "originalNum": 39,
+      "type": "judge",
+      "question": "“一国两制”构想最初是为了解决香港问题而提出的。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 40,
+      "originalNum": 40,
+      "type": "judge",
+      "question": "社会主义现代化可以建立在不发达的生产力基础之上。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 41,
+      "originalNum": 41,
+      "type": "judge",
+      "question": "教育是发展先进文化、建设物质文明和精神文明的基础工程。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 42,
+      "originalNum": 42,
+      "type": "judge",
+      "question": "我们全部工作的出发点和落脚点，就是不断实现好维护好发展好最广大人民的根本利益。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 43,
+      "originalNum": 43,
+      "type": "judge",
+      "question": "发展不包括促进人的全面发展。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 44,
+      "originalNum": 44,
+      "type": "judge",
+      "question": "党的十五大正式把建立社会主义市场经济体制确立为我国经济体制改革的目标。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 45,
+      "originalNum": 45,
+      "type": "judge",
+      "question": "“引进来”和“走出去”，是我们对外开放方针的两个紧密联系、相互促进的方面，缺一不可。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 46,
+      "originalNum": 46,
+      "type": "judge",
+      "question": "在当代中国，坚持发展是硬道理的本质要求就是坚持科学发展。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 47,
+      "originalNum": 47,
+      "type": "judge",
+      "question": "科学发展观强调的“以人为本”与中国古代的民本思想不存在本质上的区别。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    },
+    {
+      "id": 48,
+      "originalNum": 48,
+      "type": "judge",
+      "question": "坚持可持续发展，就要坚定走生产发展、生活富裕、生态良好的文明发展道路。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 49,
+      "originalNum": 49,
+      "type": "judge",
+      "question": "社会主义核心价值体系是兴国之魂，决定着中国特色社会主义发展方向。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "√"
+    },
+    {
+      "id": 50,
+      "originalNum": 50,
+      "type": "judge",
+      "question": "我们要构建的社会主义和谐社会就是历史上一些思想家憧憬的“大同社会”和空想社会主义者所描绘的“乌托邦”。",
+      "options": [
+        {
+          "letter": "√",
+          "text": "正确"
+        },
+        {
+          "letter": "×",
+          "text": "错误"
+        }
+      ],
+      "answer": "×"
+    }
+  ],
+  "essayQuestions": [
+    {
+      "id": 1,
+      "question": "简述毛泽东思想的主要内容包含哪几个组成部分？ （参考教材P20-25）"
+    },
+    {
+      "id": 2,
+      "question": "简述毛泽东思想的历史地位？ （参考教材P32-35）"
+    },
+    {
+      "id": 3,
+      "question": "简述新民主主义革命总路线的内容？ （参考教材P45）"
+    },
+    {
+      "id": 4,
+      "question": "新民主主义的政治纲领是什么？（参考教材P52）"
+    },
+    {
+      "id": 5,
+      "question": "党在过渡时期总路线的完整表述是什么？（参考教材P70-71）"
+    },
+    {
+      "id": 6,
+      "question": "简述社会主义改造的历史经验？（参考教材P83-85）"
+    },
+    {
+      "id": 7,
+      "question": "《论十大关系》确定的基本方针是什么？（参考教材P94）"
+    },
+    {
+      "id": 8,
+      "question": "简述党对社会主义建设道路初步探索的意义？（参考教材P110-112）"
+    },
+    {
+      "id": 9,
+      "question": "邓小平关于社会主义本质的论断是什么？（参考教材P153）"
+    },
+    {
+      "id": 10,
+      "question": "简述党的十三大提出的党在社会主义初级阶段的基本路线的内容？（参考教材P160）"
+    },
+    {
+      "id": 11,
+      "question": "简述邓小平理论的历史地位？（参考教材P188-189）"
+    },
+    {
+      "id": 12,
+      "question": "简述“三个代表”重要思想的核心观点？（参考教材P193-200）"
+    },
+    {
+      "id": 13,
+      "question": "简述科学发展观的科学内涵？（参考教材P264：本章小结的第一段话）"
+    },
+    {
+      "id": 14,
+      "question": "如何理解并灵活运用毛泽东思想活的灵魂？（参考教材P26-32）"
+    },
+    {
+      "id": 15,
+      "question": "试述新民主主义革命道路形成的必要性及其核心内容？（参考教材P57-59）"
+    },
+    {
+      "id": 16,
+      "question": "结合本学期概论课开展的主题实践教学活动,如何理解河南革命精神？"
+    },
+    {
+      "id": 17,
+      "question": "试述中国确立社会主义基本制度的重大意义？（参考教材P89-91）"
+    },
+    {
+      "id": 18,
+      "question": "党对社会主义建设道路的初步探索有哪些经验教训？（参考教材P112-116）"
+    },
+    {
+      "id": 19,
+      "question": "根据所学知识，如何认识改革的性质？（参考教材P168-169）"
+    },
+    {
+      "id": 20,
+      "question": "如何理解“三个代表”重要思想的核心观点？（参考教材P193-200）"
+    },
+    {
+      "id": 21,
+      "question": "如何理解构建社会主义和谐社会的总体要求？（参考教材P251-253）"
+    }
+  ]
+}
